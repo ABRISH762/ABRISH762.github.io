@@ -662,3 +662,114 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+/* =========================================================
+   TYPING ANIMATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const typingText =
+        document.getElementById("typing-text");
+
+    if (!typingText) {
+        return;
+    }
+
+    const texts = [
+        "Aspiring IT Support Officer",
+        "Information Technology Graduate",
+        "IT Support Enthusiast",
+        "Networking Enthusiast",
+        "Technical Support Professional"
+    ];
+
+    let textIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+
+    const typingSpeed = 90;
+    const deletingSpeed = 50;
+    const pauseAfterTyping = 1800;
+    const pauseAfterDeleting = 500;
+
+
+    function typeEffect() {
+
+        const currentText =
+            texts[textIndex];
+
+
+        if (!deleting) {
+
+            typingText.textContent =
+                currentText.substring(
+                    0,
+                    characterIndex + 1
+                );
+
+            characterIndex++;
+
+
+            if (
+                characterIndex ===
+                currentText.length
+            ) {
+
+                deleting = true;
+
+                setTimeout(
+                    typeEffect,
+                    pauseAfterTyping
+                );
+
+                return;
+            }
+
+
+            setTimeout(
+                typeEffect,
+                typingSpeed
+            );
+
+        } else {
+
+            typingText.textContent =
+                currentText.substring(
+                    0,
+                    characterIndex - 1
+                );
+
+            characterIndex--;
+
+
+            if (characterIndex === 0) {
+
+                deleting = false;
+
+                textIndex =
+                    (textIndex + 1) %
+                    texts.length;
+
+
+                setTimeout(
+                    typeEffect,
+                    pauseAfterDeleting
+                );
+
+                return;
+            }
+
+
+            setTimeout(
+                typeEffect,
+                deletingSpeed
+            );
+
+        }
+
+    }
+
+
+    typeEffect();
+
+});
