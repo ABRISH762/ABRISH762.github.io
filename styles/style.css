@@ -1577,3 +1577,38 @@ img {
     }
 
 }
+/* =====================================================
+   FOOTER SOCIAL LINKS
+===================================================== */
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.footer-social a {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.footer-social a:hover {
+    transform: translateY(-4px);
+}
