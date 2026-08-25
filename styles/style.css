@@ -2721,66 +2721,61 @@ button:focus-visible {
 
 }
 /* =========================================================
-   PROFESSIONAL CENTERED TYPING ANIMATION
+   DARK PURPLE TYPING ANIMATION
 ========================================================= */
 
 .typing-container {
-
     width: 100%;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     text-align: center;
 
     min-height: 55px;
-
     margin: 10px 0 22px;
 
     font-size: 1.35rem;
-
     font-weight: 600;
-
     letter-spacing: 0.5px;
 
+    color: #4b145f;
 }
 
 
 /* Typing text */
 
 .typing-text {
-
     display: inline-block;
+    color: #4b145f;
 
-    position: relative;
+    text-shadow:
+        0 2px 8px rgba(75, 20, 95, 0.15);
 
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
-
 }
 
 
-/* Cursor */
+/* Typing cursor */
 
 .typing-cursor {
-
     width: 3px;
-
     height: 1.4em;
 
     margin-left: 7px;
 
+    display: inline-block;
+
+    background-color: #4b145f;
+
     border-radius: 3px;
 
-    display: inline-block;
+    box-shadow:
+        0 0 8px rgba(75, 20, 95, 0.45);
 
     animation:
         cursorBlink 0.8s ease-in-out infinite;
-
 }
 
 
@@ -2790,55 +2785,12 @@ button:focus-visible {
 
     0%,
     100% {
-
         opacity: 1;
-
-        transform: scaleY(1);
-
     }
 
     50% {
-
         opacity: 0.15;
-
-        transform: scaleY(0.85);
-
     }
-
-}
-
-
-/* Text entering */
-
-.typing-container.typing-enter
-.typing-text {
-
-    animation:
-        typingEnter 0.35s ease-out;
-
-}
-
-
-@keyframes typingEnter {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(8px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
 }
 
 
@@ -2847,13 +2799,8 @@ button:focus-visible {
 @media (max-width: 768px) {
 
     .typing-container {
-
         font-size: 1.15rem;
-
         min-height: 48px;
-
-        margin: 8px 0 18px;
-
     }
 
 }
@@ -2864,11 +2811,8 @@ button:focus-visible {
 @media (max-width: 480px) {
 
     .typing-container {
-
         font-size: 1rem;
-
         min-height: 42px;
-
     }
 
 }
