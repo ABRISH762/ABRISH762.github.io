@@ -1,7 +1,7 @@
 /* =========================================================
    ABRAHAM ASHAGRE
    PROFESSIONAL PORTFOLIO
-   MAIN STYLESHEET
+   UPDATED MAIN STYLESHEET
 ========================================================= */
 
 
@@ -13,6 +13,12 @@
 
     --primary-color: #0d6efd;
     --primary-dark: #084298;
+
+    /* DARK PURPLE - TYPING */
+    --purple: #4b145f;
+    --purple-light: #6d2585;
+    --purple-soft: #f4eafa;
+
     --secondary-color: #198754;
 
     --text-color: #1f2937;
@@ -162,7 +168,8 @@ button {
     justify-content:
         space-between;
 
-    gap: 25px;
+    gap:
+        20px;
 
 }
 
@@ -217,7 +224,9 @@ button {
 }
 
 
-/* NAVIGATION */
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
 .nav-menu {
 
@@ -228,7 +237,7 @@ button {
         center;
 
     gap:
-        22px;
+        20px;
 
     list-style:
         none;
@@ -245,7 +254,7 @@ button {
         none;
 
     font-size:
-        14px;
+        13px;
 
     font-weight:
         600;
@@ -304,7 +313,9 @@ button {
 }
 
 
-/* HEADER CONTACT */
+/* =========================================================
+   HEADER CONTACT
+========================================================= */
 
 .header-contact {
 
@@ -355,7 +366,9 @@ button {
 }
 
 
-/* MOBILE MENU BUTTON */
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
 .menu-toggle {
 
@@ -399,13 +412,13 @@ button {
         flex-end;
 
     padding-top:
-        20px;
+        15px;
 
 }
 
 
 /* =========================================================
-   6. HERO
+   6. HERO / HOME
 ========================================================= */
 
 .hero {
@@ -420,36 +433,55 @@ button {
         center;
 
     padding:
-        80px 0;
+        55px 0 65px;
 
     background:
         linear-gradient(
             135deg,
-            #f8fbff 0%,
-            #eef5ff 100%
+            #f4f6fb 0%,
+            #e9edf5 50%,
+            #f8f9fc 100%
         );
 
 }
 
 
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
 .hero-content {
+
+    width:
+        100%;
+
+    max-width:
+        1100px;
+
+    margin:
+        0 auto;
 
     display:
         grid;
 
     grid-template-columns:
-        320px 1fr;
+        250px minmax(0, 1fr);
 
     align-items:
         center;
 
-    gap:
-        70px;
+    column-gap:
+        65px;
+
+    padding:
+        15px 25px;
 
 }
 
 
-/* PROFILE IMAGE */
+/* =========================================================
+   PROFILE IMAGE
+========================================================= */
 
 .hero-image {
 
@@ -459,22 +491,25 @@ button {
     justify-content:
         center;
 
+    align-items:
+        center;
+
 }
 
 
 .profile-frame {
 
     width:
-        270px;
+        220px;
 
     height:
-        270px;
+        220px;
 
     padding:
-        8px;
+        7px;
 
     border:
-        5px solid var(--primary-color);
+        4px solid var(--primary-color);
 
     border-radius:
         50%;
@@ -483,10 +518,28 @@ button {
         #ffffff;
 
     box-shadow:
-        var(--shadow);
+        0 15px 35px
+        rgba(25, 45, 80, 0.18);
 
     overflow:
         hidden;
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+
+}
+
+
+.profile-frame:hover {
+
+    transform:
+        translateY(-7px)
+        scale(1.025);
+
+    box-shadow:
+        0 20px 45px
+        rgba(25, 45, 80, 0.25);
 
 }
 
@@ -508,9 +561,25 @@ button {
 }
 
 
-/* HERO TEXT */
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.hero-text {
+
+    max-width:
+        700px;
+
+    padding:
+        5px 0;
+
+}
+
 
 .hero-greeting {
+
+    margin:
+        0 0 6px;
 
     color:
         var(--primary-color);
@@ -519,35 +588,193 @@ button {
         700;
 
     font-size:
-        17px;
+        16px;
 
 }
 
+
+/* NAME */
 
 .hero h1 {
 
     margin:
-        5px 0;
+        0 0 8px;
 
     font-size:
-        clamp(38px, 5vw, 62px);
+        clamp(38px, 5vw, 58px);
 
     line-height:
-        1.1;
+        1.08;
 
     font-weight:
         800;
 
+    letter-spacing:
+        -1px;
+
+    color:
+        #17202f;
+
 }
 
 
+/* DEGREE */
+
 .hero h2 {
 
-    margin-top:
-        12px;
+    margin:
+        0 0 3px;
 
     font-size:
-        clamp(21px, 3vw, 30px);
+        clamp(20px, 3vw, 28px);
+
+    line-height:
+        1.35;
+
+    font-weight:
+        700;
+
+    color:
+        #273444;
+
+}
+
+
+/* =========================================================
+   TYPING ANIMATION
+========================================================= */
+
+.typing-container {
+
+    width:
+        100%;
+
+    min-height:
+        38px;
+
+    display:
+        flex;
+
+    justify-content:
+        flex-start;
+
+    align-items:
+        center;
+
+    text-align:
+        left;
+
+    margin:
+        5px 0 13px;
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        0.3px;
+
+    color:
+        var(--purple);
+
+}
+
+
+/* TYPING TEXT */
+
+.typing-text {
+
+    display:
+        inline-block;
+
+    color:
+        var(--purple);
+
+    text-shadow:
+        0 2px 8px
+        rgba(75, 20, 95, 0.15);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+/* TYPING CURSOR */
+
+.typing-cursor {
+
+    width:
+        3px;
+
+    height:
+        1.3em;
+
+    margin-left:
+        6px;
+
+    display:
+        inline-block;
+
+    background:
+        var(--purple);
+
+    border-radius:
+        3px;
+
+    box-shadow:
+        0 0 8px
+        rgba(75, 20, 95, 0.4);
+
+    animation:
+        cursorBlink
+        0.8s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* CURSOR */
+
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+
+        opacity:
+            1;
+
+    }
+
+    50% {
+
+        opacity:
+            0.15;
+
+    }
+
+}
+
+
+/* =========================================================
+   HERO H3
+   Compatibility with existing HTML
+========================================================= */
+
+.hero h3 {
+
+    margin:
+        4px 0 13px;
+
+    color:
+        var(--purple);
+
+    font-size:
+        18px;
 
     font-weight:
         700;
@@ -555,30 +782,20 @@ button {
 }
 
 
-.hero h3 {
-
-    margin-top:
-        5px;
-
-    color:
-        var(--primary-color);
-
-    font-size:
-        19px;
-
-}
-
+/* =========================================================
+   HERO LINE
+========================================================= */
 
 .hero-line {
 
     width:
-        80px;
+        58px;
 
     height:
-        4px;
+        3px;
 
     margin:
-        22px 0;
+        5px 0 17px;
 
     border-radius:
         10px;
@@ -589,21 +806,33 @@ button {
 }
 
 
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
 .hero-description {
 
     max-width:
-        760px;
+        650px;
+
+    margin:
+        0 0 22px;
 
     color:
         var(--text-light);
 
     font-size:
-        16px;
+        15px;
+
+    line-height:
+        1.75;
 
 }
 
 
-/* HERO BUTTONS */
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
 
 .hero-buttons {
 
@@ -613,11 +842,14 @@ button {
     flex-wrap:
         wrap;
 
+    align-items:
+        center;
+
     gap:
-        12px;
+        9px;
 
     margin-top:
-        28px;
+        18px;
 
 }
 
@@ -630,26 +862,34 @@ button {
     align-items:
         center;
 
+    justify-content:
+        center;
+
     gap:
-        9px;
+        8px;
+
+    min-height:
+        42px;
 
     padding:
-        11px 17px;
+        9px 15px;
 
     border-radius:
-        9px;
+        8px;
 
     text-decoration:
         none;
 
     font-size:
-        14px;
+        13px;
 
     font-weight:
         700;
 
     transition:
-        var(--transition);
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
 
 }
 
@@ -660,10 +900,13 @@ button {
         translateY(-3px);
 
     box-shadow:
-        var(--shadow);
+        0 8px 18px
+        rgba(0, 0, 0, 0.15);
 
 }
 
+
+/* EMAIL */
 
 .email-btn {
 
@@ -676,6 +919,8 @@ button {
 }
 
 
+/* GITHUB */
+
 .github-btn {
 
     background:
@@ -686,6 +931,8 @@ button {
 
 }
 
+
+/* LINKEDIN */
 
 .linkedin-btn {
 
@@ -698,6 +945,8 @@ button {
 }
 
 
+/* WHATSAPP */
+
 .whatsapp-btn {
 
     background:
@@ -708,6 +957,8 @@ button {
 
 }
 
+
+/* PHONE */
 
 .phone-btn {
 
@@ -721,7 +972,7 @@ button {
 
 
 /* =========================================================
-   7. SECTIONS
+   7. GENERAL SECTIONS
 ========================================================= */
 
 .section {
@@ -1177,7 +1428,9 @@ button {
 }
 
 
-/* PERSONAL SKILLS */
+/* =========================================================
+   PERSONAL SKILLS
+========================================================= */
 
 .personal-skills,
 .languages {
@@ -1444,67 +1697,6 @@ button {
 
     font-weight:
         600;
-
-}
-
-
-/* PROJECT GALLERY */
-
-.project-gallery {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap:
-        15px;
-
-    margin-top:
-        28px;
-
-}
-
-
-.project-image {
-
-    overflow:
-        hidden;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        12px;
-
-    background:
-        var(--background-alt);
-
-}
-
-
-.project-image img {
-
-    width:
-        100%;
-
-    height:
-        220px;
-
-    object-fit:
-        cover;
-
-    transition:
-        transform 0.4s ease;
-
-}
-
-
-.project-image:hover img {
-
-    transform:
-        scale(1.05);
 
 }
 
@@ -2210,16 +2402,15 @@ button:focus-visible {
 
 
 /* =========================================================
-   18. RESPONSIVE TABLET
+   18. TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
 
-
     .nav-menu {
 
         gap:
-            13px;
+            12px;
 
     }
 
@@ -2227,7 +2418,7 @@ button:focus-visible {
     .nav-menu a {
 
         font-size:
-            13px;
+            12px;
 
     }
 
@@ -2243,9 +2434,9 @@ button:focus-visible {
     .hero-content {
 
         grid-template-columns:
-            260px 1fr;
+            220px 1fr;
 
-        gap:
+        column-gap:
             45px;
 
     }
@@ -2254,10 +2445,10 @@ button:focus-visible {
     .profile-frame {
 
         width:
-            230px;
+            195px;
 
         height:
-            230px;
+            195px;
 
     }
 
@@ -2289,11 +2480,10 @@ button:focus-visible {
 
 
 /* =========================================================
-   19. RESPONSIVE MOBILE
+   19. MOBILE
 ========================================================= */
 
 @media (max-width: 768px) {
-
 
     .navbar {
 
@@ -2382,6 +2572,9 @@ button:focus-visible {
         padding:
             13px 5px;
 
+        font-size:
+            14px;
+
     }
 
 
@@ -2393,6 +2586,8 @@ button:focus-visible {
     }
 
 
+    /* LINKEDIN */
+
     .linkedin-profile {
 
         justify-content:
@@ -2401,59 +2596,233 @@ button:focus-visible {
     }
 
 
+    /* =====================================================
+       MOBILE HERO
+    ===================================================== */
+
     .hero {
 
+        min-height:
+            auto;
+
         padding:
-            65px 0;
+            42px 0 55px;
 
     }
 
 
     .hero-content {
 
-        grid-template-columns:
-            1fr;
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        align-items:
+            center;
+
+        justify-content:
+            center;
+
+        gap:
+            22px;
 
         text-align:
             center;
 
-        gap:
-            35px;
+        padding:
+            5px 20px;
 
     }
 
+
+    /* IMAGE */
 
     .hero-image {
 
         order:
             1;
 
+        width:
+            100%;
+
     }
 
+
+    .profile-frame {
+
+        width:
+            165px;
+
+        height:
+            165px;
+
+        border-width:
+            4px;
+
+    }
+
+
+    /* TEXT */
 
     .hero-text {
 
         order:
             2;
 
+        width:
+            100%;
+
+        max-width:
+            600px;
+
+        padding:
+            0;
+
     }
 
+
+    .hero-greeting {
+
+        margin-bottom:
+            5px;
+
+        font-size:
+            15px;
+
+    }
+
+
+    .hero h1 {
+
+        margin-bottom:
+            7px;
+
+        font-size:
+            clamp(32px, 9vw, 43px);
+
+        letter-spacing:
+            -0.7px;
+
+    }
+
+
+    .hero h2 {
+
+        margin-bottom:
+            3px;
+
+        font-size:
+            clamp(18px, 5vw, 23px);
+
+        line-height:
+            1.4;
+
+    }
+
+
+    /* =====================================================
+       MOBILE TYPING
+    ===================================================== */
+
+    .typing-container {
+
+        justify-content:
+            center;
+
+        text-align:
+            center;
+
+        min-height:
+            36px;
+
+        margin:
+            3px 0 10px;
+
+        font-size:
+            1.05rem;
+
+    }
+
+
+    .hero h3 {
+
+        margin:
+            3px 0 10px;
+
+        font-size:
+            17px;
+
+    }
+
+
+    /* LINE */
 
     .hero-line {
 
+        width:
+            55px;
+
+        height:
+            3px;
+
         margin:
-            20px auto;
+            5px auto 16px;
 
     }
 
+
+    /* DESCRIPTION */
+
+    .hero-description {
+
+        max-width:
+            550px;
+
+        margin:
+            0 auto 20px;
+
+        font-size:
+            14px;
+
+        line-height:
+            1.7;
+
+    }
+
+
+    /* BUTTONS */
 
     .hero-buttons {
 
         justify-content:
             center;
 
+        gap:
+            8px;
+
+        margin-top:
+            15px;
+
     }
 
+
+    .hero-btn {
+
+        min-height:
+            40px;
+
+        padding:
+            9px 12px;
+
+        font-size:
+            12px;
+
+    }
+
+
+    /* OTHER SECTIONS */
 
     .about-card,
     .education-card,
@@ -2495,11 +2864,10 @@ button:focus-visible {
 
 
 /* =========================================================
-   20. SMALL MOBILE
+   20. SMALL PHONES
 ========================================================= */
 
 @media (max-width: 500px) {
-
 
     .container {
 
@@ -2525,42 +2893,41 @@ button:focus-visible {
     }
 
 
+    /* =====================================================
+       SMALL PHONE HERO
+    ===================================================== */
+
+    .hero {
+
+        padding:
+            32px 0 45px;
+
+    }
+
+
+    .hero-content {
+
+        gap:
+            18px;
+
+        padding:
+            5px 16px;
+
+    }
+
+
     .profile-frame {
 
         width:
-            190px;
+            145px;
 
         height:
-            190px;
+            145px;
 
     }
 
 
-    .hero h1 {
-
-        font-size:
-            38px;
-
-    }
-
-
-    .hero h2 {
-
-        font-size:
-            21px;
-
-    }
-
-
-    .hero h3 {
-
-        font-size:
-            17px;
-
-    }
-
-
-    .hero-description {
+    .hero-greeting {
 
         font-size:
             14px;
@@ -2568,10 +2935,85 @@ button:focus-visible {
     }
 
 
+    .hero h1 {
+
+        font-size:
+            30px;
+
+    }
+
+
+    .hero h2 {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .hero h3 {
+
+        font-size:
+            15px;
+
+    }
+
+
+    /* TYPING */
+
+    .typing-container {
+
+        min-height:
+            33px;
+
+        font-size:
+            0.95rem;
+
+        margin:
+            2px 0 9px;
+
+    }
+
+
+    .typing-cursor {
+
+        width:
+            2px;
+
+        margin-left:
+            5px;
+
+    }
+
+
+    /* DESCRIPTION */
+
+    .hero-description {
+
+        font-size:
+            13px;
+
+        line-height:
+            1.65;
+
+    }
+
+
+    /* BUTTONS */
+
     .hero-buttons {
 
-        flex-direction:
-            column;
+        width:
+            100%;
+
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            8px;
 
     }
 
@@ -2581,11 +3023,19 @@ button:focus-visible {
         width:
             100%;
 
-        justify-content:
-            center;
+        min-height:
+            40px;
+
+        padding:
+            8px 7px;
+
+        font-size:
+            11px;
 
     }
 
+
+    /* GENERAL */
 
     .section {
 
@@ -2607,22 +3057,6 @@ button:focus-visible {
 
         grid-template-columns:
             1fr;
-
-    }
-
-
-    .project-gallery {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .project-image img {
-
-        height:
-            200px;
 
     }
 
@@ -2662,6 +3096,7 @@ button:focus-visible {
 
     }
 
+
     .certificate-btn,
     .document-btn {
 
@@ -2690,7 +3125,66 @@ button:focus-visible {
 
 
 /* =========================================================
-   21. REDUCED MOTION
+   21. VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .profile-frame {
+
+        width:
+            130px;
+
+        height:
+            130px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            27px;
+
+    }
+
+
+    .hero h2 {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .typing-container {
+
+        font-size:
+            0.88rem;
+
+    }
+
+
+    .hero-description {
+
+        font-size:
+            12.5px;
+
+    }
+
+
+    .hero-buttons {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+/* =========================================================
+   22. REDUCED MOTION
 ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2716,102 +3210,6 @@ button:focus-visible {
         transition-duration:
             0.01ms !important;
 
-    }
-
-}
-/* =========================================================
-   DARK PURPLE TYPING ANIMATION
-========================================================= */
-
-.typing-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    min-height: 55px;
-    margin: 10px 0 22px;
-
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-
-    color: #4b145f;
-}
-
-
-/* Typing text */
-
-.typing-text {
-    display: inline-block;
-    color: #4b145f;
-
-    text-shadow:
-        0 2px 8px rgba(75, 20, 95, 0.15);
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-}
-
-
-/* Typing cursor */
-
-.typing-cursor {
-    width: 3px;
-    height: 1.4em;
-
-    margin-left: 7px;
-
-    display: inline-block;
-
-    background-color: #4b145f;
-
-    border-radius: 3px;
-
-    box-shadow:
-        0 0 8px rgba(75, 20, 95, 0.45);
-
-    animation:
-        cursorBlink 0.8s ease-in-out infinite;
-}
-
-
-/* Cursor animation */
-
-@keyframes cursorBlink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.15;
-    }
-}
-
-
-/* Mobile */
-
-@media (max-width: 768px) {
-
-    .typing-container {
-        font-size: 1.15rem;
-        min-height: 48px;
-    }
-
-}
-
-
-/* Small phones */
-
-@media (max-width: 480px) {
-
-    .typing-container {
-        font-size: 1rem;
-        min-height: 42px;
     }
 
 }
