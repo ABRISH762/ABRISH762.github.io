@@ -554,13 +554,21 @@ function initTypingEffect() {
 
         "Aspiring IT Support Officer",
 
-        "Information Technology Graduate",
-
         "IT Support Professional",
 
         "Network & System Enthusiast",
+       
+       "Network Administrator",
+       
+"System Administrator",
+       
+"Database Administrator",
+       
+"Graduate Trainee (IT)",
+       
+"Web Developer",
 
-        "Software Developer"
+        "Junior Software Developer"
 
     ];
 
