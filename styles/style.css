@@ -2721,70 +2721,154 @@ button:focus-visible {
 
 }
 /* =========================================================
-   TYPING ANIMATION
+   PROFESSIONAL CENTERED TYPING ANIMATION
 ========================================================= */
 
 .typing-container {
 
-    min-height: 1.5em;
+    width: 100%;
 
     display: flex;
 
+    justify-content: center;
+
     align-items: center;
+
+    text-align: center;
+
+    min-height: 55px;
+
+    margin: 10px 0 22px;
+
+    font-size: 1.35rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
 
 }
 
 
 /* Typing text */
 
-#typing-text {
+.typing-text {
 
     display: inline-block;
+
+    position: relative;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
 
 }
 
 
-/* Animated cursor */
+/* Cursor */
 
 .typing-cursor {
 
+    width: 3px;
+
+    height: 1.4em;
+
+    margin-left: 7px;
+
+    border-radius: 3px;
+
     display: inline-block;
 
-    margin-left: 3px;
-
-    font-weight: 600;
-
-    animation: typingCursor 0.8s infinite;
+    animation:
+        cursorBlink 0.8s ease-in-out infinite;
 
 }
 
 
-/* Cursor blinking */
+/* Cursor animation */
 
-@keyframes typingCursor {
+@keyframes cursorBlink {
 
     0%,
-    49% {
+    100% {
 
         opacity: 1;
 
+        transform: scaleY(1);
+
     }
 
-    50%,
-    100% {
+    50% {
 
-        opacity: 0;
+        opacity: 0.15;
+
+        transform: scaleY(0.85);
 
     }
 
 }
 
 
-/* Dark mode */
+/* Text entering */
 
-body.dark-theme
-.typing-cursor {
+.typing-container.typing-enter
+.typing-text {
 
-    color: var(--primary-color);
+    animation:
+        typingEnter 0.35s ease-out;
+
+}
+
+
+@keyframes typingEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .typing-container {
+
+        font-size: 1.15rem;
+
+        min-height: 48px;
+
+        margin: 8px 0 18px;
+
+    }
+
+}
+
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+    .typing-container {
+
+        font-size: 1rem;
+
+        min-height: 42px;
+
+    }
 
 }
