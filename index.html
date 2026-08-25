@@ -3,6 +3,10 @@
 
 <head>
 
+    <!-- =====================================================
+         BASIC META
+    ====================================================== -->
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
@@ -11,14 +15,36 @@
     <meta name="description"
           content="Professional portfolio of Abraham Ashagre, Information Technology Graduate and aspiring IT Support Officer.">
 
+    <meta name="keywords"
+          content="Abraham Ashagre, Information Technology, IT Support Officer, IT Graduate, University of Gondar, Networking, Database, Programming">
+
     <meta name="author"
           content="Abraham Ashagre">
 
-    <meta name="keywords"
-          content="Abraham Ashagre, Information Technology, IT Support Officer, IT Graduate, University of Gondar, Portfolio">
+    <meta name="robots"
+          content="index, follow">
+
+
+    <!-- =====================================================
+         THEME / PWA
+    ====================================================== -->
 
     <meta name="theme-color"
           content="#0d6efd">
+
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
+
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="default">
+
+    <meta name="apple-mobile-web-app-title"
+          content="Abraham Ashagre">
+
+
+    <!-- =====================================================
+         TITLE
+    ====================================================== -->
 
     <title>
         Abraham Ashagre | IT Support Officer
@@ -35,7 +61,15 @@
 
 
     <!-- =====================================================
-         MAIN CSS
+         PWA MANIFEST
+    ====================================================== -->
+
+    <link rel="manifest"
+          href="manifest.json">
+
+
+    <!-- =====================================================
+         CSS
     ====================================================== -->
 
     <link rel="stylesheet"
@@ -66,16 +100,9 @@
 <body>
 
 
-<!-- =====================================================
-     SCROLL PROGRESS
-====================================================== -->
-
-<div class="scroll-progress"></div>
-
-
-<!-- =====================================================
-     HEADER
-====================================================== -->
+<!-- =========================================================
+     HEADER / NAVIGATION
+========================================================= -->
 
 <header class="header">
 
@@ -155,45 +182,28 @@
             </ul>
 
 
-            <!-- HEADER ACTIONS -->
+            <!-- HEADER CONTACT -->
 
-            <div class="header-actions">
+            <a href="mailto:abraham_ash37@gmail.com"
+               class="header-contact">
 
+                <i class="fa-solid fa-envelope"></i>
 
-                <!-- DARK MODE -->
+                Contact Me
 
-                <button class="theme-toggle"
-                        type="button"
-                        aria-label="Switch to dark mode">
-
-                    <i class="fa-solid fa-moon"></i>
-
-                </button>
+            </a>
 
 
-                <!-- CONTACT -->
+            <!-- MOBILE MENU -->
 
-                <a href="mailto:abraham_ash37@gmail.com"
-                   class="header-contact">
+            <button class="menu-toggle"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false">
 
-                    <i class="fa-solid fa-envelope"></i>
+                <i class="fa-solid fa-bars"></i>
 
-                    Contact Me
-
-                </a>
-
-
-                <!-- MOBILE MENU -->
-
-                <button class="menu-toggle"
-                        type="button"
-                        aria-label="Open navigation menu">
-
-                    <i class="fa-solid fa-bars"></i>
-
-                </button>
-
-            </div>
+            </button>
 
         </nav>
 
@@ -202,16 +212,46 @@
 </header>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      MAIN
-====================================================== -->
+========================================================= -->
 
 <main>
 
 
-<!-- =====================================================
+<!-- =========================================================
+     LINKEDIN BADGE
+========================================================= -->
+
+<div class="container linkedin-profile">
+
+    <div class="badge-base LI-profile-badge"
+         data-locale="en_US"
+         data-size="medium"
+         data-theme="light"
+         data-type="HORIZONTAL"
+         data-vanity="abraham-ashagre-b9432742b"
+         data-version="v1">
+
+        <a class="badge-base__link LI-simple-link"
+           href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            Abraham Ashagre
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
      HOME / HERO
-====================================================== -->
+========================================================= -->
 
 <section id="home"
          class="hero">
@@ -253,19 +293,9 @@
             </h2>
 
 
-            <!-- TYPING EFFECT -->
-
-            <div class="typing-container">
-
-                <span class="typing-text">
-                    Aspiring IT Support Officer
-                </span>
-
-                <span class="typing-cursor">
-                    |
-                </span>
-
-            </div>
+            <h3>
+                Aspiring IT Support Officer
+            </h3>
 
 
             <div class="hero-line"></div>
@@ -286,34 +316,6 @@
             <!-- HERO BUTTONS -->
 
             <div class="hero-buttons">
-
-
-                <!-- CV -->
-
-                <a href="documents/MyCV.PDF"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="hero-btn primary">
-
-                    <i class="fa-solid fa-file-pdf"></i>
-
-                    View CV
-
-                </a>
-
-
-                <!-- APPLICATION LETTER -->
-
-                <a href="documents/CovLett.PDF"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="hero-btn">
-
-                    <i class="fa-solid fa-file-lines"></i>
-
-                    Application Letter
-
-                </a>
 
 
                 <!-- EMAIL -->
@@ -369,29 +371,31 @@
 
                 </a>
 
+
+                <!-- PHONE -->
+
+                <a href="tel:+251969601928"
+                   class="hero-btn phone-btn">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    Phone
+
+                </a>
+
             </div>
 
         </div>
 
     </div>
 
-
-    <!-- SCROLL DOWN -->
-
-    <a href="#about"
-       class="scroll-down"
-       aria-label="Scroll to About section">
-
-        <i class="fa-solid fa-chevron-down"></i>
-
-    </a>
-
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      ABOUT
-====================================================== -->
+========================================================= -->
 
 <section id="about"
          class="section about">
@@ -454,7 +458,7 @@
         </div>
 
 
-        <!-- STATISTICS -->
+        <!-- QUICK STATISTICS -->
 
         <div class="stats-grid">
 
@@ -525,11 +529,11 @@
                 </strong>
 
                 <span>
-                    Certificates
+                    Certificates &
                 </span>
 
                 <small>
-                    & Awards
+                    Awards
                 </small>
 
             </div>
@@ -544,11 +548,11 @@
                 </strong>
 
                 <span>
-                    Team Player
+                    Team Player &
                 </span>
 
                 <small>
-                    & Fast Learner
+                    Fast Learner
                 </small>
 
             </div>
@@ -560,9 +564,10 @@
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      EDUCATION
-====================================================== -->
+========================================================= -->
 
 <section id="education"
          class="section education">
@@ -600,11 +605,9 @@
                     in Information Technology
                 </h3>
 
-
                 <h4>
                     University of Gondar
                 </h4>
-
 
                 <p class="education-date">
                     2022 – 2026
@@ -629,14 +632,13 @@
                     <p>
 
                         Programming Fundamentals,
-                        Software Development,
-                        Database Management Systems,
-                        Computer Networking,
-                        Computer Maintenance and
-                        Technical Support, IT Project
+                        Software Development, Database
+                        Management Systems, Computer
+                        Networking, Computer Maintenance
+                        and Technical Support, IT Project
                         Management, System Analysis and
-                        Design, Information Assurance and
-                        Security.
+                        Design, Information Assurance
+                        and Security.
 
                     </p>
 
@@ -651,9 +653,10 @@
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      SKILLS
-====================================================== -->
+========================================================= -->
 
 <section id="skills"
          class="section skills">
@@ -718,8 +721,8 @@
                 </h3>
 
                 <p>
-                    Computer networking fundamentals and
-                    technical networking knowledge.
+                    Computer networking fundamentals
+                    and technical networking knowledge.
                 </p>
 
             </div>
@@ -794,12 +797,12 @@
                 <i class="fa-brands fa-git-alt"></i>
 
                 <h3>
-                    Git & GitHub
+                    Git
                 </h3>
 
                 <p>
-                    Version control, collaboration and
-                    project management using Git and GitHub.
+                    Version control and project management
+                    using Git.
                 </p>
 
             </div>
@@ -862,7 +865,6 @@
 
             <div class="language-list">
 
-
                 <div>
 
                     <strong>
@@ -897,9 +899,10 @@
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      PROJECT
-====================================================== -->
+========================================================= -->
 
 <section id="project"
          class="section project">
@@ -933,7 +936,7 @@
             <div class="project-content">
 
                 <span class="project-label">
-                    UNIVERSITY PROJECT
+                    FINAL YEAR PROJECT
                 </span>
 
 
@@ -949,12 +952,11 @@
 
                 <p>
 
-                    Participated in system analysis,
-                    database design, system development,
-                    testing, and documentation to develop
-                    a video-based telemedicine application
-                    that facilitates online healthcare
-                    services.
+                    A video-based telemedicine application
+                    designed to facilitate online healthcare
+                    services through appointment booking,
+                    virtual consultations, and digital
+                    healthcare communication.
 
                 </p>
 
@@ -984,16 +986,75 @@
                 </div>
 
 
-                <a href="https://github.com/ABRISH762"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="project-btn">
+                <!-- PROJECT GALLERY -->
 
-                    <i class="fa-brands fa-github"></i>
+                <div class="project-gallery">
 
-                    View GitHub
 
-                </a>
+                    <div class="project-image">
+
+                        <img
+                            src="assets/images/projects/telemedicine-home.png"
+                            alt="Telemedicine application home screen"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/images/projects/telemedicine-login.png"
+                            alt="Telemedicine application login screen"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/images/projects/telemedicine-appointment.png"
+                            alt="Telemedicine appointment booking screen"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="project-image">
+
+                        <img
+                            src="assets/images/projects/telemedicine-video-call.png"
+                            alt="Telemedicine video consultation screen"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROJECT ACTION -->
+
+                <div class="project-actions">
+
+                    <a
+                        href="https://github.com/ABRISH762"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="project-btn"
+                    >
+
+                        <i class="fa-brands fa-github"></i>
+
+                        View GitHub
+
+                    </a>
+
+                </div>
 
             </div>
 
@@ -1003,14 +1064,17 @@
 
 </section>
 
-<!-- =====================================================
+
+
+<!-- =========================================================
      CERTIFICATES & AWARDS
-===================================================== -->
+========================================================= -->
 
 <section id="achievements"
          class="section achievements">
 
     <div class="container">
+
 
         <div class="section-heading">
 
@@ -1045,6 +1109,7 @@
                         Certificate of Achievement
                     </h3>
 
+
                     <p>
 
                         Awarded in recognition of outstanding
@@ -1054,16 +1119,20 @@
 
                     </p>
 
+
                     <small>
+
                         College of Informatics Dean
+
                         <br>
+
                         24/06/2026
+
                     </small>
 
 
-                    <!-- Certificate buttons -->
-
                     <div class="certificate-actions">
+
 
                         <a
                             href="assets/certificates/certificate-achievement.pdf"
@@ -1117,6 +1186,7 @@
                         Achievement Award
                     </h3>
 
+
                     <p>
 
                         Awarded in recognition of outstanding
@@ -1125,16 +1195,20 @@
 
                     </p>
 
+
                     <small>
+
                         College of Informatics
+
                         <br>
+
                         25/06/2026
+
                     </small>
 
 
-                    <!-- Award buttons -->
-
                     <div class="certificate-actions">
+
 
                         <a
                             href="assets/certificates/academic-achievement-award.pdf"
@@ -1175,9 +1249,10 @@
 </section>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      PROFESSIONAL DOCUMENTS
-====================================================== -->
+========================================================= -->
 
 <section id="documents"
          class="section documents">
@@ -1228,10 +1303,12 @@
                     <div class="document-buttons">
 
 
-                        <a href="documents/MyCV.PDF"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="document-btn primary">
+                        <a
+                            href="documents/MyCV.PDF"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="document-btn primary"
+                        >
 
                             <i class="fa-solid fa-eye"></i>
 
@@ -1240,9 +1317,11 @@
                         </a>
 
 
-                        <a href="documents/MyCV.PDF"
-                           download="Abraham-Ashagre-CV.pdf"
-                           class="document-btn secondary">
+                        <a
+                            href="documents/MyCV.PDF"
+                            download="Abraham-Ashagre-CV.pdf"
+                            class="document-btn secondary"
+                        >
 
                             <i class="fa-solid fa-download"></i>
 
@@ -1255,6 +1334,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- APPLICATION LETTER -->
@@ -1285,10 +1365,12 @@
                     <div class="document-buttons">
 
 
-                        <a href="documents/CovLett.PDF"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="document-btn primary">
+                        <a
+                            href="documents/CovLett.PDF"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="document-btn primary"
+                        >
 
                             <i class="fa-solid fa-eye"></i>
 
@@ -1297,9 +1379,11 @@
                         </a>
 
 
-                        <a href="documents/CovLett.PDF"
-                           download="Abraham-Ashagre-Application-Letter.pdf"
-                           class="document-btn secondary">
+                        <a
+                            href="documents/CovLett.PDF"
+                            download="Abraham-Ashagre-Application-Letter.pdf"
+                            class="document-btn secondary"
+                        >
 
                             <i class="fa-solid fa-download"></i>
 
@@ -1320,161 +1404,10 @@
 </section>
 
 
-<!-- =====================================================
-     SOCIAL / CONNECT
-====================================================== -->
 
-<section id="connect"
-         class="section connect">
-
-    <div class="container">
-
-
-        <div class="section-heading">
-
-            <span>
-                ONLINE PRESENCE
-            </span>
-
-            <h2>
-                Connect With Me
-            </h2>
-
-        </div>
-
-
-        <div class="social-grid">
-
-
-            <!-- LINKEDIN -->
-
-            <a href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-linkedin"></i>
-
-                <span>
-                    LinkedIn
-                </span>
-
-                <small>
-                    Professional Profile
-                </small>
-
-            </a>
-
-
-            <!-- GITHUB -->
-
-            <a href="https://github.com/ABRISH762"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-github"></i>
-
-                <span>
-                    GitHub
-                </span>
-
-                <small>
-                    Projects & Code
-                </small>
-
-            </a>
-
-
-            <!-- FACEBOOK -->
-
-            <a href="https://www.facebook.com/"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-facebook"></i>
-
-                <span>
-                    Facebook
-                </span>
-
-                <small>
-                    Facebook Profile
-                </small>
-
-            </a>
-
-
-            <!-- INSTAGRAM -->
-
-            <a href="https://www.instagram.com/"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-instagram"></i>
-
-                <span>
-                    Instagram
-                </span>
-
-                <small>
-                    Instagram Profile
-                </small>
-
-            </a>
-
-
-            <!-- TELEGRAM -->
-
-            <a href="https://t.me/"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-telegram"></i>
-
-                <span>
-                    Telegram
-                </span>
-
-                <small>
-                    Telegram
-                </small>
-
-            </a>
-
-
-            <!-- WHATSAPP -->
-
-            <a href="https://wa.me/251969601928"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social-card">
-
-                <i class="fa-brands fa-whatsapp"></i>
-
-                <span>
-                    WhatsApp
-                </span>
-
-                <small>
-                    Direct Chat
-                </small>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
+<!-- =========================================================
      CONTACT
-====================================================== -->
+========================================================= -->
 
 <section id="contact"
          class="section contact">
@@ -1509,6 +1442,7 @@
 
                 </div>
 
+
                 <div>
 
                     <h3>
@@ -1524,6 +1458,7 @@
             </a>
 
 
+
             <!-- PHONE -->
 
             <a href="tel:+251969601928"
@@ -1534,6 +1469,7 @@
                     <i class="fa-solid fa-phone"></i>
 
                 </div>
+
 
                 <div>
 
@@ -1550,6 +1486,7 @@
             </a>
 
 
+
             <!-- WHATSAPP -->
 
             <a href="https://wa.me/251969601928"
@@ -1562,6 +1499,7 @@
                     <i class="fa-brands fa-whatsapp"></i>
 
                 </div>
+
 
                 <div>
 
@@ -1578,6 +1516,39 @@
             </a>
 
 
+
+            <!-- LINKEDIN -->
+
+            <a
+                href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-card"
+            >
+
+                <div class="contact-icon">
+
+                    <i class="fa-brands fa-linkedin"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        LinkedIn
+                    </h3>
+
+                    <p>
+                        View my LinkedIn profile
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
             <!-- GITHUB -->
 
             <a href="https://github.com/ABRISH762"
@@ -1590,6 +1561,7 @@
                     <i class="fa-brands fa-github"></i>
 
                 </div>
+
 
                 <div>
 
@@ -1606,33 +1578,6 @@
             </a>
 
 
-            <!-- LINKEDIN -->
-
-            <a href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="contact-card">
-
-                <div class="contact-icon">
-
-                    <i class="fa-brands fa-linkedin"></i>
-
-                </div>
-
-                <div>
-
-                    <h3>
-                        LinkedIn
-                    </h3>
-
-                    <p>
-                        LinkedIn Profile
-                    </p>
-
-                </div>
-
-            </a>
-
 
             <!-- LOCATION -->
 
@@ -1643,6 +1588,7 @@
                     <i class="fa-solid fa-location-dot"></i>
 
                 </div>
+
 
                 <div>
 
@@ -1665,29 +1611,30 @@
 </section>
 
 
-</main>
 
-
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-====================================================== -->
+========================================================= -->
 
 <footer class="footer">
 
     <div class="container">
 
 
-        <!-- FOOTER SOCIAL LINKS -->
+        <!-- SOCIAL LINKS -->
 
         <div class="footer-social">
 
 
             <!-- LINKEDIN -->
 
-            <a href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="LinkedIn">
+            <a
+                href="https://et.linkedin.com/in/abraham-ashagre-b9432742b"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                title="LinkedIn"
+            >
 
                 <i class="fa-brands fa-linkedin"></i>
 
@@ -1696,10 +1643,13 @@
 
             <!-- GITHUB -->
 
-            <a href="https://github.com/ABRISH762"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="GitHub">
+            <a
+                href="https://github.com/ABRISH762"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                title="GitHub"
+            >
 
                 <i class="fa-brands fa-github"></i>
 
@@ -1708,10 +1658,13 @@
 
             <!-- FACEBOOK -->
 
-            <a href="https://www.facebook.com/"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Facebook">
+            <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                title="Facebook"
+            >
 
                 <i class="fa-brands fa-facebook"></i>
 
@@ -1720,10 +1673,13 @@
 
             <!-- INSTAGRAM -->
 
-            <a href="https://www.instagram.com/"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Instagram">
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                title="Instagram"
+            >
 
                 <i class="fa-brands fa-instagram"></i>
 
@@ -1732,32 +1688,26 @@
 
             <!-- TELEGRAM -->
 
-            <a href="https://t.me/"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Telegram">
+            <a
+                href="https://t.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+                title="Telegram"
+            >
 
                 <i class="fa-brands fa-telegram"></i>
 
             </a>
 
 
-            <!-- WHATSAPP -->
-
-            <a href="https://wa.me/251969601928"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="WhatsApp">
-
-                <i class="fa-brands fa-whatsapp"></i>
-
-            </a>
-
-
             <!-- EMAIL -->
 
-            <a href="mailto:abraham_ash37@gmail.com"
-               aria-label="Email">
+            <a
+                href="mailto:abraham_ash37@gmail.com"
+                aria-label="Email"
+                title="Email"
+            >
 
                 <i class="fa-solid fa-envelope"></i>
 
@@ -1769,19 +1719,14 @@
         <!-- FOOTER TEXT -->
 
         <p>
-
-            © <span class="current-year"></span>
-            Abraham Ashagre.
+            © 2026 Abraham Ashagre.
             All Rights Reserved.
-
         </p>
 
 
         <p>
-
             Information Technology Graduate
             | Aspiring IT Support Officer
-
         </p>
 
     </div>
@@ -1789,24 +1734,17 @@
 </footer>
 
 
-<!-- =====================================================
-     BACK TO TOP
-====================================================== -->
-
-<button class="back-to-top"
-        type="button"
-        aria-label="Back to top">
-
-    <i class="fa-solid fa-arrow-up"></i>
-
-</button>
+</main>
 
 
-<!-- =====================================================
+
+<!-- =========================================================
      JAVASCRIPT
-====================================================== -->
+========================================================= -->
 
 <script src="scripts/script.js"></script>
+
+<script src="scripts/theme.js"></script>
 
 
 </body>
