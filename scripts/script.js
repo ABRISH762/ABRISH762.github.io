@@ -1,40 +1,30 @@
-/* =========================================================
-   ABRAHAM ASHAGRE - PROFESSIONAL PORTFOLIO
-   ADVANCED JAVASCRIPT
-========================================================= */
-
 "use strict";
 
-
 /* =========================================================
-   1. DOM READY
+   ABRISH762.github.io
+   Main Portfolio JavaScript
+   Theme functionality is handled separately by theme.js
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
     initMobileMenu();
-
-    initDarkMode();
-
-    initTypingEffect();
-
     initScrollProgress();
-
     initHeaderEffect();
-
     initBackToTop();
-
     initScrollReveal();
-
     initActiveNavigation();
-
+    initTypingEffect();
+    initSmoothScrolling();
+    initExternalLinks();
+    initImageErrorHandling();
     initCurrentYear();
 
 });
 
 
 /* =========================================================
-   2. MOBILE NAVIGATION
+   1. MOBILE MENU
 ========================================================= */
 
 function initMobileMenu() {
@@ -52,33 +42,50 @@ function initMobileMenu() {
 
     menuToggle.addEventListener("click", () => {
 
-        navMenu.classList.toggle("active");
+        const isOpen =
+            navMenu.classList.toggle("active");
 
 
         const icon =
             menuToggle.querySelector("i");
 
 
-        if (navMenu.classList.contains("active")) {
+        if (isOpen) {
 
-            icon.classList.remove("fa-bars");
+            if (icon) {
 
-            icon.classList.add("fa-xmark");
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-xmark");
+
+            }
 
             menuToggle.setAttribute(
                 "aria-label",
                 "Close navigation menu"
             );
 
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
         } else {
 
-            icon.classList.remove("fa-xmark");
+            if (icon) {
 
-            icon.classList.add("fa-bars");
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
 
             menuToggle.setAttribute(
                 "aria-label",
                 "Open navigation menu"
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
             );
 
         }
@@ -86,13 +93,9 @@ function initMobileMenu() {
     });
 
 
-    /* Close menu after clicking a link */
+    /* Close menu after selecting a section */
 
-    const navLinks =
-        navMenu.querySelectorAll("a");
-
-
-    navLinks.forEach(link => {
+    navMenu.querySelectorAll("a").forEach(link => {
 
         link.addEventListener("click", () => {
 
@@ -103,14 +106,17 @@ function initMobileMenu() {
                 menuToggle.querySelector("i");
 
 
-            icon.classList.remove("fa-xmark");
+            if (icon) {
 
-            icon.classList.add("fa-bars");
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
 
 
             menuToggle.setAttribute(
-                "aria-label",
-                "Open navigation menu"
+                "aria-expanded",
+                "false"
             );
 
         });
@@ -122,17 +128,9 @@ function initMobileMenu() {
 
     document.addEventListener("click", event => {
 
-        const clickedInsideMenu =
-            navMenu.contains(event.target);
-
-        const clickedToggle =
-            menuToggle.contains(event.target);
-
-
         if (
-            !clickedInsideMenu &&
-            !clickedToggle &&
-            navMenu.classList.contains("active")
+            !navMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
         ) {
 
             navMenu.classList.remove("active");
@@ -142,9 +140,18 @@ function initMobileMenu() {
                 menuToggle.querySelector("i");
 
 
-            icon.classList.remove("fa-xmark");
+            if (icon) {
 
-            icon.classList.add("fa-bars");
+                icon.classList.remove("fa-xmark");
+                icon.classList.add("fa-bars");
+
+            }
+
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
         }
 
@@ -154,263 +161,77 @@ function initMobileMenu() {
 
 
 /* =========================================================
-   3. DARK / LIGHT MODE
-========================================================= */
-
-function initDarkMode() {
-
-    const themeToggle =
-        document.querySelector(".theme-toggle");
-
-
-    if (!themeToggle) {
-        return;
-    }
-
-
-    const savedTheme =
-        localStorage.getItem("portfolio-theme");
-
-
-    if (savedTheme === "dark") {
-
-        document.body.classList.add("dark-mode");
-
-    }
-
-
-    updateThemeIcon();
-
-
-    themeToggle.addEventListener("click", () => {
-
-        document.body.classList.toggle("dark-mode");
-
-
-        const isDark =
-            document.body.classList.contains("dark-mode");
-
-
-        localStorage.setItem(
-            "portfolio-theme",
-            isDark ? "dark" : "light"
-        );
-
-
-        updateThemeIcon();
-
-    });
-
-
-    function updateThemeIcon() {
-
-        const icon =
-            themeToggle.querySelector("i");
-
-
-        if (!icon) {
-            return;
-        }
-
-
-        const isDark =
-            document.body.classList.contains("dark-mode");
-
-
-        if (isDark) {
-
-            icon.classList.remove("fa-moon");
-
-            icon.classList.add("fa-sun");
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to light mode"
-            );
-
-        } else {
-
-            icon.classList.remove("fa-sun");
-
-            icon.classList.add("fa-moon");
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to dark mode"
-            );
-
-        }
-
-    }
-
-}
-
-
-/* =========================================================
-   4. TYPING EFFECT
-========================================================= */
-
-function initTypingEffect() {
-
-    const typingElement =
-        document.querySelector(".typing-text");
-
-
-    if (!typingElement) {
-        return;
-    }
-
-
-    const words = [
-
-        "Aspiring IT Support Officer",
-
-        "IT Support Professional",
-
-        "Network & System Enthusiast",
-
-        "Software Developer",
-
-        "Information Technology Graduate"
-
-    ];
-
-
-    let wordIndex = 0;
-
-    let characterIndex = 0;
-
-    let deleting = false;
-
-
-    function type() {
-
-        const currentWord =
-            words[wordIndex];
-
-
-        if (!deleting) {
-
-            characterIndex++;
-
-        } else {
-
-            characterIndex--;
-
-        }
-
-
-        typingElement.textContent =
-            currentWord.substring(
-                0,
-                characterIndex
-            );
-
-
-        let speed =
-            deleting ? 55 : 90;
-
-
-        /* Pause after completing a word */
-
-        if (
-            !deleting &&
-            characterIndex === currentWord.length
-        ) {
-
-            speed = 1800;
-
-            deleting = true;
-
-        }
-
-
-        /* Move to next word */
-
-        if (
-            deleting &&
-            characterIndex === 0
-        ) {
-
-            deleting = false;
-
-            wordIndex =
-                (wordIndex + 1) % words.length;
-
-            speed = 400;
-
-        }
-
-
-        setTimeout(type, speed);
-
-    }
-
-
-    type();
-
-}
-
-
-/* =========================================================
-   5. SCROLL PROGRESS
+   2. SCROLL PROGRESS BAR
 ========================================================= */
 
 function initScrollProgress() {
 
-    let progressBar =
+    let progress =
         document.querySelector(".scroll-progress");
 
 
-    /* Create automatically if it doesn't exist */
+    /*
+       If it does not exist in HTML,
+       create it automatically.
+    */
 
-    if (!progressBar) {
+    if (!progress) {
 
-        progressBar =
+        progress =
             document.createElement("div");
 
-        progressBar.className =
+        progress.className =
             "scroll-progress";
 
-        document.body.prepend(progressBar);
+        document.body.prepend(progress);
+
+    }
+
+
+    function updateProgress() {
+
+        const scrollTop =
+            window.scrollY;
+
+
+        const pageHeight =
+            document.documentElement.scrollHeight -
+            window.innerHeight;
+
+
+        if (pageHeight <= 0) {
+
+            progress.style.width = "0%";
+
+            return;
+
+        }
+
+
+        const percentage =
+            (scrollTop / pageHeight) * 100;
+
+
+        progress.style.width =
+            `${percentage}%`;
 
     }
 
 
     window.addEventListener(
         "scroll",
-        () => {
-
-            const scrollTop =
-                window.scrollY;
-
-            const documentHeight =
-                document.documentElement
-                    .scrollHeight -
-                window.innerHeight;
-
-
-            if (documentHeight <= 0) {
-                return;
-            }
-
-
-            const progress =
-                (scrollTop / documentHeight) * 100;
-
-
-            progressBar.style.width =
-                `${progress}%`;
-
-        },
+        updateProgress,
         { passive: true }
     );
+
+
+    updateProgress();
 
 }
 
 
 /* =========================================================
-   6. HEADER SCROLL EFFECT
+   3. HEADER SCROLL EFFECT
 ========================================================= */
 
 function initHeaderEffect() {
@@ -439,73 +260,80 @@ function initHeaderEffect() {
     }
 
 
-    updateHeader();
-
-
     window.addEventListener(
         "scroll",
         updateHeader,
         { passive: true }
     );
 
+
+    updateHeader();
+
 }
 
 
 /* =========================================================
-   7. BACK TO TOP
+   4. BACK TO TOP
 ========================================================= */
 
 function initBackToTop() {
 
-    let backToTop =
+    let button =
         document.querySelector(".back-to-top");
 
 
-    /* Create automatically */
+    /*
+       Create automatically if HTML does not
+       already contain the button.
+    */
 
-    if (!backToTop) {
+    if (!button) {
 
-        backToTop =
+        button =
             document.createElement("button");
 
-        backToTop.className =
+        button.className =
             "back-to-top";
 
-        backToTop.innerHTML =
-            '<i class="fa-solid fa-arrow-up"></i>';
+        button.type =
+            "button";
 
-        backToTop.setAttribute(
+        button.setAttribute(
             "aria-label",
             "Back to top"
         );
 
-        document.body.appendChild(
-            backToTop
-        );
+        button.innerHTML =
+            '<i class="fa-solid fa-arrow-up"></i>';
+
+        document.body.appendChild(button);
+
+    }
+
+
+    function updateButton() {
+
+        if (window.scrollY > 500) {
+
+            button.classList.add("show");
+
+        } else {
+
+            button.classList.remove("show");
+
+        }
 
     }
 
 
     window.addEventListener(
         "scroll",
-        () => {
-
-            if (window.scrollY > 500) {
-
-                backToTop.classList.add("show");
-
-            } else {
-
-                backToTop.classList.remove("show");
-
-            }
-
-        },
+        updateButton,
         { passive: true }
     );
 
 
-    backToTop.addEventListener(
+    button.addEventListener(
         "click",
         () => {
 
@@ -520,21 +348,28 @@ function initBackToTop() {
         }
     );
 
+
+    updateButton();
+
 }
 
 
 /* =========================================================
-   8. SCROLL REVEAL ANIMATION
+   5. SCROLL REVEAL ANIMATION
 ========================================================= */
 
 function initScrollReveal() {
 
     const elements =
         document.querySelectorAll(
-            ".section, .skill-card, " +
-            ".stat-card, .project-card, " +
-            ".achievement-card, .document-card, " +
-            ".contact-card, .social-card"
+            ".section, " +
+            ".skill-card, " +
+            ".stat-card, " +
+            ".project-card, " +
+            ".achievement-card, " +
+            ".document-card, " +
+            ".contact-card, " +
+            ".social-card"
         );
 
 
@@ -549,6 +384,10 @@ function initScrollReveal() {
 
     });
 
+
+    /*
+       Fallback for older browsers
+    */
 
     if (
         !("IntersectionObserver" in window)
@@ -575,9 +414,9 @@ function initScrollReveal() {
                         entry.isIntersecting
                     ) {
 
-                        entry.target
-                            .classList
-                            .add("active");
+                        entry.target.classList.add(
+                            "active"
+                        );
 
 
                         observer.unobserve(
@@ -605,7 +444,7 @@ function initScrollReveal() {
 
 
 /* =========================================================
-   9. ACTIVE NAVIGATION
+   6. ACTIVE NAVIGATION
 ========================================================= */
 
 function initActiveNavigation() {
@@ -616,7 +455,7 @@ function initActiveNavigation() {
         );
 
 
-    const navLinks =
+    const links =
         document.querySelectorAll(
             ".nav-menu a"
         );
@@ -624,21 +463,24 @@ function initActiveNavigation() {
 
     if (
         !sections.length ||
-        !navLinks.length
+        !links.length
     ) {
+
         return;
+
     }
 
 
-    function updateActiveLink() {
+    function updateActiveNavigation() {
 
-        let currentSection = "";
+        let current =
+            "";
 
 
         sections.forEach(section => {
 
             const sectionTop =
-                section.offsetTop - 150;
+                section.offsetTop - 160;
 
 
             if (
@@ -646,26 +488,25 @@ function initActiveNavigation() {
                 sectionTop
             ) {
 
-                currentSection =
-                    section.getAttribute("id");
+                current =
+                    section.id;
 
             }
 
         });
 
 
-        navLinks.forEach(link => {
+        links.forEach(link => {
 
             link.classList.remove("active");
 
 
-            const target =
+            const href =
                 link.getAttribute("href");
 
 
             if (
-                target ===
-                `#${currentSection}`
+                href === `#${current}`
             ) {
 
                 link.classList.add("active");
@@ -679,18 +520,270 @@ function initActiveNavigation() {
 
     window.addEventListener(
         "scroll",
-        updateActiveLink,
+        updateActiveNavigation,
         { passive: true }
     );
 
 
-    updateActiveLink();
+    updateActiveNavigation();
 
 }
 
 
 /* =========================================================
-   10. AUTOMATIC COPYRIGHT YEAR
+   7. TYPING EFFECT
+========================================================= */
+
+function initTypingEffect() {
+
+    const typingElement =
+        document.querySelector(".typing-text");
+
+
+    if (!typingElement) {
+        return;
+    }
+
+
+    /*
+       These are the professional roles
+       displayed in the hero section.
+    */
+
+    const roles = [
+
+        "Aspiring IT Support Officer",
+
+        "Information Technology Graduate",
+
+        "IT Support Professional",
+
+        "Network & System Enthusiast",
+
+        "Software Developer"
+
+    ];
+
+
+    let roleIndex = 0;
+
+    let characterIndex = 0;
+
+    let deleting = false;
+
+
+    function typeText() {
+
+        const currentRole =
+            roles[roleIndex];
+
+
+        if (deleting) {
+
+            characterIndex--;
+
+        } else {
+
+            characterIndex++;
+
+        }
+
+
+        typingElement.textContent =
+            currentRole.substring(
+                0,
+                characterIndex
+            );
+
+
+        let speed =
+            deleting ? 50 : 85;
+
+
+        /*
+           Wait after completing the
+           complete sentence.
+        */
+
+        if (
+            !deleting &&
+            characterIndex ===
+            currentRole.length
+        ) {
+
+            deleting = true;
+
+            speed = 1800;
+
+        }
+
+
+        /*
+           Move to the next role.
+        */
+
+        if (
+            deleting &&
+            characterIndex === 0
+        ) {
+
+            deleting = false;
+
+            roleIndex =
+                (roleIndex + 1) %
+                roles.length;
+
+            speed = 400;
+
+        }
+
+
+        setTimeout(
+            typeText,
+            speed
+        );
+
+    }
+
+
+    typeText();
+
+}
+
+
+/* =========================================================
+   8. SMOOTH SCROLLING
+========================================================= */
+
+function initSmoothScrolling() {
+
+    const links =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    links.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            event => {
+
+                const targetId =
+                    link.getAttribute("href");
+
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "start"
+
+                });
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   9. EXTERNAL LINK SECURITY
+========================================================= */
+
+function initExternalLinks() {
+
+    const externalLinks =
+        document.querySelectorAll(
+            'a[target="_blank"]'
+        );
+
+
+    externalLinks.forEach(link => {
+
+        const currentRel =
+            link.getAttribute("rel") || "";
+
+
+        if (
+            !currentRel.includes("noopener")
+        ) {
+
+            link.setAttribute(
+                "rel",
+                `${currentRel} noopener noreferrer`
+                    .trim()
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   10. IMAGE ERROR HANDLING
+========================================================= */
+
+function initImageErrorHandling() {
+
+    const images =
+        document.querySelectorAll("img");
+
+
+    images.forEach(image => {
+
+        image.addEventListener(
+            "error",
+            () => {
+
+                console.warn(
+                    "Portfolio image could not be loaded:",
+                    image.src
+                );
+
+
+                image.classList.add(
+                    "image-error"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   11. AUTOMATIC COPYRIGHT YEAR
 ========================================================= */
 
 function initCurrentYear() {
@@ -706,14 +799,14 @@ function initCurrentYear() {
     }
 
 
-    const currentYear =
+    const year =
         new Date().getFullYear();
 
 
     yearElements.forEach(element => {
 
         element.textContent =
-            currentYear;
+            year;
 
     });
 
@@ -721,116 +814,103 @@ function initCurrentYear() {
 
 
 /* =========================================================
-   11. SMOOTH INTERNAL LINKS
+   12. KEYBOARD ACCESSIBILITY
 ========================================================= */
 
 document.addEventListener(
-    "click",
+    "keydown",
     event => {
 
-        const link =
-            event.target.closest(
-                'a[href^="#"]'
-            );
-
-
-        if (!link) {
-            return;
-        }
-
-
-        const targetId =
-            link.getAttribute("href");
-
+        /*
+           ESC closes the mobile menu.
+        */
 
         if (
-            !targetId ||
-            targetId === "#"
+            event.key === "Escape"
         ) {
-            return;
-        }
 
-
-        const target =
-            document.querySelector(
-                targetId
-            );
-
-
-        if (!target) {
-            return;
-        }
-
-
-        event.preventDefault();
-
-
-        target.scrollIntoView({
-
-            behavior: "smooth",
-
-            block: "start"
-
-        });
-
-    }
-);
-
-
-/* =========================================================
-   12. EXTERNAL LINKS
-   Add security attributes automatically
-========================================================= */
-
-document.querySelectorAll(
-    'a[target="_blank"]'
-).forEach(link => {
-
-    if (
-        !link.rel.includes("noopener")
-    ) {
-
-        link.rel +=
-            " noopener noreferrer";
-
-    }
-
-});
-
-
-/* =========================================================
-   13. IMAGE ERROR HANDLING
-========================================================= */
-
-document.querySelectorAll("img")
-    .forEach(image => {
-
-        image.addEventListener(
-            "error",
-            () => {
-
-                image.style.opacity = "0.5";
-
-                console.warn(
-                    "Portfolio image could not be loaded:",
-                    image.src
+            const navMenu =
+                document.querySelector(
+                    ".nav-menu"
                 );
 
-            }
-        );
 
-    });
+            const menuToggle =
+                document.querySelector(
+                    ".menu-toggle"
+                );
+
+
+            if (
+                navMenu &&
+                navMenu.classList.contains(
+                    "active"
+                )
+            ) {
+
+                navMenu.classList.remove(
+                    "active"
+                );
+
+
+                if (menuToggle) {
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
+            }
+
+        }
+
+    }
+);
 
 
 /* =========================================================
-   14. CONSOLE MESSAGE
+   13. PAGE VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        /*
+           Stop unnecessary activity when
+           the browser tab is hidden.
+        */
+
+        if (
+            document.hidden
+        ) {
+
+            document.body.classList.add(
+                "page-hidden"
+            );
+
+        } else {
+
+            document.body.classList.remove(
+                "page-hidden"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   14. CONSOLE INFORMATION
 ========================================================= */
 
 console.log(
-    "%cAbraham Ashagre | Professional Portfolio",
-    "font-size: 18px; font-weight: bold;"
+    "Abraham Ashagre | Professional Portfolio"
 );
 
 console.log(
-    "Portfolio JavaScript loaded successfully."
+    "Main portfolio JavaScript loaded successfully."
 );
