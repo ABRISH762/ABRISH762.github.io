@@ -663,7 +663,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 /* =========================================================
-   TYPING ANIMATION
+   PROFESSIONAL TYPING ANIMATION
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -671,33 +671,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const typingText =
         document.getElementById("typing-text");
 
-    if (!typingText) {
+    const typingContainer =
+        document.querySelector(".typing-container");
+
+
+    if (!typingText || !typingContainer) {
         return;
     }
 
+
     const texts = [
+
         "Aspiring IT Support Officer",
+
         "Information Technology Graduate",
+
         "IT Support Enthusiast",
+
         "Networking Enthusiast",
+
         "Technical Support Professional"
+
     ];
 
+
     let textIndex = 0;
+
     let characterIndex = 0;
+
     let deleting = false;
 
-    const typingSpeed = 90;
-    const deletingSpeed = 50;
-    const pauseAfterTyping = 1800;
-    const pauseAfterDeleting = 500;
+
+    /*
+     * Speed settings
+     */
+
+    const typingSpeed = 85;
+
+    const deletingSpeed = 45;
+
+    const typingPause = 2000;
+
+    const deletingPause = 700;
 
 
-    function typeEffect() {
+    function animateTyping() {
 
         const currentText =
             texts[textIndex];
 
+
+        /* =================================================
+           TYPING
+        ================================================= */
 
         if (!deleting) {
 
@@ -707,69 +733,94 @@ document.addEventListener("DOMContentLoaded", function () {
                     characterIndex + 1
                 );
 
+
             characterIndex++;
 
 
             if (
-                characterIndex ===
+                characterIndex >=
                 currentText.length
             ) {
 
                 deleting = true;
 
+
                 setTimeout(
-                    typeEffect,
-                    pauseAfterTyping
+                    animateTyping,
+                    typingPause
                 );
 
+
                 return;
+
             }
 
 
             setTimeout(
-                typeEffect,
+                animateTyping,
                 typingSpeed
             );
 
-        } else {
 
-            typingText.textContent =
-                currentText.substring(
-                    0,
-                    characterIndex - 1
-                );
-
-            characterIndex--;
-
-
-            if (characterIndex === 0) {
-
-                deleting = false;
-
-                textIndex =
-                    (textIndex + 1) %
-                    texts.length;
-
-
-                setTimeout(
-                    typeEffect,
-                    pauseAfterDeleting
-                );
-
-                return;
-            }
-
-
-            setTimeout(
-                typeEffect,
-                deletingSpeed
-            );
+            return;
 
         }
+
+
+        /* =================================================
+           DELETING
+        ================================================= */
+
+        typingText.textContent =
+            currentText.substring(
+                0,
+                characterIndex - 1
+            );
+
+
+        characterIndex--;
+
+
+        if (characterIndex <= 0) {
+
+            characterIndex = 0;
+
+            deleting = false;
+
+
+            textIndex =
+                (textIndex + 1) %
+                texts.length;
+
+
+            /*
+             * Small pause before
+             * next word starts
+             */
+
+            setTimeout(
+                animateTyping,
+                deletingPause
+            );
+
+
+            return;
+
+        }
+
+
+        setTimeout(
+            animateTyping,
+            deletingSpeed
+        );
 
     }
 
 
-    typeEffect();
+    /*
+     * Start animation
+     */
+
+    animateTyping();
 
 });
