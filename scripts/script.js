@@ -4,105 +4,201 @@
    MAIN JAVASCRIPT
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    /* =====================================================
-       1. MOBILE NAVIGATION
-    ===================================================== */
-
-    const menuToggle =
-        document.querySelector(".menu-toggle");
-
-    const navMenu =
-        document.querySelector(".nav-menu");
+"use strict";
 
 
-    if (menuToggle && navMenu) {
+/* =========================================================
+   1. DOM READY
+========================================================= */
 
-        menuToggle.addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-            navMenu.classList.toggle("active");
+    initMobileMenu();
+    initSmoothScrolling();
+    initActiveNavigation();
+    initScrollEffects();
+    initTypingEffect();
+    initExternalLinks();
+
+});
+
+
+/* =========================================================
+   2. MOBILE NAVIGATION
+========================================================= */
+
+function initMobileMenu() {
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (!menuToggle || !navMenu) {
+        return;
+    }
+
+    menuToggle.addEventListener("click", () => {
+
+        const isOpen = navMenu.classList.toggle("active");
+
+        menuToggle.setAttribute(
+            "aria-expanded",
+            String(isOpen)
+        );
+
+        const icon = menuToggle.querySelector("i");
+
+        if (icon) {
+
+            icon.classList.toggle(
+                "fa-bars",
+                !isOpen
+            );
+
+            icon.classList.toggle(
+                "fa-xmark",
+                isOpen
+            );
+
+        }
+
+    });
+
+
+    /* Close menu when navigation link is clicked */
+
+    const navLinks =
+        navMenu.querySelectorAll("a");
+
+    navLinks.forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navMenu.classList.remove("active");
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
             const icon =
                 menuToggle.querySelector("i");
 
-            if (navMenu.classList.contains("active")) {
+            if (icon) {
 
-                if (icon) {
-                    icon.classList.remove("fa-bars");
-                    icon.classList.add("fa-xmark");
-                }
+                icon.classList.remove("fa-xmark");
 
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Close navigation menu"
-                );
+                icon.classList.add("fa-bars");
 
-            } else {
-
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
             }
 
         });
 
+    });
 
-        /* Close menu after clicking a link */
 
-        const navLinks =
-            navMenu.querySelectorAll("a");
+    /* Close menu when clicking outside */
 
-        navLinks.forEach(function (link) {
+    document.addEventListener("click", event => {
 
-            link.addEventListener("click", function () {
+        if (
+            navMenu.classList.contains("active") &&
+            !navMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
 
-                navMenu.classList.remove("active");
+            navMenu.classList.remove("active");
 
-                const icon =
-                    menuToggle.querySelector("i");
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
 
-                if (icon) {
+            const icon =
+                menuToggle.querySelector("i");
 
-                    icon.classList.remove(
-                        "fa-xmark"
-                    );
+            if (icon) {
 
-                    icon.classList.add(
-                        "fa-bars"
-                    );
+                icon.classList.remove("fa-xmark");
 
-                }
+                icon.classList.add("fa-bars");
 
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open navigation menu"
-                );
+            }
 
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   3. SMOOTH SCROLLING
+========================================================= */
+
+function initSmoothScrolling() {
+
+    const links =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+    links.forEach(link => {
+
+        link.addEventListener("click", event => {
+
+            const targetId =
+                link.getAttribute("href");
+
+            if (
+                !targetId ||
+                targetId === "#"
+            ) {
+                return;
+            }
+
+            const target =
+                document.querySelector(targetId);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
             });
 
         });
 
-    }
+    });
+
+}
 
 
-    /* =====================================================
-       2. ACTIVE NAVIGATION LINK
-    ===================================================== */
+/* =========================================================
+   4. ACTIVE NAVIGATION
+========================================================= */
+
+function initActiveNavigation() {
 
     const sections =
-        document.querySelectorAll("main section[id]");
-
-    const navigationLinks =
         document.querySelectorAll(
-            ".nav-menu a[href^='#']"
+            "main section[id]"
         );
+
+    const navLinks =
+        document.querySelectorAll(
+            '.nav-menu a[href^="#"]'
+        );
+
+    if (
+        sections.length === 0 ||
+        navLinks.length === 0
+    ) {
+        return;
+    }
 
 
     function updateActiveNavigation() {
@@ -110,10 +206,10 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentSection = "";
 
         const scrollPosition =
-            window.scrollY + 150;
+            window.scrollY + 180;
 
 
-        sections.forEach(function (section) {
+        sections.forEach(section => {
 
             const sectionTop =
                 section.offsetTop;
@@ -135,15 +231,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
-        navigationLinks.forEach(function (link) {
+        navLinks.forEach(link => {
 
             link.classList.remove("active");
 
-            const target =
+            const href =
                 link.getAttribute("href");
 
             if (
-                target === "#" + currentSection
+                href === "#" + currentSection
             ) {
 
                 link.classList.add("active");
@@ -157,226 +253,309 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener(
         "scroll",
-        updateActiveNavigation
+        updateActiveNavigation,
+        { passive: true }
     );
 
     updateActiveNavigation();
 
-
-    /* =====================================================
-       3. SMOOTH SCROLL
-    ===================================================== */
-
-    navigationLinks.forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            const targetId =
-                link.getAttribute("href");
-
-            if (
-                !targetId ||
-                targetId === "#"
-            ) {
-                return;
-            }
+}
 
 
-            const target =
-                document.querySelector(targetId);
+/* =========================================================
+   5. SCROLL EFFECTS
+========================================================= */
 
-            if (!target) {
-                return;
-            }
+function initScrollEffects() {
 
+    const header =
+        document.querySelector(".header");
 
-            event.preventDefault();
-
-
-            const header =
-                document.querySelector(".header");
-
-            const headerHeight =
-                header
-                    ? header.offsetHeight
-                    : 0;
+    if (!header) {
+        return;
+    }
 
 
-            const targetPosition =
-                target.getBoundingClientRect().top +
-                window.scrollY -
-                headerHeight;
+    function handleScroll() {
 
+        if (window.scrollY > 30) {
 
-            window.scrollTo({
+            header.classList.add(
+                "header-scrolled"
+            );
 
-                top:
-                    targetPosition,
+        } else {
 
-                behavior:
-                    "smooth"
-
-            });
-
-        });
-
-    });
-
-
-    /* =====================================================
-       4. BACK TO TOP BUTTON
-    ===================================================== */
-
-    const backToTop =
-        document.createElement("button");
-
-
-    backToTop.innerHTML =
-        '<i class="fa-solid fa-arrow-up"></i>';
-
-
-    backToTop.className =
-        "back-to-top";
-
-
-    backToTop.setAttribute(
-        "aria-label",
-        "Back to top"
-    );
-
-
-    document.body.appendChild(
-        backToTop
-    );
-
-
-    const backToTopStyles =
-        document.createElement("style");
-
-
-    backToTopStyles.textContent = `
-
-        .back-to-top {
-
-            position: fixed;
-
-            right: 22px;
-
-            bottom: 22px;
-
-            width: 46px;
-
-            height: 46px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #0d6efd;
-
-            color: #ffffff;
-
-            cursor: pointer;
-
-            box-shadow:
-                0 8px 25px rgba(0,0,0,0.18);
-
-            opacity: 0;
-
-            visibility: hidden;
-
-            transform: translateY(15px);
-
-            transition: all 0.3s ease;
-
-            z-index: 999;
+            header.classList.remove(
+                "header-scrolled"
+            );
 
         }
 
-
-        .back-to-top.show {
-
-            opacity: 1;
-
-            visibility: visible;
-
-            transform: translateY(0);
-
-        }
-
-
-        .back-to-top:hover {
-
-            transform:
-                translateY(-4px);
-
-            background: #084298;
-
-        }
-
-
-        .nav-menu a.active {
-
-            color: #0d6efd;
-
-        }
-
-
-        @media (max-width: 768px) {
-
-            .back-to-top {
-
-                right: 15px;
-
-                bottom: 15px;
-
-                width: 42px;
-
-                height: 42px;
-
-            }
-
-        }
-
-    `;
-
-
-    document.head.appendChild(
-        backToTopStyles
-    );
+    }
 
 
     window.addEventListener(
         "scroll",
-        function () {
+        handleScroll,
+        { passive: true }
+    );
 
-            if (window.scrollY > 400) {
+    handleScroll();
 
-                backToTop.classList.add(
-                    "show"
+}
+
+
+/* =========================================================
+   6. TYPING EFFECT
+========================================================= */
+
+function initTypingEffect() {
+
+    /*
+       The HTML currently uses:
+
+       <h3>
+           Aspiring IT Support Officer
+       </h3>
+
+       Therefore this function automatically converts
+       the hero h3 into a typing animation.
+
+       It also works with the dedicated:
+
+       .typing-container
+       .typing-text
+
+       structure if added later.
+    */
+
+
+    const heroTitle =
+        document.querySelector(".hero h3");
+
+    if (!heroTitle) {
+        return;
+    }
+
+
+    const phrases = [
+
+        "Aspiring IT Support Officer",
+
+        "IT Support & Technical Support",
+
+        "Information Technology Graduate",
+
+        "Networking & System Administration",
+
+        "Computer Maintenance Specialist"
+
+    ];
+
+
+    let phraseIndex = 0;
+
+    let characterIndex = 0;
+
+    let deleting = false;
+
+
+    heroTitle.classList.add(
+        "typing-active"
+    );
+
+
+    function typeText() {
+
+        const currentPhrase =
+            phrases[phraseIndex];
+
+
+        if (!deleting) {
+
+            characterIndex++;
+
+            heroTitle.textContent =
+                currentPhrase.substring(
+                    0,
+                    characterIndex
+                );
+
+
+            if (
+                characterIndex >=
+                currentPhrase.length
+            ) {
+
+                deleting = true;
+
+                setTimeout(
+                    typeText,
+                    1800
+                );
+
+                return;
+
+            }
+
+
+            setTimeout(
+                typeText,
+                80
+            );
+
+        } else {
+
+            characterIndex--;
+
+            heroTitle.textContent =
+                currentPhrase.substring(
+                    0,
+                    characterIndex
+                );
+
+
+            if (characterIndex <= 0) {
+
+                deleting = false;
+
+                phraseIndex =
+                    (phraseIndex + 1) %
+                    phrases.length;
+
+                setTimeout(
+                    typeText,
+                    400
+                );
+
+                return;
+
+            }
+
+
+            setTimeout(
+                typeText,
+                45
+            );
+
+        }
+
+    }
+
+
+    typeText();
+
+}
+
+
+/* =========================================================
+   7. EXTERNAL LINKS
+========================================================= */
+
+function initExternalLinks() {
+
+    const externalLinks =
+        document.querySelectorAll(
+            'a[target="_blank"]'
+        );
+
+    externalLinks.forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                link.setAttribute(
+                    "rel",
+                    "noopener noreferrer"
+                );
+
+            }
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   8. IMAGE ERROR HANDLING
+========================================================= */
+
+document.addEventListener(
+    "error",
+    event => {
+
+        const image = event.target;
+
+        if (
+            image &&
+            image.tagName === "IMG"
+        ) {
+
+            image.classList.add(
+                "image-error"
+            );
+
+        }
+
+    },
+    true
+);
+
+
+/* =========================================================
+   9. BACK TO TOP SUPPORT
+========================================================= */
+
+function createBackToTopButton() {
+
+    const button =
+        document.createElement("button");
+
+    button.type = "button";
+
+    button.className =
+        "back-to-top";
+
+    button.setAttribute(
+        "aria-label",
+        "Back to top"
+    );
+
+    button.innerHTML =
+        '<i class="fa-solid fa-arrow-up"></i>';
+
+    document.body.appendChild(button);
+
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (window.scrollY > 500) {
+
+                button.classList.add(
+                    "visible"
                 );
 
             } else {
 
-                backToTop.classList.remove(
-                    "show"
+                button.classList.remove(
+                    "visible"
                 );
 
             }
 
-        }
+        },
+        { passive: true }
     );
 
 
-    backToTop.addEventListener(
+    button.addEventListener(
         "click",
-        function () {
+        () => {
 
             window.scrollTo({
 
@@ -389,163 +568,47 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     );
 
-
-    /* =====================================================
-       5. CURRENT YEAR
-    ===================================================== */
-
-    const yearElements =
-        document.querySelectorAll(
-            "[data-current-year]"
-        );
+}
 
 
-    yearElements.forEach(function (element) {
+/* =========================================================
+   10. LAZY IMAGE OBSERVER
+========================================================= */
 
-        element.textContent =
-            new Date().getFullYear();
-
-    });
-
-
-    /* =====================================================
-       6. EXTERNAL LINKS
-    ===================================================== */
-
-    const externalLinks =
-        document.querySelectorAll(
-            'a[href^="http"]'
-        );
-
-
-    externalLinks.forEach(function (link) {
-
-        if (
-            link.hostname !==
-            window.location.hostname
-        ) {
-
-            link.setAttribute(
-                "target",
-                "_blank"
-            );
-
-            link.setAttribute(
-                "rel",
-                "noopener noreferrer"
-            );
-
-        }
-
-    });
-
-
-    /* =====================================================
-       7. DOCUMENT LINK CHECK
-    ===================================================== */
-
-    const documentLinks =
-        document.querySelectorAll(
-            'a[href$=".PDF"], a[href$=".pdf"]'
-        );
-
-
-    documentLinks.forEach(function (link) {
-
-        link.addEventListener(
-            "error",
-            function () {
-
-                console.warn(
-                    "Document could not be loaded:",
-                    link.href
-                );
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       8. IMAGE LAZY LOADING
-    ===================================================== */
+function initImageObserver() {
 
     const images =
         document.querySelectorAll(
-            "img"
+            'img[loading="lazy"]'
         );
 
-
-    images.forEach(function (image) {
-
-        if (
-            !image.hasAttribute("loading")
-        ) {
-
-            image.setAttribute(
-                "loading",
-                "lazy"
-            );
-
-        }
-
-    });
-
-
-    /* =====================================================
-       9. FADE-IN ANIMATION
-    ===================================================== */
-
-    const animatedElements =
-        document.querySelectorAll(
-            ".skill-card, " +
-            ".stat-card, " +
-            ".achievement-card, " +
-            ".document-card, " +
-            ".contact-card, " +
-            ".project-card, " +
-            ".education-card, " +
-            ".about-card"
-        );
-
-
-    animatedElements.forEach(function (
-        element
+    if (
+        images.length === 0 ||
+        !("IntersectionObserver" in window)
     ) {
-
-        element.style.opacity = "0";
-
-        element.style.transform =
-            "translateY(20px)";
-
-        element.style.transition =
-            "opacity 0.6s ease, " +
-            "transform 0.6s ease";
-
-    });
+        return;
+    }
 
 
-    const animationObserver =
+    const observer =
         new IntersectionObserver(
-            function (entries, observer) {
+            entries => {
 
-                entries.forEach(function (
-                    entry
-                ) {
+                entries.forEach(entry => {
 
                     if (
                         entry.isIntersecting
                     ) {
 
-                        entry.target.style.opacity =
-                            "1";
+                        const image =
+                            entry.target;
 
-                        entry.target.style.transform =
-                            "translateY(0)";
+                        image.classList.add(
+                            "image-loaded"
+                        );
 
                         observer.unobserve(
-                            entry.target
+                            image
                         );
 
                     }
@@ -554,273 +617,130 @@ document.addEventListener("DOMContentLoaded", function () {
 
             },
             {
-                threshold: 0.15
+                rootMargin:
+                    "100px"
             }
         );
 
 
-    animatedElements.forEach(function (
-        element
-    ) {
+    images.forEach(image => {
 
-        animationObserver.observe(
-            element
-        );
+        observer.observe(image);
 
     });
 
-
-    /* =====================================================
-       10. EMAIL LINK PROTECTION
-    ===================================================== */
-
-    const emailLinks =
-        document.querySelectorAll(
-            'a[href^="mailto:"]'
-        );
+}
 
 
-    emailLinks.forEach(function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "Opening email application..."
-                );
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       11. PHONE LINK
-    ===================================================== */
-
-    const phoneLinks =
-        document.querySelectorAll(
-            'a[href^="tel:"]'
-        );
-
-
-    phoneLinks.forEach(function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "Opening phone application..."
-                );
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       12. WHATSAPP LINK
-    ===================================================== */
-
-    const whatsappLinks =
-        document.querySelectorAll(
-            'a[href*="wa.me"]'
-        );
-
-
-    whatsappLinks.forEach(function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "Opening WhatsApp..."
-                );
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       13. PAGE LOADED
-    ===================================================== */
-
-    document.body.classList.add(
-        "page-loaded"
-    );
-
-
-    console.log(
-        "Abraham Ashagre Portfolio loaded successfully."
-    );
-
-});
 /* =========================================================
-   PROFESSIONAL TYPING ANIMATION
+   11. CURRENT YEAR
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+function updateCurrentYear() {
 
-    const typingText =
-        document.getElementById("typing-text");
+    const year =
+        document.querySelector(
+            ".current-year"
+        );
 
-    const typingContainer =
-        document.querySelector(".typing-container");
-
-
-    if (!typingText || !typingContainer) {
+    if (!year) {
         return;
     }
 
+    year.textContent =
+        new Date().getFullYear();
 
-    const texts = [
-
-        "Aspiring IT Support Officer",
-
-        "Information Technology Graduate",
-
-        "IT Support Enthusiast",
-
-        "Networking Enthusiast",
-
-        "Technical Support Professional"
-
-    ];
+}
 
 
-    let textIndex = 0;
+/* =========================================================
+   12. INITIALIZE OPTIONAL FEATURES
+========================================================= */
 
-    let characterIndex = 0;
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    let deleting = false;
+        createBackToTopButton();
 
+        initImageObserver();
 
-    /*
-     * Speed settings
-     */
+        updateCurrentYear();
 
-    const typingSpeed = 85;
-
-    const deletingSpeed = 45;
-
-    const typingPause = 2000;
-
-    const deletingPause = 700;
+    }
+);
 
 
-    function animateTyping() {
+/* =========================================================
+   13. KEYBOARD ACCESSIBILITY
+========================================================= */
 
-        const currentText =
-            texts[textIndex];
+document.addEventListener(
+    "keydown",
+    event => {
 
+        if (
+            event.key === "Escape"
+        ) {
 
-        /* =================================================
-           TYPING
-        ================================================= */
-
-        if (!deleting) {
-
-            typingText.textContent =
-                currentText.substring(
-                    0,
-                    characterIndex + 1
+            const navMenu =
+                document.querySelector(
+                    ".nav-menu"
                 );
 
-
-            characterIndex++;
+            const menuToggle =
+                document.querySelector(
+                    ".menu-toggle"
+                );
 
 
             if (
-                characterIndex >=
-                currentText.length
+                navMenu &&
+                navMenu.classList.contains(
+                    "active"
+                )
             ) {
 
-                deleting = true;
-
-
-                setTimeout(
-                    animateTyping,
-                    typingPause
+                navMenu.classList.remove(
+                    "active"
                 );
 
 
-                return;
+                if (menuToggle) {
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    const icon =
+                        menuToggle.querySelector(
+                            "i"
+                        );
+
+                    if (icon) {
+
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
+
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+                    }
+
+                }
 
             }
 
-
-            setTimeout(
-                animateTyping,
-                typingSpeed
-            );
-
-
-            return;
-
         }
-
-
-        /* =================================================
-           DELETING
-        ================================================= */
-
-        typingText.textContent =
-            currentText.substring(
-                0,
-                characterIndex - 1
-            );
-
-
-        characterIndex--;
-
-
-        if (characterIndex <= 0) {
-
-            characterIndex = 0;
-
-            deleting = false;
-
-
-            textIndex =
-                (textIndex + 1) %
-                texts.length;
-
-
-            /*
-             * Small pause before
-             * next word starts
-             */
-
-            setTimeout(
-                animateTyping,
-                deletingPause
-            );
-
-
-            return;
-
-        }
-
-
-        setTimeout(
-            animateTyping,
-            deletingSpeed
-        );
 
     }
+);
 
 
-    /*
-     * Start animation
-     */
-
-    animateTyping();
-
-});
+/* =========================================================
+   END OF MAIN JAVASCRIPT
+========================================================= */
