@@ -262,16 +262,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-
-    /* =========================================================
-   HERO TYPING EFFECT
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
     const typingText = document.getElementById("typing-text");
-
-    if (!typingText) return;
 
     const roles = [
         "IT Support Officer",
@@ -283,33 +276,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let roleIndex = 0;
     let charIndex = 0;
-    let isDeleting = false;
+    let deleting = false;
 
-    const typingSpeed = 90;
-    const deletingSpeed = 55;
-    const pauseAfterTyping = 1800;
-    const pauseAfterDeleting = 500;
-
-    function typeEffect() {
+    function typeWriter() {
 
         const currentRole = roles[roleIndex];
 
-        if (!isDeleting) {
+        if (!deleting) {
 
             typingText.textContent =
                 currentRole.substring(0, charIndex + 1);
 
             charIndex++;
 
-            if (charIndex === currentRole.length) {
+            if (charIndex >= currentRole.length) {
+                deleting = true;
 
-                isDeleting = true;
-
-                setTimeout(typeEffect, pauseAfterTyping);
+                setTimeout(typeWriter, 2000);
                 return;
             }
 
-            setTimeout(typeEffect, typingSpeed);
+            setTimeout(typeWriter, 90);
 
         } else {
 
@@ -318,9 +305,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             charIndex--;
 
-            if (charIndex === 0) {
+            if (charIndex <= 0) {
 
-                isDeleting = false;
+                deleting = false;
 
                 roleIndex++;
 
@@ -328,15 +315,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     roleIndex = 0;
                 }
 
-                setTimeout(typeEffect, pauseAfterDeleting);
+                setTimeout(typeWriter, 500);
                 return;
             }
 
-            setTimeout(typeEffect, deletingSpeed);
+            setTimeout(typeWriter, 50);
         }
     }
 
-    typeEffect();
+    typeWriter();
 });
     /* =====================================================
        6. SCROLL REVEAL ANIMATION
