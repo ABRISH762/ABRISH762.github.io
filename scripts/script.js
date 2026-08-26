@@ -264,166 +264,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =========================================================
-   PROFESSIONAL TYPING ANIMATION
+   HERO TYPING EFFECT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const typingText =
-        document.getElementById("typing-text");
+    const typingText = document.getElementById("typing-text");
 
-    const typingContainer =
-        document.querySelector(".typing-container");
+    if (!typingText) return;
 
-
-    if (!typingText || !typingContainer) {
-        return;
-    }
-
-
-    const texts = [
-
-        "Aspiring IT Support Officer",
-
-        "Information Technology Graduate",
-
-        "IT Support Enthusiast",
-
-        "Networking Enthusiast",
-
-        "Technical Support Professional"
-
+    const roles = [
+        "IT Support Officer",
+        "Junior Software Developer",
+        "Web Developer",
+        "Network Administrator",
+        "IT Professional"
     ];
 
+    let roleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-    let textIndex = 0;
+    const typingSpeed = 90;
+    const deletingSpeed = 55;
+    const pauseAfterTyping = 1800;
+    const pauseAfterDeleting = 500;
 
-    let characterIndex = 0;
+    function typeEffect() {
 
-    let deleting = false;
+        const currentRole = roles[roleIndex];
 
-
-    /*
-     * Speed settings
-     */
-
-    const typingSpeed = 85;
-
-    const deletingSpeed = 45;
-
-    const typingPause = 2000;
-
-    const deletingPause = 700;
-
-
-    function animateTyping() {
-
-        const currentText =
-            texts[textIndex];
-
-
-        /* =================================================
-           TYPING
-        ================================================= */
-
-        if (!deleting) {
+        if (!isDeleting) {
 
             typingText.textContent =
-                currentText.substring(
-                    0,
-                    characterIndex + 1
-                );
+                currentRole.substring(0, charIndex + 1);
 
+            charIndex++;
 
-            characterIndex++;
+            if (charIndex === currentRole.length) {
 
+                isDeleting = true;
 
-            if (
-                characterIndex >=
-                currentText.length
-            ) {
-
-                deleting = true;
-
-
-                setTimeout(
-                    animateTyping,
-                    typingPause
-                );
-
-
+                setTimeout(typeEffect, pauseAfterTyping);
                 return;
-
             }
 
+            setTimeout(typeEffect, typingSpeed);
 
-            setTimeout(
-                animateTyping,
-                typingSpeed
-            );
+        } else {
 
+            typingText.textContent =
+                currentRole.substring(0, charIndex - 1);
 
-            return;
+            charIndex--;
 
+            if (charIndex === 0) {
+
+                isDeleting = false;
+
+                roleIndex++;
+
+                if (roleIndex >= roles.length) {
+                    roleIndex = 0;
+                }
+
+                setTimeout(typeEffect, pauseAfterDeleting);
+                return;
+            }
+
+            setTimeout(typeEffect, deletingSpeed);
         }
-
-
-        /* =================================================
-           DELETING
-        ================================================= */
-
-        typingText.textContent =
-            currentText.substring(
-                0,
-                characterIndex - 1
-            );
-
-
-        characterIndex--;
-
-
-        if (characterIndex <= 0) {
-
-            characterIndex = 0;
-
-            deleting = false;
-
-
-            textIndex =
-                (textIndex + 1) %
-                texts.length;
-
-
-            /*
-             * Small pause before
-             * next word starts
-             */
-
-            setTimeout(
-                animateTyping,
-                deletingPause
-            );
-
-
-            return;
-
-        }
-
-
-        setTimeout(
-            animateTyping,
-            deletingSpeed
-        );
-
     }
 
-
-    /*
-     * Start animation
-     */
-
-    animateTyping();
-
+    typeEffect();
 });
     /* =====================================================
        6. SCROLL REVEAL ANIMATION
