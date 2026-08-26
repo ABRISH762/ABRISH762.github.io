@@ -13,12 +13,19 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    initMobileMenu();
-    initSmoothScrolling();
-    initActiveNavigation();
-    initScrollEffects();
-    initTypingEffect();
-    initExternalLinks();
+    initializeMobileMenu();
+
+    initializeSmoothScrolling();
+
+    initializeActiveNavigation();
+
+    initializeHeaderScroll();
+
+    initializeScrollReveal();
+
+    initializeExternalLinks();
+
+    initializeImageFallback();
 
 });
 
@@ -27,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
    2. MOBILE NAVIGATION
 ========================================================= */
 
-function initMobileMenu() {
+function initializeMobileMenu() {
 
     const menuToggle = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector(".nav-menu");
@@ -38,14 +45,23 @@ function initMobileMenu() {
 
     menuToggle.addEventListener("click", () => {
 
-        const isOpen = navMenu.classList.toggle("active");
+        const isOpen =
+            navMenu.classList.toggle("active");
 
         menuToggle.setAttribute(
             "aria-expanded",
-            String(isOpen)
+            isOpen ? "true" : "false"
         );
 
-        const icon = menuToggle.querySelector("i");
+        menuToggle.setAttribute(
+            "aria-label",
+            isOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+        );
+
+        const icon =
+            menuToggle.querySelector("i");
 
         if (icon) {
 
@@ -64,7 +80,7 @@ function initMobileMenu() {
     });
 
 
-    /* Close menu when navigation link is clicked */
+    /* Close menu after clicking a navigation link */
 
     const navLinks =
         navMenu.querySelectorAll("a");
@@ -78,6 +94,11 @@ function initMobileMenu() {
             menuToggle.setAttribute(
                 "aria-expanded",
                 "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
             );
 
             const icon =
@@ -101,7 +122,6 @@ function initMobileMenu() {
     document.addEventListener("click", event => {
 
         if (
-            navMenu.classList.contains("active") &&
             !navMenu.contains(event.target) &&
             !menuToggle.contains(event.target)
         ) {
@@ -111,6 +131,11 @@ function initMobileMenu() {
             menuToggle.setAttribute(
                 "aria-expanded",
                 "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
             );
 
             const icon =
@@ -135,7 +160,7 @@ function initMobileMenu() {
    3. SMOOTH SCROLLING
 ========================================================= */
 
-function initSmoothScrolling() {
+function initializeSmoothScrolling() {
 
     const links =
         document.querySelectorAll(
@@ -181,7 +206,7 @@ function initSmoothScrolling() {
    4. ACTIVE NAVIGATION
 ========================================================= */
 
-function initActiveNavigation() {
+function initializeActiveNavigation() {
 
     const sections =
         document.querySelectorAll(
@@ -190,23 +215,23 @@ function initActiveNavigation() {
 
     const navLinks =
         document.querySelectorAll(
-            '.nav-menu a[href^="#"]'
+            ".nav-menu a"
         );
 
     if (
-        sections.length === 0 ||
-        navLinks.length === 0
+        !sections.length ||
+        !navLinks.length
     ) {
         return;
     }
 
 
-    function updateActiveNavigation() {
+    const updateActiveLink = () => {
 
         let currentSection = "";
 
         const scrollPosition =
-            window.scrollY + 180;
+            window.scrollY + 150;
 
 
         sections.forEach(section => {
@@ -233,13 +258,14 @@ function initActiveNavigation() {
 
         navLinks.forEach(link => {
 
-            link.classList.remove("active");
-
             const href =
                 link.getAttribute("href");
 
+            link.classList.remove("active");
+
             if (
-                href === "#" + currentSection
+                href ===
+                `#${currentSection}`
             ) {
 
                 link.classList.add("active");
@@ -248,25 +274,25 @@ function initActiveNavigation() {
 
         });
 
-    }
+    };
 
 
     window.addEventListener(
         "scroll",
-        updateActiveNavigation,
+        updateActiveLink,
         { passive: true }
     );
 
-    updateActiveNavigation();
+    updateActiveLink();
 
 }
 
 
 /* =========================================================
-   5. SCROLL EFFECTS
+   5. HEADER SCROLL EFFECT
 ========================================================= */
 
-function initScrollEffects() {
+function initializeHeaderScroll() {
 
     const header =
         document.querySelector(".header");
@@ -276,9 +302,9 @@ function initScrollEffects() {
     }
 
 
-    function handleScroll() {
+    const updateHeader = () => {
 
-        if (window.scrollY > 30) {
+        if (window.scrollY > 20) {
 
             header.classList.add(
                 "header-scrolled"
@@ -292,159 +318,134 @@ function initScrollEffects() {
 
         }
 
-    }
+    };
 
 
     window.addEventListener(
         "scroll",
-        handleScroll,
+        updateHeader,
         { passive: true }
     );
 
-    handleScroll();
+    updateHeader();
 
 }
 
 
 /* =========================================================
-   6. TYPING EFFECT
+   6. SCROLL REVEAL
 ========================================================= */
 
-function initTypingEffect() {
+function initializeScrollReveal() {
 
-    /*
-       The HTML currently uses:
-
-       <h3>
-           Aspiring IT Support Officer
-       </h3>
-
-       Therefore this function automatically converts
-       the hero h3 into a typing animation.
-
-       It also works with the dedicated:
-
-       .typing-container
-       .typing-text
-
-       structure if added later.
-    */
+    const elements =
+        document.querySelectorAll(
+            ".section-heading, " +
+            ".about-card, " +
+            ".stat-card, " +
+            ".education-card, " +
+            ".skill-card, " +
+            ".project-card, " +
+            ".achievement-card, " +
+            ".document-card, " +
+            ".contact-card"
+        );
 
 
-    const heroTitle =
-        document.querySelector(".hero h3");
-
-    if (!heroTitle) {
+    if (!elements.length) {
         return;
     }
 
 
-    const phrases = [
+    /*
+       Add initial reveal class.
+       The CSS can animate these elements
+       when the class "show" is added.
+    */
 
-        "Aspiring IT Support Officer",
+    elements.forEach(element => {
 
-        "IT Support & Technical Support",
+        element.classList.add(
+            "reveal"
+        );
 
-        "Information Technology Graduate",
-
-        "Networking & System Administration",
-
-        "Computer Maintenance Specialist"
-
-    ];
-
-
-    let phraseIndex = 0;
-
-    let characterIndex = 0;
-
-    let deleting = false;
+    });
 
 
-    heroTitle.classList.add(
-        "typing-active"
-    );
+    /* Respect reduced-motion preference */
+
+    const reduceMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
-    function typeText() {
+    if (reduceMotion) {
 
-        const currentPhrase =
-            phrases[phraseIndex];
+        elements.forEach(element => {
 
+            element.classList.add("show");
 
-        if (!deleting) {
+        });
 
-            characterIndex++;
-
-            heroTitle.textContent =
-                currentPhrase.substring(
-                    0,
-                    characterIndex
-                );
-
-
-            if (
-                characterIndex >=
-                currentPhrase.length
-            ) {
-
-                deleting = true;
-
-                setTimeout(
-                    typeText,
-                    1800
-                );
-
-                return;
-
-            }
-
-
-            setTimeout(
-                typeText,
-                80
-            );
-
-        } else {
-
-            characterIndex--;
-
-            heroTitle.textContent =
-                currentPhrase.substring(
-                    0,
-                    characterIndex
-                );
-
-
-            if (characterIndex <= 0) {
-
-                deleting = false;
-
-                phraseIndex =
-                    (phraseIndex + 1) %
-                    phrases.length;
-
-                setTimeout(
-                    typeText,
-                    400
-                );
-
-                return;
-
-            }
-
-
-            setTimeout(
-                typeText,
-                45
-            );
-
-        }
+        return;
 
     }
 
 
-    typeText();
+    /* Intersection Observer */
+
+    if (
+        "IntersectionObserver"
+        in window
+    ) {
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        elements.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+    } else {
+
+        /* Fallback for older browsers */
+
+        elements.forEach(element => {
+
+            element.classList.add("show");
+
+        });
+
+    }
 
 }
 
@@ -453,25 +454,19 @@ function initTypingEffect() {
    7. EXTERNAL LINKS
 ========================================================= */
 
-function initExternalLinks() {
+function initializeExternalLinks() {
 
     const externalLinks =
         document.querySelectorAll(
             'a[target="_blank"]'
         );
 
+
     externalLinks.forEach(link => {
 
-        link.addEventListener(
-            "click",
-            () => {
-
-                link.setAttribute(
-                    "rel",
-                    "noopener noreferrer"
-                );
-
-            }
+        link.setAttribute(
+            "rel",
+            "noopener noreferrer"
         );
 
     });
@@ -480,152 +475,38 @@ function initExternalLinks() {
 
 
 /* =========================================================
-   8. IMAGE ERROR HANDLING
+   8. IMAGE FALLBACK
 ========================================================= */
 
-document.addEventListener(
-    "error",
-    event => {
-
-        const image = event.target;
-
-        if (
-            image &&
-            image.tagName === "IMG"
-        ) {
-
-            image.classList.add(
-                "image-error"
-            );
-
-        }
-
-    },
-    true
-);
-
-
-/* =========================================================
-   9. BACK TO TOP SUPPORT
-========================================================= */
-
-function createBackToTopButton() {
-
-    const button =
-        document.createElement("button");
-
-    button.type = "button";
-
-    button.className =
-        "back-to-top";
-
-    button.setAttribute(
-        "aria-label",
-        "Back to top"
-    );
-
-    button.innerHTML =
-        '<i class="fa-solid fa-arrow-up"></i>';
-
-    document.body.appendChild(button);
-
-
-    window.addEventListener(
-        "scroll",
-        () => {
-
-            if (window.scrollY > 500) {
-
-                button.classList.add(
-                    "visible"
-                );
-
-            } else {
-
-                button.classList.remove(
-                    "visible"
-                );
-
-            }
-
-        },
-        { passive: true }
-    );
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            window.scrollTo({
-
-                top: 0,
-
-                behavior: "smooth"
-
-            });
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   10. LAZY IMAGE OBSERVER
-========================================================= */
-
-function initImageObserver() {
+function initializeImageFallback() {
 
     const images =
-        document.querySelectorAll(
-            'img[loading="lazy"]'
-        );
-
-    if (
-        images.length === 0 ||
-        !("IntersectionObserver" in window)
-    ) {
-        return;
-    }
-
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        const image =
-                            entry.target;
-
-                        image.classList.add(
-                            "image-loaded"
-                        );
-
-                        observer.unobserve(
-                            image
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                rootMargin:
-                    "100px"
-            }
-        );
+        document.querySelectorAll("img");
 
 
     images.forEach(image => {
 
-        observer.observe(image);
+        image.addEventListener(
+            "error",
+            () => {
+
+                image.classList.add(
+                    "image-error"
+                );
+
+                /*
+                   Prevent repeated error events.
+                */
+
+                image.removeAttribute(
+                    "src"
+                );
+
+            },
+            {
+                once: true
+            }
+        );
 
     });
 
@@ -633,103 +514,124 @@ function initImageObserver() {
 
 
 /* =========================================================
-   11. CURRENT YEAR
+   9. RESIZE HANDLING
 ========================================================= */
 
-function updateCurrentYear() {
-
-    const year =
-        document.querySelector(
-            ".current-year"
-        );
-
-    if (!year) {
-        return;
-    }
-
-    year.textContent =
-        new Date().getFullYear();
-
-}
-
-
-/* =========================================================
-   12. INITIALIZE OPTIONAL FEATURES
-========================================================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
+window.addEventListener(
+    "resize",
     () => {
 
-        createBackToTopButton();
+        const navMenu =
+            document.querySelector(".nav-menu");
 
-        initImageObserver();
+        const menuToggle =
+            document.querySelector(".menu-toggle");
 
-        updateCurrentYear();
 
+        /*
+           Return navigation to desktop state
+           when screen becomes larger.
+        */
+
+        if (
+            window.innerWidth > 768 &&
+            navMenu &&
+            menuToggle
+        ) {
+
+            navMenu.classList.remove(
+                "active"
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+            );
+
+
+            const icon =
+                menuToggle.querySelector("i");
+
+            if (icon) {
+
+                icon.classList.remove(
+                    "fa-xmark"
+                );
+
+                icon.classList.add(
+                    "fa-bars"
+                );
+
+            }
+
+        }
+
+    },
+    {
+        passive: true
     }
 );
 
 
 /* =========================================================
-   13. KEYBOARD ACCESSIBILITY
+   10. ESCAPE KEY
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
+        if (event.key !== "Escape") {
+            return;
+        }
+
+
+        const navMenu =
+            document.querySelector(".nav-menu");
+
+        const menuToggle =
+            document.querySelector(".menu-toggle");
+
+
         if (
-            event.key === "Escape"
+            navMenu &&
+            navMenu.classList.contains("active")
         ) {
 
-            const navMenu =
-                document.querySelector(
-                    ".nav-menu"
+            navMenu.classList.remove(
+                "active"
+            );
+
+            if (menuToggle) {
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
                 );
 
-            const menuToggle =
-                document.querySelector(
-                    ".menu-toggle"
-                );
-
-
-            if (
-                navMenu &&
-                navMenu.classList.contains(
-                    "active"
-                )
-            ) {
-
-                navMenu.classList.remove(
-                    "active"
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Open navigation menu"
                 );
 
 
-                if (menuToggle) {
+                const icon =
+                    menuToggle.querySelector("i");
 
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
+                if (icon) {
+
+                    icon.classList.remove(
+                        "fa-xmark"
                     );
 
-
-                    const icon =
-                        menuToggle.querySelector(
-                            "i"
-                        );
-
-                    if (icon) {
-
-                        icon.classList.remove(
-                            "fa-xmark"
-                        );
-
-                        icon.classList.add(
-                            "fa-bars"
-                        );
-
-                    }
+                    icon.classList.add(
+                        "fa-bars"
+                    );
 
                 }
 
@@ -742,5 +644,48 @@ document.addEventListener(
 
 
 /* =========================================================
-   END OF MAIN JAVASCRIPT
+   11. CURRENT YEAR
 ========================================================= */
+
+function updateCopyrightYear() {
+
+    const year =
+        new Date().getFullYear();
+
+    const footer =
+        document.querySelector(".footer");
+
+    if (!footer) {
+        return;
+    }
+
+    const paragraphs =
+        footer.querySelectorAll("p");
+
+    if (!paragraphs.length) {
+        return;
+    }
+
+    paragraphs[0].innerHTML =
+        `© ${year} Abraham Ashagre. All Rights Reserved.`;
+
+}
+
+
+updateCopyrightYear();
+
+
+/* =========================================================
+   12. PAGE LOADED
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        document.body.classList.add(
+            "page-loaded"
+        );
+
+    }
+);
