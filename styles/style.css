@@ -1936,99 +1936,234 @@ button:focus-visible {
         font-size: 24px;
     }
 }
-/* =========================================================
-   DARK PURPLE TYPING ANIMATION
+//* =========================================================
+   STABLE TYPING ANIMATION
+   Completely prevents horizontal vibration/jumping
 ========================================================= */
 
 .typing-container {
-    width: 100%;
+    position: relative;
+
+    width: 320px;
+    height: 42px;
+
+    margin: 12px 0 10px;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
 
-    min-height: 55px;
-    margin: 10px 0 22px;
+    color: var(--primary-color);
 
-    font-size: 1.35rem;
+    font-size: 20px;
     font-weight: 600;
-    letter-spacing: 0.5px;
 
-    color: #4b145f;
+    letter-spacing: 0.3px;
+
+    overflow: hidden;
 }
 
 
-/* Typing text */
+/* =========================================================
+   TYPING TEXT
+========================================================= */
 
 .typing-text {
-    display: inline-block;
-    color: #4b145f;
+    display: block;
 
-    text-shadow:
-        0 2px 8px rgba(75, 20, 95, 0.15);
+    width: 300px;
+    height: 30px;
 
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+    line-height: 30px;
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    text-align: left;
+
+    /*
+       Do NOT use width:auto.
+       Do NOT use flex-grow.
+       Do NOT center the text.
+    */
+
+    background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #7c3aed,
+        #9333ea
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
 }
 
 
-/* Typing cursor */
+/* =========================================================
+   FIXED CURSOR
+========================================================= */
 
 .typing-cursor {
+    position: absolute;
+
+    left: 307px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
     width: 3px;
-    height: 1.4em;
+    height: 24px;
 
-    margin-left: 7px;
+    margin: 0;
 
-    display: inline-block;
+    border-radius: 4px;
 
-    background-color: #4b145f;
-
-    border-radius: 3px;
-
-    box-shadow:
-        0 0 8px rgba(75, 20, 95, 0.45);
+    background: linear-gradient(
+        180deg,
+        #4f46e5,
+        #9333ea
+    );
 
     animation:
-        cursorBlink 0.8s ease-in-out infinite;
+        typingCursorBlink 0.8s steps(1) infinite;
 }
 
 
-/* Cursor animation */
+/* =========================================================
+   CURSOR BLINK
+========================================================= */
 
-@keyframes cursorBlink {
+@keyframes typingCursorBlink {
 
     0%,
-    100% {
+    49% {
         opacity: 1;
     }
 
-    50% {
-        opacity: 0.15;
+    50%,
+    100% {
+        opacity: 0;
     }
 }
 
 
-/* Mobile */
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media (max-width: 768px) {
 
     .typing-container {
-        font-size: 1.15rem;
-        min-height: 48px;
+        width: 270px;
+        height: 38px;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        justify-content: flex-start;
+
+        font-size: 18px;
     }
 
+    .typing-text {
+        width: 250px;
+        height: 28px;
+
+        line-height: 28px;
+
+        text-align: left;
+    }
+
+    .typing-cursor {
+        left: 256px;
+
+        width: 2px;
+        height: 22px;
+    }
 }
 
 
-/* Small phones */
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
 
     .typing-container {
-        font-size: 1rem;
-        min-height: 42px;
+        width: 235px;
+        height: 34px;
+
+        font-size: 16px;
     }
 
+    .typing-text {
+        width: 220px;
+        height: 25px;
+
+        line-height: 25px;
+
+        text-align: left;
+    }
+
+    .typing-cursor {
+        left: 224px;
+
+        width: 2px;
+        height: 20px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .typing-container {
+        width: 215px;
+
+        font-size: 15px;
+    }
+
+    .typing-text {
+        width: 200px;
+    }
+
+    .typing-cursor {
+        left: 204px;
+    }
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme="dark"] .typing-text,
+html.dark-mode .typing-text {
+
+    background: linear-gradient(
+        90deg,
+        #93c5fd,
+        #c4b5fd,
+        #d8b4fe
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+}
+
+
+html[data-theme="dark"] .typing-cursor,
+html.dark-mode .typing-cursor {
+
+    background: linear-gradient(
+        180deg,
+        #93c5fd,
+        #c4b5fd
+    );
 }
