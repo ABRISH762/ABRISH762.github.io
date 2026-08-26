@@ -1,521 +1,433 @@
 /* =========================================================
    ABRAHAM ASHAGRE
    PROFESSIONAL PORTFOLIO
-   DARK / LIGHT THEME
+   THEME / DISPLAY CONTROLLER
 ========================================================= */
 
-(function () {
-
-    "use strict";
+"use strict";
 
 
-    /* =====================================================
-       1. CREATE THEME BUTTON
-    ===================================================== */
+/* =========================================================
+   1. THEME CONFIGURATION
+========================================================= */
 
-    function createThemeButton() {
-
-        if (document.querySelector(".theme-toggle")) {
-            return;
-        }
+const THEME_KEY =
+    "abrahamPortfolioTheme";
 
 
-        const button =
-            document.createElement("button");
+const THEMES = {
+
+    light: "light",
+
+    dark: "dark"
+
+};
 
 
-        button.className =
-            "theme-toggle";
+/* =========================================================
+   2. GET SAVED THEME
+========================================================= */
 
+function getSavedTheme() {
 
-        button.type =
-            "button";
+    try {
 
-
-        button.setAttribute(
-            "aria-label",
-            "Switch to dark mode"
-        );
-
-
-        button.setAttribute(
-            "title",
-            "Switch theme"
-        );
-
-
-        button.innerHTML =
-            '<i class="fa-solid fa-moon"></i>';
-
-
-        const header =
-            document.querySelector(".navbar");
-
-
-        if (header) {
-
-            const menuToggle =
-                document.querySelector(".menu-toggle");
-
-
-            if (menuToggle) {
-
-                header.insertBefore(
-                    button,
-                    menuToggle
-                );
-
-            } else {
-
-                header.appendChild(
-                    button
-                );
-
-            }
-
-        }
-
-
-        addThemeButtonStyles();
-
-    }
-
-
-    /* =====================================================
-       2. THEME BUTTON STYLES
-    ===================================================== */
-
-    function addThemeButtonStyles() {
+        const savedTheme =
+            localStorage.getItem(THEME_KEY);
 
         if (
-            document.querySelector(
-                "#theme-button-styles"
-            )
+            savedTheme === THEMES.light ||
+            savedTheme === THEMES.dark
         ) {
 
-            return;
+            return savedTheme;
 
         }
 
-
-        const style =
-            document.createElement("style");
-
-
-        style.id =
-            "theme-button-styles";
-
-
-        style.textContent = `
-
-            .theme-toggle {
-
-                width: 42px;
-
-                height: 42px;
-
-                display: flex;
-
-                align-items: center;
-
-                justify-content: center;
-
-                border: 1px solid #d1d5db;
-
-                border-radius: 50%;
-
-                background: #ffffff;
-
-                color: #1f2937;
-
-                cursor: pointer;
-
-                font-size: 16px;
-
-                transition: all 0.3s ease;
-
-            }
-
-
-            .theme-toggle:hover {
-
-                transform: rotate(15deg);
-
-                background: #0d6efd;
-
-                color: #ffffff;
-
-                border-color: #0d6efd;
-
-            }
-
-
-            body.dark-theme {
-
-                --primary-color: #4d9cff;
-
-                --primary-dark: #78b5ff;
-
-                --secondary-color: #35c878;
-
-                --text-color: #f3f4f6;
-
-                --text-light: #b8c0cc;
-
-                --background: #111827;
-
-                --background-alt: #182233;
-
-                --card-background: #1f2937;
-
-                --border: #374151;
-
-                --shadow:
-                    0 10px 30px rgba(0,0,0,0.30);
-
-                --shadow-hover:
-                    0 15px 40px rgba(0,0,0,0.40);
-
-            }
-
-
-            body.dark-theme .header {
-
-                background:
-                    rgba(17, 24, 39, 0.96);
-
-            }
-
-
-            body.dark-theme .nav-menu {
-
-                background:
-                    #111827;
-
-            }
-
-
-            body.dark-theme .nav-menu a {
-
-                color:
-                    #f3f4f6;
-
-            }
-
-
-            body.dark-theme .hero {
-
-                background:
-                    linear-gradient(
-                        135deg,
-                        #111827 0%,
-                        #18263a 100%
-                    );
-
-            }
-
-
-            body.dark-theme .profile-frame {
-
-                background:
-                    #1f2937;
-
-            }
-
-
-            body.dark-theme
-            .about-icon,
-            body.dark-theme
-            .education-icon,
-            body.dark-theme
-            .project-icon,
-            body.dark-theme
-            .contact-icon {
-
-                background:
-                    #243b5a;
-
-            }
-
-
-            body.dark-theme .project-tags span {
-
-                background:
-                    #263852;
-
-                color:
-                    #9bc7ff;
-
-            }
-
-
-            body.dark-theme .skill-tags span {
-
-                color:
-                    #7eb7ff;
-
-                border-color:
-                    #4d9cff;
-
-            }
-
-
-            body.dark-theme .cgpa {
-
-                background:
-                    #163d2b;
-
-                color:
-                    #74d9a0;
-
-            }
-
-
-            body.dark-theme
-            .document-icon {
-
-                background:
-                    #49252a;
-
-            }
-
-
-            body.dark-theme
-            .achievement-icon {
-
-                background:
-                    #493b1d;
-
-            }
-
-
-            body.dark-theme .footer {
-
-                background:
-                    #080c14;
-
-            }
-
-
-            @media (max-width: 768px) {
-
-                .theme-toggle {
-
-                    margin-left: auto;
-
-                    margin-right: 8px;
-
-                }
-
-            }
-
-        `;
-
-
-        document.head.appendChild(style);
+    } catch (error) {
+
+        console.warn(
+            "Theme preference could not be loaded.",
+            error
+        );
 
     }
 
 
-    /* =====================================================
-       3. APPLY THEME
-    ===================================================== */
+    return getSystemTheme();
 
-    function applyTheme(theme) {
-
-        const body =
-            document.body;
+}
 
 
-        const button =
-            document.querySelector(
-                ".theme-toggle"
+/* =========================================================
+   3. SYSTEM THEME
+========================================================= */
+
+function getSystemTheme() {
+
+    if (
+        window.matchMedia &&
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches
+    ) {
+
+        return THEMES.dark;
+
+    }
+
+
+    return THEMES.light;
+
+}
+
+
+/* =========================================================
+   4. APPLY THEME
+========================================================= */
+
+function applyTheme(theme) {
+
+    if (
+        theme !== THEMES.light &&
+        theme !== THEMES.dark
+    ) {
+
+        theme = THEMES.light;
+
+    }
+
+
+    document.documentElement.setAttribute(
+        "data-theme",
+        theme
+    );
+
+
+    document.body.classList.toggle(
+        "dark-mode",
+        theme === THEMES.dark
+    );
+
+
+    updateThemeControls(theme);
+
+
+    updateThemeColor(theme);
+
+}
+
+
+/* =========================================================
+   5. SAVE THEME
+========================================================= */
+
+function saveTheme(theme) {
+
+    try {
+
+        localStorage.setItem(
+            THEME_KEY,
+            theme
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Theme preference could not be saved.",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   6. UPDATE THEME CONTROLS
+========================================================= */
+
+function updateThemeControls(theme) {
+
+    const themeButtons =
+        document.querySelectorAll(
+            "[data-theme-toggle]"
+        );
+
+
+    themeButtons.forEach(button => {
+
+        const icon =
+            button.querySelector("i");
+
+
+        if (theme === THEMES.dark) {
+
+            button.setAttribute(
+                "aria-label",
+                "Switch to light mode"
+            );
+
+            button.setAttribute(
+                "title",
+                "Switch to light mode"
             );
 
 
-        if (theme === "dark") {
+            if (icon) {
 
-            body.classList.add(
-                "dark-theme"
-            );
-
-
-            if (button) {
-
-                button.innerHTML =
-                    '<i class="fa-solid fa-sun"></i>';
-
-
-                button.setAttribute(
-                    "aria-label",
-                    "Switch to light mode"
+                icon.classList.remove(
+                    "fa-moon"
                 );
 
-
-                button.setAttribute(
-                    "title",
-                    "Switch to light mode"
+                icon.classList.add(
+                    "fa-sun"
                 );
 
             }
 
         } else {
 
-            body.classList.remove(
-                "dark-theme"
+            button.setAttribute(
+                "aria-label",
+                "Switch to dark mode"
+            );
+
+            button.setAttribute(
+                "title",
+                "Switch to dark mode"
             );
 
 
-            if (button) {
+            if (icon) {
 
-                button.innerHTML =
-                    '<i class="fa-solid fa-moon"></i>';
-
-
-                button.setAttribute(
-                    "aria-label",
-                    "Switch to dark mode"
+                icon.classList.remove(
+                    "fa-sun"
                 );
 
-
-                button.setAttribute(
-                    "title",
-                    "Switch to dark mode"
+                icon.classList.add(
+                    "fa-moon"
                 );
 
             }
 
         }
 
-    }
+    });
+
+}
 
 
-    /* =====================================================
-       4. DETERMINE INITIAL THEME
-    ===================================================== */
+/* =========================================================
+   7. UPDATE BROWSER THEME COLOR
+========================================================= */
 
-    function getInitialTheme() {
+function updateThemeColor(theme) {
 
-        const savedTheme =
-            localStorage.getItem(
-                "portfolio-theme"
-            );
-
-
-        if (savedTheme === "dark" ||
-            savedTheme === "light") {
-
-            return savedTheme;
-
-        }
-
-
-        /* Use device preference */
-
-        if (
-            window.matchMedia &&
-            window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            ).matches
-        ) {
-
-            return "dark";
-
-        }
-
-
-        return "light";
-
-    }
-
-
-    /* =====================================================
-       5. TOGGLE THEME
-    ===================================================== */
-
-    function toggleTheme() {
-
-        const body =
-            document.body;
-
-
-        const isDark =
-            body.classList.contains(
-                "dark-theme"
-            );
-
-
-        const newTheme =
-            isDark
-                ? "light"
-                : "dark";
-
-
-        applyTheme(newTheme);
-
-
-        localStorage.setItem(
-            "portfolio-theme",
-            newTheme
-        );
-
-    }
-
-
-    /* =====================================================
-       6. INITIALIZE
-    ===================================================== */
-
-    function initializeTheme() {
-
-        createThemeButton();
-
-
-        const initialTheme =
-            getInitialTheme();
-
-
-        applyTheme(
-            initialTheme
+    const themeColorMeta =
+        document.querySelector(
+            'meta[name="theme-color"]'
         );
 
 
-        const button =
-            document.querySelector(
-                ".theme-toggle"
-            );
-
-
-        if (button) {
-
-            button.addEventListener(
-                "click",
-                toggleTheme
-            );
-
-        }
-
+    if (!themeColorMeta) {
+        return;
     }
 
 
-    /* =====================================================
-       7. START AFTER DOM LOAD
-    ===================================================== */
+    if (theme === THEMES.dark) {
 
-    if (
-        document.readyState ===
-        "loading"
-    ) {
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            initializeTheme
+        themeColorMeta.setAttribute(
+            "content",
+            "#111827"
         );
 
     } else {
 
-        initializeTheme();
+        themeColorMeta.setAttribute(
+            "content",
+            "#0d6efd"
+        );
 
     }
 
-})();
+}
+
+
+/* =========================================================
+   8. TOGGLE THEME
+========================================================= */
+
+function toggleTheme() {
+
+    const currentTheme =
+        document.documentElement.getAttribute(
+            "data-theme"
+        ) || THEMES.light;
+
+
+    const newTheme =
+        currentTheme === THEMES.dark
+            ? THEMES.light
+            : THEMES.dark;
+
+
+    applyTheme(newTheme);
+
+    saveTheme(newTheme);
+
+}
+
+
+/* =========================================================
+   9. INITIALIZE THEME BUTTONS
+========================================================= */
+
+function initializeThemeButtons() {
+
+    const themeButtons =
+        document.querySelectorAll(
+            "[data-theme-toggle]"
+        );
+
+
+    if (!themeButtons.length) {
+        return;
+    }
+
+
+    themeButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            toggleTheme
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   10. SYSTEM THEME CHANGES
+========================================================= */
+
+function initializeSystemThemeListener() {
+
+    if (!window.matchMedia) {
+        return;
+    }
+
+
+    const mediaQuery =
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        );
+
+
+    const handleSystemThemeChange =
+        event => {
+
+            /*
+             * Only follow the operating-system theme
+             * when the visitor has not manually selected
+             * a preference.
+             */
+
+            let manuallySaved = false;
+
+
+            try {
+
+                manuallySaved =
+                    localStorage.getItem(
+                        THEME_KEY
+                    ) !== null;
+
+            } catch (error) {
+
+                manuallySaved = false;
+
+            }
+
+
+            if (manuallySaved) {
+                return;
+            }
+
+
+            applyTheme(
+                event.matches
+                    ? THEMES.dark
+                    : THEMES.light
+            );
+
+        };
+
+
+    if (
+        typeof mediaQuery.addEventListener ===
+        "function"
+    ) {
+
+        mediaQuery.addEventListener(
+            "change",
+            handleSystemThemeChange
+        );
+
+    } else if (
+        typeof mediaQuery.addListener ===
+        "function"
+    ) {
+
+        mediaQuery.addListener(
+            handleSystemThemeChange
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   11. INITIALIZE
+========================================================= */
+
+function initializeTheme() {
+
+    const savedTheme =
+        getSavedTheme();
+
+
+    applyTheme(savedTheme);
+
+    initializeThemeButtons();
+
+    initializeSystemThemeListener();
+
+}
+
+
+/* =========================================================
+   12. START
+========================================================= */
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initializeTheme
+    );
+
+} else {
+
+    initializeTheme();
+
+}
+
+
+/* =========================================================
+   END OF THEME.JS
+========================================================= */
