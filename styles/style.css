@@ -705,8 +705,8 @@ html.dark-mode .linkedin-profile {
     background:
         #24292f;
 
-    color:
-        #ffffff;
+    color: purple;
+        
 }
 
 
@@ -733,7 +733,7 @@ html.dark-mode .linkedin-profile {
         var(--secondary-color);
 
     color:
-        #ffffff;
+        green;
 }
 
 
