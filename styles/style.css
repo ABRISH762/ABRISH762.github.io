@@ -2392,23 +2392,6 @@ button:focus-visible {
     }
 
 
-    .typing-container {
-        height: 34px;
-        min-height: 34px;
-
-        font-size: 16px;
-    }
-
-
-    .typing-cursor {
-        width: 2px;
-        height: 20px;
-
-        margin-left: 5px;
-    }
-}
-
-
 /* =========================================================
    44. VERY SMALL MOBILE
 ========================================================= */
