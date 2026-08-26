@@ -3133,3 +3133,247 @@ html[data-theme="dark"] .document-btn.secondary {
             0.01ms !important;
     }
 }
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   THEME TOGGLE BUTTON
+========================================================= */
+
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+    border-radius: 50%;
+
+    background: var(--card-background);
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+
+    background: var(--primary-color);
+    color: #ffffff;
+
+    border-color: var(--primary-color);
+
+    box-shadow:
+        0 6px 18px rgba(13, 110, 253, 0.25);
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html.dark-mode {
+
+    --primary-color: #6ea8fe;
+    --primary-dark: #9ec5fe;
+
+    --secondary-color: #20c997;
+
+    --text-color: #f1f5f9;
+    --text-light: #aeb8c6;
+
+    --background: #0b1120;
+    --background-alt: #111827;
+
+    --card-background: #172033;
+
+    --border: #293548;
+
+    --shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+
+    --shadow-hover:
+        0 18px 45px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   DARK MODE - BODY
+========================================================= */
+
+html.dark-mode body {
+    background: var(--background);
+    color: var(--text-color);
+}
+
+
+/* =========================================================
+   DARK MODE - HEADER
+========================================================= */
+
+html.dark-mode .header {
+    background: rgba(11, 17, 32, 0.95);
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   DARK MODE - MOBILE NAV
+========================================================= */
+
+html.dark-mode .nav-menu {
+    background: #0b1120;
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   DARK MODE - HERO
+========================================================= */
+
+html.dark-mode .hero {
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(13, 110, 253, 0.16),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #0b1120 0%,
+            #111827 100%
+        );
+}
+
+
+/* =========================================================
+   DARK MODE - PROFILE FRAME
+========================================================= */
+
+html.dark-mode .profile-frame {
+    background: var(--card-background);
+}
+
+
+/* =========================================================
+   DARK MODE - ICON BACKGROUNDS
+========================================================= */
+
+html.dark-mode .about-icon,
+html.dark-mode .education-icon,
+html.dark-mode .project-icon,
+html.dark-mode .contact-icon {
+    background: rgba(110, 168, 254, 0.12);
+}
+
+
+/* =========================================================
+   DARK MODE - PROJECT TAGS
+========================================================= */
+
+html.dark-mode .project-tags span {
+    background: rgba(110, 168, 254, 0.12);
+    color: var(--primary-color);
+}
+
+
+/* =========================================================
+   DARK MODE - SECONDARY BUTTONS
+========================================================= */
+
+html.dark-mode .certificate-btn.secondary,
+html.dark-mode .document-btn.secondary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+
+/* =========================================================
+   DARK MODE - LANGUAGE CARDS
+========================================================= */
+
+html.dark-mode .language-list div {
+    background: var(--card-background);
+    border-color: var(--border);
+}
+
+
+/* =========================================================
+   DARK MODE - THEME BUTTON
+========================================================= */
+
+html.dark-mode .theme-toggle {
+    background: #1e293b;
+    color: #facc15;
+    border-color: #334155;
+}
+
+html.dark-mode .theme-toggle:hover {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE - LINKEDIN BADGE AREA
+========================================================= */
+
+html.dark-mode .linkedin-profile {
+    background: transparent;
+}
+
+
+/* =========================================================
+   MOBILE HEADER ACTIONS
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .header-actions {
+        margin-left: auto;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .header-actions {
+        margin-left: auto;
+        margin-right: 8px;
+    }
+
+    .header-contact {
+        display: none;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+
+}
