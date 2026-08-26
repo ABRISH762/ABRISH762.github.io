@@ -694,18 +694,18 @@ html.dark-mode .linkedin-profile {
 
 .email-btn {
     background:
-        var(--primary-color);
+        #E91E63;
 
     color:
-        #E91E63;
+        #ffffff;
 }
 
 
 .github-btn {
     background:
-        #24292f;
+        #9C27B0;
 
-    color: #9C27B0;
+    color: #ffffff;
         
 }
 
@@ -733,7 +733,7 @@ html.dark-mode .linkedin-profile {
         var(--secondary-color);
 
     color:
-        #4CAF50;
+        #ffffff;
 }
 
 
