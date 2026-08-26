@@ -2373,37 +2373,30 @@ button:focus-visible {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
-    margin: 0;
 }
 
-.hero-title #typing-text {
-    display: inline-block;
-    min-width: 0;
+#typing-text {
     color: var(--primary-color);
     white-space: nowrap;
 }
 
-/* Typing cursor */
-.hero-title #typing-text::after {
+#typing-text::after {
     content: "|";
     display: inline-block;
     margin-left: 3px;
-    font-weight: 400;
-    animation: typingCursor 0.7s steps(1) infinite;
+    animation: cursorBlink 0.7s steps(1) infinite;
 }
 
-/* Cursor blink only */
-@keyframes typingCursor {
-    0%,
-    49% {
+@keyframes cursorBlink {
+    0%, 49% {
         opacity: 1;
     }
 
-    50%,
-    100% {
+    50%, 100% {
         opacity: 0;
     }
 }
+
 
 /* Mobile */
 @media (max-width: 768px) {
