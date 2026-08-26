@@ -1,7 +1,9 @@
 /* =========================================================
-   ABRISH762.github.io
-   PROFESSIONAL PORTFOLIO
-   Main Stylesheet
+   ABRAHAM ASHAGRE
+   PROFESSIONAL MODERN PORTFOLIO
+   styles/style.css
+
+   Designed for the final index.html
 ========================================================= */
 
 
@@ -11,31 +13,52 @@
 
 :root {
 
-    --primary: #0d6efd;
-    --primary-dark: #084298;
-    --secondary: #6f42c1;
+    --primary: #4b91f1;
+    --primary-light: #60a5fa;
+    --primary-dark: #2563c7;
 
-    --text: #1f2937;
-    --text-light: #6b7280;
+    --accent: #4b91f1;
 
-    --background: #ffffff;
-    --background-alt: #f5f7fb;
+    --background: #0f1726;
+    --background-dark: #0b1220;
+    --background-section: #111b2c;
 
-    --card: #ffffff;
-    --border: #e5e7eb;
+    --card: #151f30;
+    --card-light: #1b2638;
 
-    --header-bg: rgba(255, 255, 255, 0.95);
+    --header: #0d1524;
+
+    --text: #f1f5f9;
+    --text-soft: #d1d8e3;
+    --text-muted: #9ca8b9;
+
+    --border: rgba(148, 163, 184, 0.16);
+    --border-light: rgba(148, 163, 184, 0.25);
+
+    --white: #ffffff;
+
+    --green: #22c55e;
+    --whatsapp: #25d366;
+    --linkedin: #0a66c2;
+    --github: #24292f;
+    --danger: #ef4444;
+    --gold: #f59e0b;
 
     --shadow:
-        0 10px 30px rgba(0, 0, 0, 0.08);
+        0 15px 40px rgba(0, 0, 0, 0.28);
 
-    --shadow-hover:
-        0 18px 45px rgba(0, 0, 0, 0.14);
+    --shadow-soft:
+        0 8px 25px rgba(0, 0, 0, 0.20);
 
-    --radius: 16px;
+    --shadow-blue:
+        0 10px 35px rgba(75, 145, 241, 0.18);
+
+    --radius: 14px;
+
+    --radius-small: 9px;
 
     --transition:
-        0.3s ease;
+        all 0.3s ease;
 
     --max-width: 1180px;
 
@@ -43,36 +66,7 @@
 
 
 /* =========================================================
-   2. DARK MODE
-========================================================= */
-
-html.dark-mode {
-
-    --text: #f3f4f6;
-
-    --text-light: #c4c9d1;
-
-    --background: #0f172a;
-
-    --background-alt: #111827;
-
-    --card: #1e293b;
-
-    --border: #334155;
-
-    --header-bg: rgba(15, 23, 42, 0.96);
-
-    --shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35);
-
-    --shadow-hover:
-        0 18px 45px rgba(0, 0, 0, 0.5);
-
-}
-
-
-/* =========================================================
-   3. RESET
+   2. RESET
 ========================================================= */
 
 * {
@@ -90,7 +84,7 @@ html {
 
     scroll-behavior: smooth;
 
-    scroll-padding-top: 90px;
+    scroll-padding-top: 85px;
 
 }
 
@@ -102,17 +96,23 @@ body {
         Helvetica,
         sans-serif;
 
+    color: var(--text);
+
     background:
         var(--background);
 
-    color:
-        var(--text);
-
     line-height: 1.7;
 
-    transition:
-        background var(--transition),
-        color var(--transition);
+    overflow-x: hidden;
+
+}
+
+
+body::selection {
+
+    background: var(--primary);
+
+    color: var(--white);
 
 }
 
@@ -128,8 +128,6 @@ img {
 
 a {
 
-    text-decoration: none;
-
     color: inherit;
 
 }
@@ -137,21 +135,20 @@ a {
 
 button {
 
-    font-family: inherit;
+    font: inherit;
 
 }
 
 
 /* =========================================================
-   4. CONTAINER
+   3. GLOBAL CONTAINER
 ========================================================= */
 
 .container {
 
-    width: min(
-        92%,
-        var(--max-width)
-    );
+    width: 92%;
+
+    max-width: var(--max-width);
 
     margin: 0 auto;
 
@@ -159,34 +156,7 @@ button {
 
 
 /* =========================================================
-   5. SCROLL PROGRESS
-========================================================= */
-
-.scroll-progress {
-
-    position: fixed;
-
-    top: 0;
-
-    left: 0;
-
-    width: 0;
-
-    height: 4px;
-
-    background:
-        var(--primary);
-
-    z-index: 9999;
-
-    transition:
-        width 0.1s linear;
-
-}
-
-
-/* =========================================================
-   6. HEADER
+   4. HEADER
 ========================================================= */
 
 .header {
@@ -198,37 +168,23 @@ button {
     z-index: 1000;
 
     background:
-        var(--header-bg);
-
-    backdrop-filter:
-        blur(12px);
+        rgba(13, 21, 36, 0.96);
 
     border-bottom:
         1px solid var(--border);
 
-    transition:
-        box-shadow var(--transition),
-        background var(--transition);
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
 
 }
 
-
-.header.scrolled {
-
-    box-shadow:
-        0 5px 25px
-        rgba(0, 0, 0, 0.08);
-
-}
-
-
-/* =========================================================
-   7. NAVBAR
-========================================================= */
 
 .navbar {
 
-    min-height: 78px;
+    min-height: 76px;
 
     display: flex;
 
@@ -242,7 +198,7 @@ button {
 
 
 /* =========================================================
-   8. LOGO
+   5. LOGO
 ========================================================= */
 
 .logo {
@@ -251,23 +207,26 @@ button {
 
     flex-direction: column;
 
-    line-height: 1.2;
+    justify-content: center;
 
-    min-width: 190px;
+    text-decoration: none;
+
+    line-height: 1.15;
+
+    min-width: 200px;
 
 }
 
 
 .logo-name {
 
-    font-size: 1.15rem;
+    color: var(--text);
+
+    font-size: 17px;
 
     font-weight: 800;
 
-    letter-spacing: 1px;
-
-    color:
-        var(--primary);
+    letter-spacing: 0.8px;
 
 }
 
@@ -276,16 +235,17 @@ button {
 
     margin-top: 5px;
 
-    color:
-        var(--text-light);
+    color: var(--text-muted);
 
-    font-size: 0.72rem;
+    font-size: 11px;
+
+    font-weight: 500;
 
 }
 
 
 /* =========================================================
-   9. NAV MENU
+   6. NAVIGATION
 ========================================================= */
 
 .nav-menu {
@@ -294,7 +254,9 @@ button {
 
     align-items: center;
 
-    gap: 22px;
+    justify-content: center;
+
+    gap: 19px;
 
     list-style: none;
 
@@ -305,17 +267,19 @@ button {
 
     position: relative;
 
+    display: inline-block;
+
     padding: 8px 0;
 
-    color:
-        var(--text);
+    text-decoration: none;
 
-    font-size: 0.92rem;
+    color: var(--text-soft);
+
+    font-size: 12px;
 
     font-weight: 600;
 
-    transition:
-        color var(--transition);
+    transition: var(--transition);
 
 }
 
@@ -334,26 +298,23 @@ button {
 
     height: 2px;
 
-    background:
-        var(--primary);
+    border-radius: 5px;
 
-    transition:
-        width var(--transition);
+    background: var(--primary);
 
-}
-
-
-.nav-menu a:hover,
-.nav-menu a.active {
-
-    color:
-        var(--primary);
+    transition: var(--transition);
 
 }
 
 
-.nav-menu a:hover::after,
-.nav-menu a.active::after {
+.nav-menu a:hover {
+
+    color: var(--primary-light);
+
+}
+
+
+.nav-menu a:hover::after {
 
     width: 100%;
 
@@ -361,72 +322,8 @@ button {
 
 
 /* =========================================================
-   10. HEADER ACTIONS
+   7. HEADER CONTACT
 ========================================================= */
-
-.header-actions {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-}
-
-
-.theme-toggle,
-.menu-toggle {
-
-    width: 42px;
-
-    height: 42px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 50%;
-
-    background:
-        var(--card);
-
-    color:
-        var(--text);
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.theme-toggle:hover,
-.menu-toggle:hover {
-
-    color:
-        var(--primary);
-
-    border-color:
-        var(--primary);
-
-    transform:
-        translateY(-2px);
-
-}
-
-
-.menu-toggle {
-
-    display: none;
-
-}
-
 
 .header-contact {
 
@@ -434,83 +331,141 @@ button {
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
 
-    padding: 11px 17px;
+    padding: 9px 15px;
 
-    border-radius: 30px;
+    border-radius: var(--radius-small);
 
-    background:
-        var(--primary);
+    text-decoration: none;
 
-    color: #ffffff;
+    background: var(--primary);
+
+    color: var(--white);
+
+    font-size: 12px;
 
     font-weight: 700;
 
-    font-size: 0.88rem;
-
-    transition:
-        all var(--transition);
+    transition: var(--transition);
 
 }
 
 
 .header-contact:hover {
 
-    background:
-        var(--primary-dark);
+    background: var(--primary-dark);
 
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
+
+    box-shadow: var(--shadow-blue);
 
 }
 
 
 /* =========================================================
-   11. HERO
+   8. MOBILE MENU BUTTON
+========================================================= */
+
+.menu-toggle {
+
+    display: none;
+
+    width: 54px;
+
+    height: 54px;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background: var(--primary);
+
+    color: var(--white);
+
+    cursor: pointer;
+
+    font-size: 25px;
+
+    transition: var(--transition);
+
+}
+
+
+.menu-toggle:hover {
+
+    background: var(--primary-dark);
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   9. LINKEDIN PROFILE
+========================================================= */
+
+.linkedin-profile {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    min-height: 1px;
+
+    padding-top: 18px;
+
+    position: relative;
+
+    z-index: 5;
+
+}
+
+
+/* Keep LinkedIn widget visually separated */
+
+.linkedin-profile .LI-profile-badge {
+
+    max-width: 100%;
+
+}
+
+
+/* =========================================================
+   10. HERO
 ========================================================= */
 
 .hero {
 
     min-height:
-        calc(100vh - 78px);
+        calc(100vh - 76px);
 
     display: flex;
 
     align-items: center;
 
-    position: relative;
-
-    overflow: hidden;
+    padding:
+        80px 0 100px;
 
     background:
+        radial-gradient(
+            circle at 75% 35%,
+            rgba(59, 130, 246, 0.08),
+            transparent 30%
+        ),
+
         linear-gradient(
             135deg,
-            var(--background),
-            var(--background-alt)
+            #0f1726 0%,
+            #101a2b 50%,
+            #0e1727 100%
         );
-
-}
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 350px;
-
-    height: 350px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(13, 110, 253, 0.08);
-
-    top: -120px;
-
-    right: -100px;
 
 }
 
@@ -520,20 +475,17 @@ button {
     display: grid;
 
     grid-template-columns:
-        380px 1fr;
+        300px 1fr;
 
     align-items: center;
 
-    gap: 70px;
-
-    padding:
-        80px 0;
+    gap: 65px;
 
 }
 
 
 /* =========================================================
-   12. PROFILE IMAGE
+   11. HERO IMAGE
 ========================================================= */
 
 .hero-image {
@@ -542,29 +494,52 @@ button {
 
     justify-content: center;
 
+    align-items: center;
+
 }
 
 
 .profile-frame {
 
-    width: 320px;
+    position: relative;
 
-    height: 320px;
+    width: 270px;
+
+    height: 270px;
 
     padding: 8px;
+
+    border:
+        5px solid var(--primary);
 
     border-radius: 50%;
 
     background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
+        #111827;
 
     box-shadow:
-        0 20px 50px
-        rgba(13, 110, 253, 0.2);
+        0 0 0 8px rgba(75, 145, 241, 0.08),
+        0 0 35px rgba(75, 145, 241, 0.20);
+
+    overflow: hidden;
+
+}
+
+
+.profile-frame::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid rgba(96, 165, 250, 0.45);
+
+    pointer-events: none;
 
 }
 
@@ -577,134 +552,120 @@ button {
 
     object-fit: cover;
 
-    border-radius: 50%;
+    object-position: center;
 
-    border:
-        6px solid var(--background);
+    border-radius: 50%;
 
 }
 
 
 /* =========================================================
-   13. HERO TEXT
+   12. HERO TEXT
 ========================================================= */
+
+.hero-text {
+
+    max-width: 760px;
+
+}
+
 
 .hero-greeting {
 
-    color:
-        var(--primary);
+    margin-bottom: 4px;
 
-    font-size: 1.1rem;
+    color: var(--primary);
+
+    font-size: 18px;
 
     font-weight: 700;
-
-    margin-bottom: 8px;
 
 }
 
 
 .hero h1 {
 
+    margin: 0;
+
+    color: var(--text);
+
     font-size:
-        clamp(2.5rem, 6vw, 4.3rem);
+        clamp(42px, 5vw, 64px);
 
     line-height: 1.1;
 
-    margin-bottom: 12px;
-
     font-weight: 800;
+
+    letter-spacing: -1px;
 
 }
 
 
 .hero h2 {
 
+    margin-top: 14px;
+
+    color: var(--text);
+
     font-size:
-        clamp(1.1rem, 2vw, 1.5rem);
+        clamp(24px, 3vw, 32px);
 
-    color:
-        var(--text-light);
-
-    font-weight: 600;
-
-    margin-bottom: 8px;
-
-}
-
-
-/* =========================================================
-   14. TYPING EFFECT
-========================================================= */
-
-.typing-container {
-
-    min-height: 35px;
-
-    color:
-        var(--primary);
-
-    font-size: 1.15rem;
+    line-height: 1.3;
 
     font-weight: 700;
 
 }
 
 
-.typing-cursor {
+.hero h3 {
 
-    display: inline-block;
+    margin-top: 12px;
 
-    margin-left: 3px;
+    color: var(--primary);
 
-    animation:
-        blink 0.8s infinite;
+    font-size: 20px;
 
-}
-
-
-@keyframes blink {
-
-    0%,
-    50% {
-
-        opacity: 1;
-
-    }
-
-    51%,
-    100% {
-
-        opacity: 0;
-
-    }
+    font-weight: 700;
 
 }
 
+
+/* =========================================================
+   13. HERO LINE
+========================================================= */
 
 .hero-line {
 
-    width: 70px;
+    width: 80px;
 
     height: 4px;
 
-    margin: 20px 0;
+    margin: 24px 0;
 
-    border-radius: 5px;
+    border-radius: 20px;
 
     background:
         var(--primary);
 
+    box-shadow:
+        0 0 12px rgba(75, 145, 241, 0.30);
+
 }
 
 
+/* =========================================================
+   14. HERO DESCRIPTION
+========================================================= */
+
 .hero-description {
 
-    max-width: 700px;
+    max-width: 760px;
 
-    color:
-        var(--text-light);
+    color: var(--text-muted);
 
-    margin-bottom: 28px;
+    font-size: 16px;
+
+    line-height: 1.85;
 
 }
 
@@ -719,7 +680,9 @@ button {
 
     flex-wrap: wrap;
 
-    gap: 12px;
+    gap: 10px;
+
+    margin-top: 28px;
 
 }
 
@@ -732,184 +695,124 @@ button {
 
     justify-content: center;
 
-    gap: 8px;
+    gap: 9px;
 
-    padding: 12px 17px;
+    min-height: 42px;
+
+    padding:
+        10px 16px;
+
+    border:
+        1px solid transparent;
 
     border-radius: 8px;
 
-    border:
-        1px solid var(--border);
+    text-decoration: none;
 
-    background:
-        var(--card);
-
-    color:
-        var(--text);
-
-    font-size: 0.88rem;
+    font-size: 13px;
 
     font-weight: 700;
 
-    transition:
-        all var(--transition);
+    transition: var(--transition);
 
 }
 
 
 .hero-btn:hover {
 
-    transform:
-        translateY(-3px);
+    transform: translateY(-3px);
 
-    box-shadow:
-        var(--shadow);
+    box-shadow: var(--shadow-soft);
 
 }
 
 
-.hero-btn.primary {
+.email-btn {
 
-    background:
-        var(--primary);
+    background: var(--primary);
 
-    color: #ffffff;
-
-    border-color:
-        var(--primary);
+    color: var(--white);
 
 }
 
 
 .email-btn:hover {
 
-    color:
-        var(--primary);
+    background: var(--primary-dark);
 
 }
 
 
-.github-btn:hover {
+.github-btn {
 
-    background:
-        #24292f;
+    background: #24292f;
 
-    color:
-        #ffffff;
+    color: var(--white);
 
 }
 
 
-.linkedin-btn:hover {
+.linkedin-btn {
 
-    background:
-        #0a66c2;
+    background: var(--linkedin);
 
-    color:
-        #ffffff;
+    color: var(--white);
 
 }
 
 
-.whatsapp-btn:hover {
+.whatsapp-btn {
 
-    background:
-        #25d366;
+    background: var(--whatsapp);
 
-    color:
-        #ffffff;
+    color: var(--white);
 
 }
 
 
-/* =========================================================
-   16. SCROLL DOWN
-========================================================= */
+.phone-btn {
 
-.scroll-down {
+    background: #198754;
 
-    position: absolute;
-
-    bottom: 25px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 42px;
-
-    height: 42px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color:
-        var(--primary);
-
-    border:
-        1px solid var(--border);
-
-    animation:
-        bounce 2s infinite;
-
-}
-
-
-@keyframes bounce {
-
-    0%,
-    100% {
-
-        transform:
-            translate(-50%, 0);
-
-    }
-
-    50% {
-
-        transform:
-            translate(-50%, -8px);
-
-    }
+    color: var(--white);
 
 }
 
 
 /* =========================================================
-   17. GENERAL SECTION
+   16. GENERAL SECTIONS
 ========================================================= */
 
 .section {
 
+    position: relative;
+
     padding:
         100px 0;
+
+    background:
+        var(--background);
 
 }
 
 
-.section:nth-child(even) {
+.section:nth-of-type(even) {
 
     background:
-        var(--background-alt);
+        var(--background-section);
 
 }
 
 
 /* =========================================================
-   18. SECTION HEADING
+   17. SECTION HEADING
 ========================================================= */
 
 .section-heading {
 
-    text-align: center;
+    margin-bottom: 48px;
 
-    margin-bottom: 55px;
+    text-align: center;
 
 }
 
@@ -918,32 +821,35 @@ button {
 
     display: block;
 
-    color:
-        var(--primary);
+    margin-bottom: 8px;
 
-    font-size: 0.78rem;
+    color: var(--primary);
+
+    font-size: 12px;
 
     font-weight: 800;
 
-    letter-spacing: 2px;
-
-    margin-bottom: 8px;
+    letter-spacing: 2.5px;
 
 }
 
 
 .section-heading h2 {
 
+    color: var(--text);
+
     font-size:
-        clamp(1.8rem, 4vw, 2.5rem);
+        clamp(28px, 4vw, 40px);
 
     line-height: 1.2;
+
+    font-weight: 800;
 
 }
 
 
 /* =========================================================
-   19. ABOUT
+   18. ABOUT CARD
 ========================================================= */
 
 .about-card {
@@ -951,9 +857,199 @@ button {
     display: grid;
 
     grid-template-columns:
-        90px 1fr;
+        75px 1fr;
 
-    gap: 30px;
+    gap: 25px;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(21, 31, 48, 0.98),
+            rgba(17, 27, 44, 0.98)
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
+
+}
+
+
+.about-icon {
+
+    width: 62px;
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(75, 145, 241, 0.12);
+
+    color: var(--primary);
+
+    border:
+        1px solid rgba(75, 145, 241, 0.20);
+
+    font-size: 23px;
+
+}
+
+
+.about-content p {
+
+    color: var(--text-muted);
+
+    font-size: 15px;
+
+    line-height: 1.85;
+
+}
+
+
+.about-content p + p {
+
+    margin-top: 18px;
+
+}
+
+
+/* =========================================================
+   19. STATISTICS
+========================================================= */
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 16px;
+
+    margin-top: 25px;
+
+}
+
+
+.stat-card {
+
+    padding:
+        25px 15px;
+
+    text-align: center;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition:
+        var(--transition);
+
+}
+
+
+.stat-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    border-color:
+        rgba(75, 145, 241, 0.40);
+
+    box-shadow:
+        var(--shadow-blue);
+
+}
+
+
+.stat-card i {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--primary);
+
+    font-size: 25px;
+
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    color: var(--text);
+
+    font-size: 28px;
+
+    line-height: 1.2;
+
+}
+
+
+.stat-card span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text-soft);
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+}
+
+
+.stat-card small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =========================================================
+   20. EDUCATION CARD
+========================================================= */
+
+.education-card {
+
+    display: grid;
+
+    grid-template-columns:
+        75px 1fr;
+
+    gap: 25px;
 
     padding: 35px;
 
@@ -967,183 +1063,16 @@ button {
         var(--radius);
 
     box-shadow:
-        var(--shadow);
-
-}
-
-
-.about-icon {
-
-    width: 75px;
-
-    height: 75px;
-
-    border-radius: 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        rgba(13, 110, 253, 0.1);
-
-    color:
-        var(--primary);
-
-    font-size: 1.8rem;
-
-}
-
-
-.about-content p {
-
-    color:
-        var(--text-light);
-
-    margin-bottom: 15px;
-
-}
-
-
-.about-content p:last-child {
-
-    margin-bottom: 0;
-
-}
-
-
-/* =========================================================
-   20. STATISTICS
-========================================================= */
-
-.stats-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, 1fr);
-
-    gap: 18px;
-
-    margin-top: 30px;
-
-}
-
-
-.stat-card {
-
-    padding: 25px 15px;
-
-    text-align: center;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.stat-card:hover {
-
-    transform:
-        translateY(-6px);
-
-    box-shadow:
-        var(--shadow-hover);
-
-}
-
-
-.stat-card i {
-
-    display: block;
-
-    color:
-        var(--primary);
-
-    font-size: 1.5rem;
-
-    margin-bottom: 10px;
-
-}
-
-
-.stat-card strong {
-
-    display: block;
-
-    font-size: 1.7rem;
-
-}
-
-
-.stat-card span {
-
-    display: block;
-
-    font-weight: 700;
-
-}
-
-
-.stat-card small {
-
-    color:
-        var(--text-light);
-
-}
-
-
-/* =========================================================
-   21. EDUCATION
-========================================================= */
-
-.education-card {
-
-    display: grid;
-
-    grid-template-columns:
-        90px 1fr;
-
-    gap: 30px;
-
-    padding: 40px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
+        var(--shadow-soft);
 
 }
 
 
 .education-icon {
 
-    width: 75px;
+    width: 62px;
 
-    height: 75px;
-
-    border-radius: 18px;
+    height: 62px;
 
     display: flex;
 
@@ -1151,42 +1080,52 @@ button {
 
     justify-content: center;
 
+    border-radius: 50%;
+
     background:
-        rgba(111, 66, 193, 0.1);
+        rgba(75, 145, 241, 0.12);
 
-    color:
-        var(--secondary);
+    color: var(--primary);
 
-    font-size: 1.8rem;
+    border:
+        1px solid rgba(75, 145, 241, 0.20);
+
+    font-size: 23px;
 
 }
 
 
 .education-content h3 {
 
-    font-size: 1.35rem;
+    color: var(--text);
 
-    margin-bottom: 8px;
+    font-size: 23px;
+
+    line-height: 1.4;
 
 }
 
 
 .education-content h4 {
 
-    color:
-        var(--primary);
+    margin-top: 7px;
 
-    margin-bottom: 8px;
+    color: var(--text-soft);
+
+    font-size: 16px;
 
 }
 
 
 .education-date {
 
-    color:
-        var(--text-light);
+    margin-top: 8px;
 
-    margin-bottom: 15px;
+    color: var(--primary);
+
+    font-weight: 700;
+
+    font-size: 14px;
 
 }
 
@@ -1195,39 +1134,61 @@ button {
 
     display: inline-block;
 
-    padding: 9px 15px;
+    margin-top: 12px;
 
-    border-radius: 20px;
+    padding:
+        7px 13px;
+
+    border:
+        1px solid rgba(34, 197, 94, 0.20);
+
+    border-radius: 7px;
 
     background:
-        rgba(13, 110, 253, 0.1);
+        rgba(34, 197, 94, 0.10);
 
     color:
-        var(--primary);
+        #4ade80;
 
-    margin-bottom: 25px;
+    font-size: 13px;
+
+}
+
+
+.coursework {
+
+    margin-top: 25px;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid var(--border);
 
 }
 
 
 .coursework h4 {
 
-    color:
-        var(--text);
+    margin-bottom: 8px;
+
+    color: var(--text);
 
 }
 
 
 .coursework p {
 
-    color:
-        var(--text-light);
+    color: var(--text-muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
 
 }
 
 
 /* =========================================================
-   22. SKILLS
+   21. SKILLS
 ========================================================= */
 
 .skills-grid {
@@ -1237,14 +1198,15 @@ button {
     grid-template-columns:
         repeat(4, 1fr);
 
-    gap: 20px;
+    gap: 18px;
 
 }
 
 
 .skill-card {
 
-    padding: 28px;
+    padding:
+        28px 22px;
 
     background:
         var(--card);
@@ -1256,10 +1218,10 @@ button {
         var(--radius);
 
     box-shadow:
-        var(--shadow);
+        var(--shadow-soft);
 
     transition:
-        all var(--transition);
+        var(--transition);
 
 }
 
@@ -1269,45 +1231,52 @@ button {
     transform:
         translateY(-7px);
 
+    border-color:
+        rgba(75, 145, 241, 0.35);
+
     box-shadow:
-        var(--shadow-hover);
+        var(--shadow-blue);
 
 }
 
 
 .skill-card > i {
 
-    font-size: 1.8rem;
+    display: block;
 
-    color:
-        var(--primary);
+    margin-bottom: 16px;
 
-    margin-bottom: 18px;
+    color: var(--primary);
+
+    font-size: 30px;
 
 }
 
 
 .skill-card h3 {
 
-    font-size: 1.05rem;
+    margin-bottom: 8px;
 
-    margin-bottom: 10px;
+    color: var(--text);
+
+    font-size: 17px;
 
 }
 
 
 .skill-card p {
 
-    color:
-        var(--text-light);
+    color: var(--text-muted);
 
-    font-size: 0.92rem;
+    font-size: 13px;
+
+    line-height: 1.7;
 
 }
 
 
 /* =========================================================
-   23. PERSONAL SKILLS
+   22. PERSONAL SKILLS
 ========================================================= */
 
 .personal-skills,
@@ -1315,15 +1284,19 @@ button {
 
     margin-top: 50px;
 
+    text-align: center;
+
 }
 
 
 .personal-skills h3,
 .languages h3 {
 
-    text-align: center;
+    margin-bottom: 22px;
 
-    margin-bottom: 20px;
+    color: var(--text);
+
+    font-size: 23px;
 
 }
 
@@ -1343,23 +1316,45 @@ button {
 
 .skill-tags span {
 
-    padding: 9px 16px;
+    padding:
+        8px 15px;
+
+    border:
+        1px solid rgba(75, 145, 241, 0.45);
 
     border-radius: 30px;
 
     background:
-        var(--card);
+        rgba(75, 145, 241, 0.06);
 
-    border:
-        1px solid var(--border);
+    color: var(--primary-light);
 
-    color:
-        var(--text-light);
+    font-size: 13px;
 
-    font-size: 0.88rem;
+    font-weight: 600;
+
+    transition: var(--transition);
 
 }
 
+
+.skill-tags span:hover {
+
+    background:
+        var(--primary);
+
+    color:
+        var(--white);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   23. LANGUAGES
+========================================================= */
 
 .language-list {
 
@@ -1369,62 +1364,20 @@ button {
 
     flex-wrap: wrap;
 
-    gap: 20px;
+    gap: 18px;
 
 }
 
 
-.language-list > div {
+.language-list div {
+
+    display: flex;
+
+    flex-direction: column;
 
     min-width: 220px;
 
-    padding: 20px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    text-align: center;
-
-}
-
-
-.language-list strong {
-
-    display: block;
-
-}
-
-
-.language-list span {
-
-    color:
-        var(--text-light);
-
-    font-size: 0.85rem;
-
-}
-
-
-/* =========================================================
-   24. PROJECT
-========================================================= */
-
-.project-card {
-
-    display: grid;
-
-    grid-template-columns:
-        100px 1fr;
-
-    gap: 30px;
-
-    padding: 40px;
+    padding: 18px;
 
     background:
         var(--card);
@@ -1436,18 +1389,64 @@ button {
         var(--radius);
 
     box-shadow:
-        var(--shadow);
+        var(--shadow-soft);
+
+}
+
+
+.language-list strong {
+
+    color: var(--text);
+
+}
+
+
+.language-list span {
+
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   24. PROJECT CARD
+========================================================= */
+
+.project-card {
+
+    display: grid;
+
+    grid-template-columns:
+        75px 1fr;
+
+    gap: 25px;
+
+    padding: 35px;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
 
 }
 
 
 .project-icon {
 
-    width: 80px;
+    width: 62px;
 
-    height: 80px;
-
-    border-radius: 20px;
+    height: 62px;
 
     display: flex;
 
@@ -1455,57 +1454,70 @@ button {
 
     justify-content: center;
 
+    border-radius: 50%;
+
     background:
-        rgba(13, 110, 253, 0.1);
+        rgba(75, 145, 241, 0.12);
 
-    color:
-        var(--primary);
+    color: var(--primary);
 
-    font-size: 2rem;
+    border:
+        1px solid rgba(75, 145, 241, 0.20);
+
+    font-size: 23px;
 
 }
 
 
 .project-label {
 
-    color:
-        var(--primary);
+    color: var(--primary);
 
-    font-size: 0.75rem;
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 
 }
 
 
 .project-content h3 {
 
-    font-size: 1.5rem;
+    margin-top: 5px;
 
-    margin: 8px 0;
+    color: var(--text);
+
+    font-size: 25px;
 
 }
 
 
 .project-content h4 {
 
-    color:
-        var(--secondary);
+    color: var(--text-soft);
 
-    margin-bottom: 15px;
+    font-size: 17px;
 
 }
 
 
 .project-content p {
 
-    color:
-        var(--text-light);
+    margin-top: 15px;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+
+    line-height: 1.8;
 
 }
 
+
+/* =========================================================
+   25. PROJECT TAGS
+========================================================= */
 
 .project-tags {
 
@@ -1515,25 +1527,95 @@ button {
 
     gap: 8px;
 
-    margin:
-        20px 0;
+    margin-top: 20px;
 
 }
 
 
 .project-tags span {
 
-    padding: 7px 12px;
+    padding:
+        6px 11px;
 
-    border-radius: 20px;
+    border:
+        1px solid rgba(75, 145, 241, 0.20);
+
+    border-radius: 6px;
 
     background:
-        var(--background-alt);
+        rgba(75, 145, 241, 0.08);
+
+    color: var(--primary-light);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================================
+   26. PROJECT GALLERY
+========================================================= */
+
+.project-gallery {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 28px;
+
+}
+
+
+.project-image {
+
+    overflow: hidden;
 
     border:
         1px solid var(--border);
 
-    font-size: 0.78rem;
+    border-radius: 11px;
+
+    background:
+        var(--background-dark);
+
+}
+
+
+.project-image img {
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.5s ease;
+
+}
+
+
+.project-image:hover img {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =========================================================
+   27. PROJECT BUTTON
+========================================================= */
+
+.project-actions {
+
+    margin-top: 22px;
 
 }
 
@@ -1544,24 +1626,44 @@ button {
 
     align-items: center;
 
+    justify-content: center;
+
     gap: 8px;
 
-    padding: 10px 17px;
+    padding:
+        11px 18px;
 
     border-radius: 8px;
 
     background:
         #24292f;
 
-    color: #ffffff;
+    color: var(--white);
+
+    text-decoration: none;
+
+    font-size: 13px;
 
     font-weight: 700;
+
+    transition: var(--transition);
+
+}
+
+
+.project-btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #30363d;
 
 }
 
 
 /* =========================================================
-   25. ACHIEVEMENTS
+   28. ACHIEVEMENTS
 ========================================================= */
 
 .achievement-grid {
@@ -1571,7 +1673,7 @@ button {
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 25px;
+    gap: 22px;
 
 }
 
@@ -1581,7 +1683,7 @@ button {
     display: grid;
 
     grid-template-columns:
-        70px 1fr;
+        65px 1fr;
 
     gap: 20px;
 
@@ -1597,10 +1699,10 @@ button {
         var(--radius);
 
     box-shadow:
-        var(--shadow);
+        var(--shadow-soft);
 
     transition:
-        all var(--transition);
+        var(--transition);
 
 }
 
@@ -1610,1071 +1712,70 @@ button {
     transform:
         translateY(-5px);
 
+    border-color:
+        rgba(245, 158, 11, 0.35);
+
 }
 
 
 .achievement-icon {
 
-    width: 60px;
+    width: 55px;
 
-    height: 60px;
-
-    border-radius: 15px;
+    height: 55px;
 
     display: flex;
 
     align-items: center;
 
     justify-content: center;
-
-    background:
-        rgba(255, 193, 7, 0.12);
-
-    color:
-        #d39e00;
-
-    font-size: 1.5rem;
-
-}
-
-
-.achievement-card h3 {
-
-    margin-bottom: 10px;
-
-}
-
-
-.achievement-card p {
-
-    color:
-        var(--text-light);
-
-    margin-bottom: 12px;
-
-}
-
-
-.achievement-card small {
-
-    color:
-        var(--text-light);
-
-}
-
-
-/* =========================================================
-   26. DOCUMENTS
-========================================================= */
-
-.document-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 25px;
-
-}
-
-
-.document-card {
-
-    display: grid;
-
-    grid-template-columns:
-        80px 1fr;
-
-    gap: 25px;
-
-    padding: 30px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
-
-}
-
-
-.document-icon {
-
-    width: 65px;
-
-    height: 65px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        rgba(220, 53, 69, 0.1);
-
-    color:
-        #dc3545;
-
-    font-size: 1.7rem;
-
-}
-
-
-.document-content h3 {
-
-    margin-bottom: 8px;
-
-}
-
-
-.document-content p {
-
-    color:
-        var(--text-light);
-
-    margin-bottom: 18px;
-
-}
-
-
-.document-buttons {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-}
-
-
-.document-btn {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    padding: 10px 15px;
-
-    border-radius: 8px;
-
-    font-size: 0.85rem;
-
-    font-weight: 700;
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.document-btn.primary {
-
-    background:
-        var(--primary);
-
-    color: #ffffff;
-
-}
-
-
-.document-btn.secondary {
-
-    background:
-        var(--background-alt);
-
-    border:
-        1px solid var(--border);
-
-}
-
-
-.document-btn:hover {
-
-    transform:
-        translateY(-2px);
-
-}
-
-
-/* =========================================================
-   27. SOCIAL
-========================================================= */
-
-.social-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-}
-
-
-.social-card {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    text-align: center;
-
-    padding: 30px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.social-card:hover {
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:
-        var(--shadow-hover);
-
-}
-
-
-.social-card i {
-
-    font-size: 2.3rem;
-
-    color:
-        var(--primary);
-
-    margin-bottom: 12px;
-
-}
-
-
-.social-card span {
-
-    font-weight: 800;
-
-}
-
-
-.social-card small {
-
-    color:
-        var(--text-light);
-
-    margin-top: 4px;
-
-}
-
-
-/* =========================================================
-   28. CONTACT
-========================================================= */
-
-.contact-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 20px;
-
-}
-
-
-.contact-card {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 16px;
-
-    padding: 24px;
-
-    background:
-        var(--card);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.contact-card:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        var(--primary);
-
-}
-
-
-.contact-icon {
-
-    min-width: 50px;
-
-    width: 50px;
-
-    height: 50px;
-
-    border-radius: 13px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        rgba(13, 110, 253, 0.1);
-
-    color:
-        var(--primary);
-
-    font-size: 1.25rem;
-
-}
-
-
-.whatsapp-icon {
-
-    color:
-        #25d366;
-
-    background:
-        rgba(37, 211, 102, 0.1);
-
-}
-
-
-.contact-card h3 {
-
-    font-size: 1rem;
-
-    margin-bottom: 3px;
-
-}
-
-
-.contact-card p {
-
-    color:
-        var(--text-light);
-
-    font-size: 0.84rem;
-
-    word-break: break-word;
-
-}
-
-
-/* =========================================================
-   29. FOOTER
-========================================================= */
-
-.footer {
-
-    padding:
-        45px 0;
-
-    text-align: center;
-
-    background:
-        #0f172a;
-
-    color:
-        #ffffff;
-
-}
-
-
-.footer-social {
-
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-bottom: 25px;
-
-}
-
-
-.footer-social a {
-
-    width: 42px;
-
-    height: 42px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border:
-        1px solid rgba(255,255,255,0.2);
-
-    transition:
-        all var(--transition);
-
-}
-
-
-.footer-social a:hover {
-
-    background:
-        var(--primary);
-
-    border-color:
-        var(--primary);
-
-    transform:
-        translateY(-4px);
-
-}
-
-
-.footer p {
-
-    color:
-        #cbd5e1;
-
-    font-size: 0.88rem;
-
-    margin-top: 5px;
-
-}
-
-
-/* =========================================================
-   30. BACK TO TOP
-========================================================= */
-
-.back-to-top {
-
-    position: fixed;
-
-    right: 25px;
-
-    bottom: 25px;
-
-    width: 48px;
-
-    height: 48px;
-
-    border: none;
 
     border-radius: 50%;
 
     background:
-        var(--primary);
+        rgba(245, 158, 11, 0.10);
 
-    color: #ffffff;
+    color:
+        var(--gold);
 
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform:
-        translateY(15px);
-
-    transition:
-        all var(--transition);
-
-    z-index: 900;
-
-    box-shadow:
-        0 8px 25px
-        rgba(13, 110, 253, 0.3);
+    font-size: 22px;
 
 }
 
 
-.back-to-top.show {
+.achievement-content h3 {
 
-    opacity: 1;
+    color: var(--text);
 
-    visibility: visible;
-
-    transform:
-        translateY(0);
+    font-size: 19px;
 
 }
 
 
-.back-to-top:hover {
+.achievement-content p {
 
-    transform:
-        translateY(-4px);
+    margin: 10px 0;
+
+    color: var(--text-muted);
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+}
+
+
+.achievement-content small {
+
+    color: var(--text-muted);
+
+    font-size: 12px;
 
 }
 
 
 /* =========================================================
-   31. SCROLL REVEAL
-========================================================= */
-
-.reveal {
-
-    opacity: 0;
-
-    transform:
-        translateY(35px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-
-}
-
-
-.reveal.active {
-
-    opacity: 1;
-
-    transform:
-        translateY(0);
-
-}
-
-
-/* =========================================================
-   32. IMAGE ERROR
-========================================================= */
-
-.image-error {
-
-    opacity: 0.4;
-
-}
-
-
-/* =========================================================
-   33. RESPONSIVE — TABLET
-========================================================= */
-
-@media (max-width: 1050px) {
-
-
-    .nav-menu {
-
-        gap: 14px;
-
-    }
-
-
-    .nav-menu a {
-
-        font-size: 0.82rem;
-
-    }
-
-
-    .header-contact {
-
-        display: none;
-
-    }
-
-
-    .hero-content {
-
-        grid-template-columns:
-            300px 1fr;
-
-        gap: 45px;
-
-    }
-
-
-    .profile-frame {
-
-        width: 270px;
-
-        height: 270px;
-
-    }
-
-
-    .stats-grid {
-
-        grid-template-columns:
-            repeat(3, 1fr);
-
-    }
-
-
-    .skills-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-
-    .social-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-
-    .contact-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-}
-
-
-/* =========================================================
-   34. RESPONSIVE — MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-
-
-    .navbar {
-
-        min-height: 70px;
-
-    }
-
-
-    .logo {
-
-        min-width: 0;
-
-    }
-
-
-    .logo-name {
-
-        font-size: 0.95rem;
-
-    }
-
-
-    .logo small {
-
-        font-size: 0.65rem;
-
-    }
-
-
-    .menu-toggle {
-
-        display: flex;
-
-    }
-
-
-    .nav-menu {
-
-        position: absolute;
-
-        top: 70px;
-
-        left: 0;
-
-        width: 100%;
-
-        padding: 20px;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 5px;
-
-        background:
-            var(--card);
-
-        border-bottom:
-            1px solid var(--border);
-
-        box-shadow:
-            var(--shadow);
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        transform:
-            translateY(-10px);
-
-        transition:
-            all var(--transition);
-
-    }
-
-
-    .nav-menu.active {
-
-        opacity: 1;
-
-        visibility: visible;
-
-        transform:
-            translateY(0);
-
-    }
-
-
-    .nav-menu a {
-
-        display: block;
-
-        padding: 12px;
-
-    }
-
-
-    .nav-menu a::after {
-
-        display: none;
-
-    }
-
-
-    .hero {
-
-        min-height:
-            auto;
-
-    }
-
-
-    .hero-content {
-
-        grid-template-columns:
-            1fr;
-
-        text-align: center;
-
-        gap: 35px;
-
-        padding:
-            65px 0 80px;
-
-    }
-
-
-    .hero-image {
-
-        order: 1;
-
-    }
-
-
-    .hero-text {
-
-        order: 2;
-
-    }
-
-
-    .profile-frame {
-
-        width: 230px;
-
-        height: 230px;
-
-    }
-
-
-    .hero-line {
-
-        margin:
-            20px auto;
-
-    }
-
-
-    .hero-buttons {
-
-        justify-content: center;
-
-    }
-
-
-    .scroll-down {
-
-        display: none;
-
-    }
-
-
-    .section {
-
-        padding:
-            75px 0;
-
-    }
-
-
-    .about-card,
-    .education-card,
-    .project-card,
-    .document-card {
-
-        grid-template-columns:
-            1fr;
-
-        text-align: center;
-
-    }
-
-
-    .about-icon,
-    .education-icon,
-    .project-icon,
-    .document-icon {
-
-        margin:
-            0 auto;
-
-    }
-
-
-    .stats-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-    }
-
-
-    .achievement-grid,
-    .document-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .contact-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .social-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .project-tags,
-    .document-buttons {
-
-        justify-content: center;
-
-    }
-
-}
-
-
-/* =========================================================
-   35. RESPONSIVE — SMALL PHONE
-========================================================= */
-
-@media (max-width: 480px) {
-
-
-    .container {
-
-        width: 90%;
-
-    }
-
-
-    .hero h1 {
-
-        font-size: 2.3rem;
-
-    }
-
-
-    .hero h2 {
-
-        font-size: 1rem;
-
-    }
-
-
-    .typing-container {
-
-        font-size: 1rem;
-
-    }
-
-
-    .hero-description {
-
-        font-size: 0.9rem;
-
-    }
-
-
-    .hero-buttons {
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-    }
-
-
-    .hero-btn {
-
-        width: 100%;
-
-    }
-
-
-    .stats-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .skills-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-
-    .about-card,
-    .education-card,
-    .project-card,
-    .achievement-card,
-    .document-card {
-
-        padding: 25px 20px;
-
-    }
-
-
-    .language-list {
-
-        flex-direction: column;
-
-    }
-
-
-    .language-list > div {
-
-        width: 100%;
-
-    }
-
-
-    .back-to-top {
-
-        right: 15px;
-
-        bottom: 15px;
-
-        width: 44px;
-
-        height: 44px;
-
-    }
-
-}
-
-
-/* =========================================================
-   36. REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-
-        scroll-behavior: auto !important;
-
-        animation-duration: 0.01ms !important;
-
-        animation-iteration-count: 1 !important;
-
-        transition-duration: 0.01ms !important;
-
-    }
-
-}
-/* =========================================================
-   CERTIFICATE & AWARD BUTTONS
+   29. CERTIFICATE BUTTONS
 ========================================================= */
 
 .certificate-actions {
@@ -2700,18 +1801,18 @@ button {
 
     gap: 8px;
 
-    padding: 10px 16px;
+    padding:
+        9px 14px;
 
     border-radius: 8px;
 
     text-decoration: none;
 
-    font-weight: 600;
+    font-size: 12px;
 
-    font-size: 14px;
+    font-weight: 700;
 
-    transition:
-        all 0.3s ease;
+    transition: var(--transition);
 
 }
 
@@ -2719,59 +1820,1487 @@ button {
 .certificate-btn.primary {
 
     background:
-        var(--primary-color);
+        var(--primary);
 
-    color: #ffffff;
-
-}
-
-
-.certificate-btn.primary:hover {
-
-    transform:
-        translateY(-2px);
-
-    opacity: 0.9;
+    color:
+        var(--white);
 
 }
 
 
 .certificate-btn.secondary {
 
+    border:
+        1px solid rgba(75, 145, 241, 0.50);
+
     background:
         transparent;
 
     color:
-        var(--primary-color);
-
-    border:
-        1px solid var(--primary-color);
+        var(--primary-light);
 
 }
 
 
-.certificate-btn.secondary:hover {
+.certificate-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   30. DOCUMENTS
+========================================================= */
+
+.document-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 22px;
+
+}
+
+
+.document-card {
+
+    display: grid;
+
+    grid-template-columns:
+        65px 1fr;
+
+    gap: 20px;
+
+    padding: 30px;
 
     background:
-        var(--primary-color);
+        var(--card);
 
-    color: #ffffff;
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition:
+        var(--transition);
 
 }
 
 
-@media (max-width: 600px) {
+.document-card:hover {
 
-    .certificate-actions {
+    transform:
+        translateY(-5px);
 
-        flex-direction: column;
+    border-color:
+        rgba(75, 145, 241, 0.35);
+
+}
+
+
+.document-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(239, 68, 68, 0.10);
+
+    color:
+        #f87171;
+
+    font-size: 23px;
+
+}
+
+
+.document-content h3 {
+
+    color:
+        var(--text);
+
+    font-size: 20px;
+
+}
+
+
+.document-content p {
+
+    margin: 8px 0;
+
+    color:
+        var(--text-muted);
+
+    font-size: 13px;
+
+}
+
+
+.document-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 15px;
+
+}
+
+
+.document-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding:
+        9px 14px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition: var(--transition);
+
+}
+
+
+.document-btn.primary {
+
+    background:
+        var(--primary);
+
+    color:
+        var(--white);
+
+}
+
+
+.document-btn.secondary {
+
+    border:
+        1px solid rgba(75, 145, 241, 0.50);
+
+    background:
+        transparent;
+
+    color:
+        var(--primary-light);
+
+}
+
+
+.document-btn:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   31. CONTACT
+========================================================= */
+
+.contact-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.contact-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 22px;
+
+    text-decoration: none;
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-soft);
+
+    transition:
+        var(--transition);
+
+}
+
+
+.contact-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(75, 145, 241, 0.40);
+
+    box-shadow:
+        var(--shadow-blue);
+
+}
+
+
+.contact-icon {
+
+    flex-shrink: 0;
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(75, 145, 241, 0.12);
+
+    color:
+        var(--primary-light);
+
+    font-size: 20px;
+
+}
+
+
+.contact-card h3 {
+
+    color:
+        var(--text);
+
+    font-size: 15px;
+
+}
+
+
+.contact-card p {
+
+    margin-top: 2px;
+
+    color:
+        var(--text-muted);
+
+    font-size: 12px;
+
+    word-break:
+        break-word;
+
+}
+
+
+.whatsapp-icon {
+
+    background:
+        rgba(37, 211, 102, 0.12);
+
+    color:
+        var(--whatsapp);
+
+}
+
+
+/* =========================================================
+   32. FOOTER
+========================================================= */
+
+.footer {
+
+    padding:
+        45px 0;
+
+    text-align:
+        center;
+
+    background:
+        #090f1a;
+
+    border-top:
+        1px solid var(--border);
+
+    color:
+        var(--white);
+
+}
+
+
+.footer-social {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        12px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.footer-social a {
+
+    width:
+        42px;
+
+    height:
+        42px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.14);
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.03);
+
+    color:
+        var(--text-soft);
+
+    text-decoration:
+        none;
+
+    font-size:
+        18px;
+
+    transition:
+        var(--transition);
+
+}
+
+
+.footer-social a:hover {
+
+    transform:
+        translateY(-4px);
+
+    background:
+        var(--primary);
+
+    border-color:
+        var(--primary);
+
+    color:
+        var(--white);
+
+}
+
+
+.footer p {
+
+    margin:
+        5px 0;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        12px;
+
+}
+
+
+/* =========================================================
+   33. ACCESSIBILITY
+========================================================= */
+
+a:focus-visible,
+button:focus-visible {
+
+    outline:
+        3px solid
+        rgba(96, 165, 250, 0.55);
+
+    outline-offset:
+        3px;
+
+}
+
+
+/* =========================================================
+   34. TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+
+    .nav-menu {
+
+        gap:
+            12px;
 
     }
 
 
-    .certificate-btn {
+    .nav-menu a {
 
-        width: 100%;
+        font-size:
+            11px;
+
+    }
+
+
+    .header-contact {
+
+        padding:
+            8px 12px;
+
+    }
+
+
+    .hero-content {
+
+        grid-template-columns:
+            250px 1fr;
+
+        gap:
+            45px;
+
+    }
+
+
+    .profile-frame {
+
+        width:
+            230px;
+
+        height:
+            230px;
+
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+
+    .skills-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .contact-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   35. MOBILE NAVIGATION
+========================================================= */
+
+@media (max-width: 768px) {
+
+
+    .header {
+
+        background:
+            rgba(13, 21, 36, 0.98);
+
+    }
+
+
+    .navbar {
+
+        min-height:
+            76px;
+
+    }
+
+
+    .logo {
+
+        min-width:
+            0;
+
+    }
+
+
+    .logo-name {
+
+        font-size:
+            18px;
+
+        letter-spacing:
+            0.7px;
+
+    }
+
+
+    .logo small {
+
+        font-size:
+            12px;
+
+    }
+
+
+    .header-contact {
+
+        display:
+            none;
+
+    }
+
+
+    .menu-toggle {
+
+        display:
+            flex;
+
+    }
+
+
+    .nav-menu {
+
+        position:
+            absolute;
+
+        top:
+            76px;
+
+        left:
+            0;
+
+        width:
+            100%;
+
+        display:
+            none;
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+
+        gap:
+            0;
+
+        padding:
+            10px 6% 20px;
+
+        background:
+            #0d1524;
+
+        border-bottom:
+            1px solid var(--border);
+
+        box-shadow:
+            0 15px 35px rgba(0,0,0,0.35);
+
+    }
+
+
+    .nav-menu.active {
+
+        display:
+            flex;
+
+    }
+
+
+    .nav-menu li {
+
+        width:
+            100%;
+
+    }
+
+
+    .nav-menu a {
+
+        display:
+            block;
+
+        width:
+            100%;
+
+        padding:
+            13px 5px;
+
+        color:
+            var(--text-soft);
+
+        font-size:
+            14px;
+
+    }
+
+
+    .nav-menu a::after {
+
+        display:
+            none;
+
+    }
+
+
+    .nav-menu a:hover {
+
+        color:
+            var(--primary-light);
+
+        padding-left:
+            10px;
+
+    }
+
+
+    /* LinkedIn */
+
+    .linkedin-profile {
+
+        justify-content:
+            center;
+
+        padding-top:
+            15px;
+
+    }
+
+
+    /* Hero */
+
+    .hero {
+
+        min-height:
+            auto;
+
+        padding:
+            0 0 80px;
+
+    }
+
+
+    .hero-content {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            35px;
+
+        text-align:
+            center;
+
+    }
+
+
+    .hero-image {
+
+        order:
+            1;
+
+        margin-top:
+            0;
+
+    }
+
+
+    .hero-text {
+
+        order:
+            2;
+
+        max-width:
+            100%;
+
+    }
+
+
+    .profile-frame {
+
+        width:
+            280px;
+
+        height:
+            280px;
+
+        border-width:
+            5px;
+
+        box-shadow:
+            0 0 0 8px rgba(75,145,241,0.08),
+            0 0 35px rgba(75,145,241,0.20);
+
+    }
+
+
+    .hero-greeting {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            43px;
+
+        line-height:
+            1.15;
+
+    }
+
+
+    .hero h2 {
+
+        font-size:
+            27px;
+
+        line-height:
+            1.35;
+
+    }
+
+
+    .hero h3 {
+
+        font-size:
+            19px;
+
+    }
+
+
+    .hero-line {
+
+        margin:
+            23px auto;
+
+    }
+
+
+    .hero-description {
+
+        max-width:
+            650px;
+
+        margin:
+            0 auto;
+
+        padding:
+            0 5px;
+
+        font-size:
+            16px;
+
+        line-height:
+            1.8;
+
+    }
+
+
+    .hero-buttons {
+
+        justify-content:
+            center;
+
+    }
+
+
+    /* Cards */
+
+    .about-card,
+    .education-card,
+    .project-card {
+
+        grid-template-columns:
+            1fr;
+
+        text-align:
+            center;
+
+    }
+
+
+    .about-icon,
+    .education-icon,
+    .project-icon {
+
+        margin:
+            0 auto;
+
+    }
+
+
+    .coursework {
+
+        text-align:
+            left;
+
+    }
+
+
+    .achievement-grid,
+    .document-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .contact-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   36. SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+
+    .container {
+
+        width:
+            92%;
+
+    }
+
+
+    .navbar {
+
+        min-height:
+            70px;
+
+    }
+
+
+    .logo-name {
+
+        font-size:
+            18px;
+
+    }
+
+
+    .logo small {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .menu-toggle {
+
+        width:
+            54px;
+
+        height:
+            54px;
+
+        border-radius:
+            12px;
+
+        font-size:
+            24px;
+
+    }
+
+
+    .nav-menu {
+
+        top:
+            70px;
+
+    }
+
+
+    /* =====================================================
+       MOBILE HERO
+    ===================================================== */
+
+    .hero {
+
+        padding:
+            0 0 65px;
+
+    }
+
+
+    .hero-content {
+
+        gap:
+            30px;
+
+    }
+
+
+    .profile-frame {
+
+        width:
+            285px;
+
+        height:
+            285px;
+
+        padding:
+            7px;
+
+    }
+
+
+    .hero-greeting {
+
+        margin-top:
+            5px;
+
+        font-size:
+            18px;
+
+    }
+
+
+    .hero h1 {
+
+        margin-top:
+            3px;
+
+        font-size:
+            42px;
+
+        letter-spacing:
+            -0.7px;
+
+    }
+
+
+    .hero h2 {
+
+        margin-top:
+            16px;
+
+        font-size:
+            27px;
+
+    }
+
+
+    .hero h3 {
+
+        margin-top:
+            14px;
+
+        font-size:
+            18px;
+
+    }
+
+
+    .hero-description {
+
+        padding:
+            0 7px;
+
+        font-size:
+            15px;
+
+        line-height:
+            1.85;
+
+    }
+
+
+    .hero-buttons {
+
+        flex-direction:
+            column;
+
+        gap:
+            12px;
+
+        margin-top:
+            28px;
+
+    }
+
+
+    .hero-btn {
+
+        width:
+            100%;
+
+        min-height:
+            58px;
+
+        border-radius:
+            13px;
+
+        font-size:
+            17px;
+
+        justify-content:
+            center;
+
+    }
+
+
+    .hero-btn i {
+
+        font-size:
+            20px;
+
+    }
+
+
+    /* =====================================================
+       SECTIONS
+    ===================================================== */
+
+    .section {
+
+        padding:
+            70px 0;
+
+    }
+
+
+    .section-heading {
+
+        margin-bottom:
+            35px;
+
+    }
+
+
+    .section-heading span {
+
+        font-size:
+            11px;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size:
+            29px;
+
+    }
+
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+
+    .about-card,
+    .education-card,
+    .project-card {
+
+        padding:
+            25px 20px;
+
+    }
+
+
+    .about-content p {
+
+        font-size:
+            14px;
+
+    }
+
+
+    /* =====================================================
+       STATISTICS
+    ===================================================== */
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            12px;
+
+    }
+
+
+    .stat-card {
+
+        padding:
+            20px 10px;
+
+    }
+
+
+    .stat-card strong {
+
+        font-size:
+            24px;
+
+    }
+
+
+    /* =====================================================
+       SKILLS
+    ===================================================== */
+
+    .skills-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .skill-card {
+
+        padding:
+            25px 20px;
+
+    }
+
+
+    /* =====================================================
+       PROJECT
+    ===================================================== */
+
+    .project-gallery {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .project-image img {
+
+        height:
+            210px;
+
+    }
+
+
+    .project-content h3 {
+
+        font-size:
+            22px;
+
+    }
+
+
+    /* =====================================================
+       ACHIEVEMENTS / DOCUMENTS
+    ===================================================== */
+
+    .achievement-card,
+    .document-card {
+
+        grid-template-columns:
+            1fr;
+
+        padding:
+            25px 20px;
+
+        text-align:
+            center;
+
+    }
+
+
+    .achievement-icon,
+    .document-icon {
+
+        margin:
+            0 auto;
+
+    }
+
+
+    .certificate-actions,
+    .document-buttons {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .certificate-btn,
+    .document-btn {
+
+        width:
+            100%;
+
+        min-height:
+            44px;
+
+    }
+
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
+
+    .contact-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .contact-card {
+
+        padding:
+            18px;
+
+    }
+
+
+    /* =====================================================
+       LANGUAGE
+    ===================================================== */
+
+    .language-list {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .language-list div {
+
+        width:
+            100%;
+
+        min-width:
+            0;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .footer {
+
+        padding:
+            38px 0;
+
+    }
+
+}
+
+
+/* =========================================================
+   37. VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+
+    .logo-name {
+
+        font-size:
+            16px;
+
+    }
+
+
+    .logo small {
+
+        font-size:
+            10px;
+
+    }
+
+
+    .profile-frame {
+
+        width:
+            250px;
+
+        height:
+            250px;
+
+    }
+
+
+    .hero h1 {
+
+        font-size:
+            36px;
+
+    }
+
+
+    .hero h2 {
+
+        font-size:
+            23px;
+
+    }
+
+
+    .hero h3 {
+
+        font-size:
+            17px;
+
+    }
+
+
+    .hero-description {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .hero-btn {
+
+        min-height:
+            54px;
+
+        font-size:
+            16px;
+
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size:
+            26px;
+
+    }
+
+}
+
+
+/* =========================================================
+   38. REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+
+    html {
+
+        scroll-behavior:
+            auto;
+
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
 
     }
 
