@@ -2112,3 +2112,99 @@ html.dark-mode .typing-cursor {
         transition-duration: 0.01ms !important;
     }
 }
+/* =========================================================
+   DARK PURPLE TYPING ANIMATION
+========================================================= */
+
+.typing-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    min-height: 55px;
+    margin: 10px 0 22px;
+
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    color: #4b145f;
+}
+
+
+/* Typing text */
+
+.typing-text {
+    display: inline-block;
+    color: #4b145f;
+
+    text-shadow:
+        0 2px 8px rgba(75, 20, 95, 0.15);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* Typing cursor */
+
+.typing-cursor {
+    width: 3px;
+    height: 1.4em;
+
+    margin-left: 7px;
+
+    display: inline-block;
+
+    background-color: #4b145f;
+
+    border-radius: 3px;
+
+    box-shadow:
+        0 0 8px rgba(75, 20, 95, 0.45);
+
+    animation:
+        cursorBlink 0.8s ease-in-out infinite;
+}
+
+
+/* Cursor animation */
+
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.15;
+    }
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .typing-container {
+        font-size: 1.15rem;
+        min-height: 48px;
+    }
+
+}
+
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+    .typing-container {
+        font-size: 1rem;
+        min-height: 42px;
+    }
+
+}
