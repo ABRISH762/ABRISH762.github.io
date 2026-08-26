@@ -2360,156 +2360,61 @@ button:focus-visible {
     }
 }
 
-
-    /* =========================================================
-   PROFESSIONAL CENTERED TYPING ANIMATION
+/* =========================================================
+   HERO TYPING ANIMATION
 ========================================================= */
 
-.typing-container {
-
-    width: 100%;
-
+.hero-title {
     display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
 
-    justify-content: center;
-
-    align-items: center;
-
-    text-align: center;
-
-    min-height: 55px;
-
-    margin: 10px 0 22px;
-
-    font-size: 1.35rem;
-
-    font-weight: 600;
-
-    letter-spacing: 0.5px;
-
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
 }
 
-
-/* Typing text */
-
-.typing-text {
-
+.hero-title #typing-text {
     display: inline-block;
-
-    position: relative;
-
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-
+    min-width: 0;
+    color: var(--primary-color);
+    white-space: nowrap;
 }
 
-
-/* Cursor */
-
-.typing-cursor {
-
-    width: 3px;
-
-    height: 1.4em;
-
-    margin-left: 7px;
-
-    border-radius: 3px;
-
+/* Typing cursor */
+.hero-title #typing-text::after {
+    content: "|";
     display: inline-block;
-
-    animation:
-        cursorBlink 0.8s ease-in-out infinite;
-
+    margin-left: 3px;
+    font-weight: 400;
+    animation: typingCursor 0.7s steps(1) infinite;
 }
 
-
-/* Cursor animation */
-
-@keyframes cursorBlink {
-
+/* Cursor blink only */
+@keyframes typingCursor {
     0%,
+    49% {
+        opacity: 1;
+    }
+
+    50%,
     100% {
-
-        opacity: 1;
-
-        transform: scaleY(1);
-
-    }
-
-    50% {
-
-        opacity: 0.15;
-
-        transform: scaleY(0.85);
-
-    }
-
-}
-
-
-/* Text entering */
-
-.typing-container.typing-enter
-.typing-text {
-
-    animation:
-        typingEnter 0.35s ease-out;
-
-}
-
-
-@keyframes typingEnter {
-
-    from {
-
         opacity: 0;
-
-        transform:
-            translateY(8px);
-
     }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
-
 }
-
 
 /* Mobile */
-
 @media (max-width: 768px) {
-
-    .typing-container {
-
-        font-size: 1.15rem;
-
-        min-height: 48px;
-
-        margin: 8px 0 18px;
-
+    .hero-title {
+        font-size: 2rem;
+        gap: 6px;
     }
-
 }
 
-
-/* Small phones */
-
 @media (max-width: 480px) {
-
-    .typing-container {
-
-        font-size: 1rem;
-
-        min-height: 42px;
-
+    .hero-title {
+        font-size: 1.7rem;
     }
-
 }
