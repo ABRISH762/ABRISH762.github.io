@@ -780,3 +780,137 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 });
+/* =========================================================
+   BEAUTIFUL TYPING ANIMATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const typingText =
+        document.getElementById("typingText");
+
+    if (!typingText) {
+        return;
+    }
+
+
+    const phrases = [
+
+        "IT Support & Technical Assistance",
+
+        "Computer Networking",
+
+        "System Administration",
+
+        "Database Management",
+
+        "Software Development",
+
+        "Computer Maintenance",
+
+        "Problem Solving"
+
+    ];
+
+
+    let phraseIndex = 0;
+    let characterIndex = 0;
+
+    let isDeleting = false;
+
+
+    const typingSpeed = 75;
+    const deletingSpeed = 40;
+    const pauseAfterTyping = 1800;
+    const pauseAfterDeleting = 400;
+
+
+    function typeEffect() {
+
+        const currentPhrase =
+            phrases[phraseIndex];
+
+
+        /* =================================================
+           TYPING
+        ================================================= */
+
+        if (!isDeleting) {
+
+            typingText.textContent =
+                currentPhrase.substring(
+                    0,
+                    characterIndex + 1
+                );
+
+            characterIndex++;
+
+
+            if (
+                characterIndex ===
+                currentPhrase.length
+            ) {
+
+                isDeleting = true;
+
+                setTimeout(
+                    typeEffect,
+                    pauseAfterTyping
+                );
+
+                return;
+            }
+
+
+            setTimeout(
+                typeEffect,
+                typingSpeed
+            );
+
+            return;
+        }
+
+
+        /* =================================================
+           DELETING
+        ================================================= */
+
+        typingText.textContent =
+            currentPhrase.substring(
+                0,
+                characterIndex - 1
+            );
+
+        characterIndex--;
+
+
+        if (characterIndex === 0) {
+
+            isDeleting = false;
+
+            phraseIndex =
+                (phraseIndex + 1) %
+                phrases.length;
+
+
+            setTimeout(
+                typeEffect,
+                pauseAfterDeleting
+            );
+
+            return;
+        }
+
+
+        setTimeout(
+            typeEffect,
+            deletingSpeed
+        );
+    }
+
+
+    /* START */
+
+    typeEffect();
+
+});
