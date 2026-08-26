@@ -263,123 +263,168 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =====================================================
-       5. TYPING EFFECT
-    ====================================================== */
+    /* =========================================================
+   PROFESSIONAL TYPING ANIMATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
 
     const typingText =
-        document.querySelector(
-            ".typing-text"
-        );
+        document.getElementById("typing-text");
 
     const typingContainer =
-        document.querySelector(
-            ".typing-container"
-        );
+        document.querySelector(".typing-container");
 
 
-    if (typingText && typingContainer) {
-
-        const roles = [
-
-            "Aspiring IT Support Officer",
-
-            "Information Technology Graduate",
-
-            "Technical Support Enthusiast",
-
-            "Networking & Systems Enthusiast",
-
-            "Software Development Enthusiast"
-
-        ];
+    if (!typingText || !typingContainer) {
+        return;
+    }
 
 
-        let roleIndex = 0;
+    const texts = [
 
-        let characterIndex = 0;
+        "Aspiring IT Support Officer",
 
-        let deleting = false;
+        "Information Technology Graduate",
 
+        "IT Support Enthusiast",
 
-        function typeRole() {
+        "Networking Enthusiast",
 
-            const currentRole =
-                roles[roleIndex];
+        "Technical Support Professional"
 
-
-            if (!deleting) {
-
-                typingText.textContent =
-                    currentRole.substring(
-                        0,
-                        characterIndex + 1
-                    );
-
-                characterIndex++;
+    ];
 
 
-                if (
-                    characterIndex ===
-                    currentRole.length
-                ) {
+    let textIndex = 0;
 
-                    deleting = true;
+    let characterIndex = 0;
 
-                    setTimeout(
-                        typeRole,
-                        1800
-                    );
-
-                    return;
-
-                }
-
-            } else {
-
-                typingText.textContent =
-                    currentRole.substring(
-                        0,
-                        characterIndex - 1
-                    );
-
-                characterIndex--;
+    let deleting = false;
 
 
-                if (
-                    characterIndex === 0
-                ) {
+    /*
+     * Speed settings
+     */
 
-                    deleting = false;
+    const typingSpeed = 85;
 
-                    roleIndex =
-                        (roleIndex + 1) %
-                        roles.length;
+    const deletingSpeed = 45;
 
-                }
+    const typingPause = 2000;
+
+    const deletingPause = 700;
+
+
+    function animateTyping() {
+
+        const currentText =
+            texts[textIndex];
+
+
+        /* =================================================
+           TYPING
+        ================================================= */
+
+        if (!deleting) {
+
+            typingText.textContent =
+                currentText.substring(
+                    0,
+                    characterIndex + 1
+                );
+
+
+            characterIndex++;
+
+
+            if (
+                characterIndex >=
+                currentText.length
+            ) {
+
+                deleting = true;
+
+
+                setTimeout(
+                    animateTyping,
+                    typingPause
+                );
+
+
+                return;
 
             }
 
 
-            const typingSpeed =
-                deleting
-                    ? 45
-                    : 85;
-
-
             setTimeout(
-                typeRole,
+                animateTyping,
                 typingSpeed
             );
+
+
+            return;
 
         }
 
 
-        typeRole();
+        /* =================================================
+           DELETING
+        ================================================= */
+
+        typingText.textContent =
+            currentText.substring(
+                0,
+                characterIndex - 1
+            );
+
+
+        characterIndex--;
+
+
+        if (characterIndex <= 0) {
+
+            characterIndex = 0;
+
+            deleting = false;
+
+
+            textIndex =
+                (textIndex + 1) %
+                texts.length;
+
+
+            /*
+             * Small pause before
+             * next word starts
+             */
+
+            setTimeout(
+                animateTyping,
+                deletingPause
+            );
+
+
+            return;
+
+        }
+
+
+        setTimeout(
+            animateTyping,
+            deletingSpeed
+        );
 
     }
 
 
+    /*
+     * Start animation
+     */
+
+    animateTyping();
+
+});
     /* =====================================================
        6. SCROLL REVEAL ANIMATION
     ====================================================== */
