@@ -13,8 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
        1. MOBILE NAVIGATION
     ====================================================== */
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-menu");
+    const menuToggle =
+        document.querySelector(".menu-toggle");
+
+    const navMenu =
+        document.querySelector(".nav-menu");
 
     if (menuToggle && navMenu) {
 
@@ -42,9 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "fa-xmark",
                     isOpen
                 );
-
             }
-
         });
 
 
@@ -76,13 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     icon.classList.add(
                         "fa-bars"
                     );
-
                 }
-
             });
-
         });
-
     }
 
 
@@ -110,9 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
             header.classList.remove(
                 "header-scrolled"
             );
-
         }
-
     }
 
     window.addEventListener(
@@ -163,9 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 currentSection =
                     section.getAttribute("id");
-
             }
-
         });
 
 
@@ -181,11 +174,8 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
 
                 link.classList.add("active");
-
             }
-
         });
-
     }
 
 
@@ -257,74 +247,146 @@ document.addEventListener("DOMContentLoaded", function () {
                     "smooth"
 
             });
-
         });
-
     });
 
-document.addEventListener("DOMContentLoaded", function () {
 
-    const typingText = document.getElementById("typing-text");
+    /* =====================================================
+       5. HERO TYPING ANIMATION
+       
+       "Aspiring" stays fixed.
+       Only the job title types/deletes.
+    ====================================================== */
 
-    const roles = [
-        "IT Support Officer",
-        "Junior Software Developer",
-        "Web Developer",
-        "Network Administrator",
-        "IT Professional"
-    ];
+    const typingText =
+        document.getElementById("typing-text");
 
-    let roleIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
 
-    function typeWriter() {
+    if (typingText) {
 
-        const currentRole = roles[roleIndex];
+        const roles = [
 
-        if (!deleting) {
+            "IT Support Officer",
 
-            typingText.textContent =
-                currentRole.substring(0, charIndex + 1);
+            "Junior Software Developer",
 
-            charIndex++;
+            "Web Developer",
 
-            if (charIndex >= currentRole.length) {
-                deleting = true;
+            "Network Administrator",
 
-                setTimeout(typeWriter, 2000);
+            "IT Professional"
+
+        ];
+
+
+        let roleIndex = 0;
+
+        let charIndex = 0;
+
+        let isDeleting = false;
+
+
+        const typingSpeed = 90;
+
+        const deletingSpeed = 55;
+
+        const pauseAfterTyping = 2000;
+
+        const pauseAfterDeleting = 500;
+
+
+        function typeWriter() {
+
+            const currentRole =
+                roles[roleIndex];
+
+
+            /* =============================================
+               TYPING
+            ============================================== */
+
+            if (!isDeleting) {
+
+                typingText.textContent =
+                    currentRole.substring(
+                        0,
+                        charIndex + 1
+                    );
+
+                charIndex++;
+
+
+                if (
+                    charIndex >=
+                    currentRole.length
+                ) {
+
+                    isDeleting = true;
+
+                    setTimeout(
+                        typeWriter,
+                        pauseAfterTyping
+                    );
+
+                    return;
+                }
+
+
+                setTimeout(
+                    typeWriter,
+                    typingSpeed
+                );
+
                 return;
             }
 
-            setTimeout(typeWriter, 90);
 
-        } else {
+            /* =============================================
+               DELETING
+            ============================================== */
 
             typingText.textContent =
-                currentRole.substring(0, charIndex - 1);
+                currentRole.substring(
+                    0,
+                    charIndex - 1
+                );
 
             charIndex--;
 
+
             if (charIndex <= 0) {
 
-                deleting = false;
+                charIndex = 0;
 
-                roleIndex++;
+                isDeleting = false;
 
-                if (roleIndex >= roles.length) {
-                    roleIndex = 0;
-                }
+                roleIndex =
+                    (roleIndex + 1) %
+                    roles.length;
 
-                setTimeout(typeWriter, 500);
+
+                setTimeout(
+                    typeWriter,
+                    pauseAfterDeleting
+                );
+
                 return;
             }
 
-            setTimeout(typeWriter, 50);
+
+            setTimeout(
+                typeWriter,
+                deletingSpeed
+            );
         }
+
+
+        /* START TYPING */
+
+        typeWriter();
     }
 
-    typeWriter();
-});
+
     /* =====================================================
        6. SCROLL REVEAL ANIMATION
     ====================================================== */
@@ -367,18 +429,14 @@ document.addEventListener("DOMContentLoaded", function () {
                                 observer.unobserve(
                                     entry.target
                                 );
-
                             }
-
                         }
                     );
-
                 },
 
                 {
                     threshold: 0.12
                 }
-
             );
 
 
@@ -392,15 +450,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 revealObserver.observe(
                     element
                 );
-
             }
         );
-
     }
 
 
     /* =====================================================
-       7. PROJECT IMAGE HOVER
+       7. PROJECT IMAGE HOVER / CLICK
     ====================================================== */
 
     const projectImages =
@@ -430,13 +486,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         imageSource,
                         image.alt
                     );
-
                 }
             );
 
+
             image.style.cursor =
                 "zoom-in";
-
         }
     );
 
@@ -459,7 +514,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (existingViewer) {
 
             existingViewer.remove();
-
         }
 
 
@@ -488,7 +542,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <img
                     src="${escapeHtml(imageSource)}"
-                    alt="${escapeHtml(imageAlt || "Project image")}"
+                    alt="${escapeHtml(
+                        imageAlt ||
+                        "Project image"
+                    )}"
                 >
 
             </div>
@@ -521,45 +578,53 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(
                 function () {
 
-                    viewer.remove();
+                    if (viewer) {
+                        viewer.remove();
+                    }
 
                 },
                 250
             );
-
         }
 
 
-        closeButton.addEventListener(
-            "click",
-            closeViewer
-        );
+        if (closeButton) {
+
+            closeButton.addEventListener(
+                "click",
+                closeViewer
+            );
+        }
 
 
-        overlay.addEventListener(
-            "click",
-            closeViewer
-        );
+        if (overlay) {
+
+            overlay.addEventListener(
+                "click",
+                closeViewer
+            );
+        }
+
+
+        function handleEscape(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeViewer();
+
+                document.removeEventListener(
+                    "keydown",
+                    handleEscape
+                );
+            }
+        }
 
 
         document.addEventListener(
             "keydown",
-            function handleEscape(event) {
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    closeViewer();
-
-                    document.removeEventListener(
-                        "keydown",
-                        handleEscape
-                    );
-
-                }
-
-            }
+            handleEscape
         );
 
 
@@ -569,10 +634,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 viewer.classList.add(
                     "image-viewer-visible"
                 );
-
             }
         );
-
     }
 
 
@@ -593,7 +656,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "rel",
                 "noopener noreferrer"
             );
-
         }
     );
 
@@ -625,10 +687,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         "© " +
                         new Date().getFullYear()
                     );
-
             }
         );
-
     }
 
 
@@ -648,10 +708,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     function (event) {
 
                         event.preventDefault();
-
                     }
                 );
-
             }
         );
 
@@ -676,11 +734,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (viewer) {
 
                     viewer.remove();
-
                 }
-
             }
-
         }
     );
 
@@ -692,27 +747,31 @@ document.addEventListener("DOMContentLoaded", function () {
     function escapeHtml(value) {
 
         return String(value)
+
             .replace(
                 /&/g,
                 "&amp;"
             )
+
             .replace(
                 /</g,
                 "&lt;"
             )
+
             .replace(
                 />/g,
                 "&gt;"
             )
+
             .replace(
                 /"/g,
                 "&quot;"
             )
+
             .replace(
                 /'/g,
                 "&#039;"
             );
-
     }
 
 
@@ -723,139 +782,5 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.add(
         "page-loaded"
     );
-
-});
-/* =========================================================
-   BEAUTIFUL TYPING ANIMATION
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const typingText =
-        document.getElementById("typingText");
-
-    if (!typingText) {
-        return;
-    }
-
-
-    const phrases = [
-
-        "IT Support & Technical Assistance",
-
-        "Computer Networking",
-
-        "System Administration",
-
-        "Database Management",
-
-        "Software Development",
-
-        "Computer Maintenance",
-
-        "Problem Solving"
-
-    ];
-
-
-    let phraseIndex = 0;
-    let characterIndex = 0;
-
-    let isDeleting = false;
-
-
-    const typingSpeed = 75;
-    const deletingSpeed = 40;
-    const pauseAfterTyping = 1800;
-    const pauseAfterDeleting = 400;
-
-
-    function typeEffect() {
-
-        const currentPhrase =
-            phrases[phraseIndex];
-
-
-        /* =================================================
-           TYPING
-        ================================================= */
-
-        if (!isDeleting) {
-
-            typingText.textContent =
-                currentPhrase.substring(
-                    0,
-                    characterIndex + 1
-                );
-
-            characterIndex++;
-
-
-            if (
-                characterIndex ===
-                currentPhrase.length
-            ) {
-
-                isDeleting = true;
-
-                setTimeout(
-                    typeEffect,
-                    pauseAfterTyping
-                );
-
-                return;
-            }
-
-
-            setTimeout(
-                typeEffect,
-                typingSpeed
-            );
-
-            return;
-        }
-
-
-        /* =================================================
-           DELETING
-        ================================================= */
-
-        typingText.textContent =
-            currentPhrase.substring(
-                0,
-                characterIndex - 1
-            );
-
-        characterIndex--;
-
-
-        if (characterIndex === 0) {
-
-            isDeleting = false;
-
-            phraseIndex =
-                (phraseIndex + 1) %
-                phrases.length;
-
-
-            setTimeout(
-                typeEffect,
-                pauseAfterDeleting
-            );
-
-            return;
-        }
-
-
-        setTimeout(
-            typeEffect,
-            deletingSpeed
-        );
-    }
-
-
-    /* START */
-
-    typeEffect();
 
 });
