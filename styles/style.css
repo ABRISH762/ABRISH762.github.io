@@ -3740,3 +3740,163 @@ html.dark-mode .linkedin-profile {
     }
 
 }
+/* =========================================================
+   BEAUTIFUL TYPING ANIMATION
+========================================================= */
+
+.typing-container {
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+
+    margin: 12px 0 10px;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    color: #5b21b6;
+}
+
+
+/* TYPING TEXT */
+
+.typing-text {
+    display: inline-block;
+
+    background: linear-gradient(
+        90deg,
+        #4f46e5,
+        #7c3aed,
+        #9333ea
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+/* CURSOR */
+
+.typing-cursor {
+    width: 3px;
+    height: 24px;
+
+    display: inline-block;
+
+    margin-left: 7px;
+
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #4f46e5,
+            #9333ea
+        );
+
+    box-shadow:
+        0 0 8px rgba(124, 58, 237, 0.45);
+
+    animation:
+        typingCursorBlink 0.75s infinite;
+}
+
+
+/* CURSOR BLINK */
+
+@keyframes typingCursorBlink {
+
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .typing-container {
+        justify-content: center;
+
+        font-size: 18px;
+
+        min-height: 38px;
+
+        margin: 10px 0;
+    }
+
+    .typing-cursor {
+        height: 22px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .typing-container {
+        font-size: 16px;
+
+        min-height: 34px;
+    }
+
+    .typing-cursor {
+        width: 2px;
+        height: 20px;
+
+        margin-left: 5px;
+    }
+
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html.dark-mode .typing-text {
+
+    background: linear-gradient(
+        90deg,
+        #93c5fd,
+        #c4b5fd,
+        #d8b4fe
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    background-clip: text;
+}
+
+
+html.dark-mode .typing-cursor {
+
+    background:
+        linear-gradient(
+            180deg,
+            #93c5fd,
+            #c4b5fd
+        );
+
+    box-shadow:
+        0 0 10px rgba(196, 181, 253, 0.55);
+}
