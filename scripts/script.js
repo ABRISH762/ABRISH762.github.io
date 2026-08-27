@@ -268,13 +268,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
             "IT Support Officer",
 
-            "Junior Software Developer",
+            "Junior Software And Mobile App Developer",
 
             "Web Developer",
 
             "Network Administrator",
 
-            "IT Professional"
+            "System Administrator",
+           
+             "Database Administrator",
+             
 
         ];
 
